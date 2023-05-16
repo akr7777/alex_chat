@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/alex_chat/static/css/main.ee3e7512.css",
+    "main.js": "/alex_chat/static/js/main.01385a47.js",
+    "static/js/787.0c6125a2.chunk.js": "/alex_chat/static/js/787.0c6125a2.chunk.js",
+    "index.html": "/alex_chat/index.html",
+    "main.ee3e7512.css.map": "/alex_chat/static/css/main.ee3e7512.css.map",
+    "main.01385a47.js.map": "/alex_chat/static/js/main.01385a47.js.map",
+    "787.0c6125a2.chunk.js.map": "/alex_chat/static/js/787.0c6125a2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee3e7512.css",
+    "static/js/main.01385a47.js"
+  ]
+}
