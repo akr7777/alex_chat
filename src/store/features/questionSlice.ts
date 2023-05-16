@@ -41,23 +41,23 @@ const initContentQuestionsSlice:InitContectType = {
     },
     {
         id: '2',
-        question: 'question 2 text question 2 text question 1 text question 1 text',
-        answer: 'answer 2 text answer 2 text answer 1 text '
+        question: 'question 2 text question 2 text question 2 text question 2 text',
+        answer: 'answer 2 text answer 2 text answer 2 text '
     },
     {
         id: '3',
-        question: 'question 3 text question 3 text question 1 text question 1 text',
-        answer: 'answer 3 text answer 3 text answer 1 text '
+        question: 'question 3 text question 3 text question 3 text question 3 text',
+        answer: 'answer 3 text answer 3 text answer 3 text '
     },
     {
         id: '4',
-        question: 'question 3 text question 3 text question 1 text question 1 text',
-        answer: 'answer 3 text answer 3 text answer 1 text '
+        question: 'question 4 text question 4 text question 4 text question 4 text',
+        answer: 'answer 4 text answer 4 text answer 4 text '
     },
     {
         id: '5',
-        question: 'question 3 text question 3 text question 1 text question 1 text',
-        answer: 'answer 3 text answer 3 text answer 1 text '
+        question: 'question 5 text question 5 text question 5 text question 5 text',
+        answer: 'answer 5 text answer 5 text answer 5 text '
     },
     {
         id: '6',

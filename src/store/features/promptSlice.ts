@@ -24,7 +24,9 @@ export const promptSlice = createSlice({
         changePromptAC: (state: initContentPromptSliceType, action: PayloadAction<string>) => {
             state.prompt = action.payload;
         },
-        
+        changeRespomseAC: (state: initContentPromptSliceType, action: PayloadAction<string>) => {
+            state.responseGPT = action.payload;
+        },
     },
 
 
@@ -42,6 +44,6 @@ export const promptSlice = createSlice({
        
     }
 })
-export const {changePromptAC} = promptSlice.actions;
+export const {changePromptAC, changeRespomseAC} = promptSlice.actions;
 
 export default promptSlice.reducer;

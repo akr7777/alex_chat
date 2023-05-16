@@ -27,12 +27,17 @@ const BlockTwo = () => {
     })
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [newPrompt, setNewPrompt] = useState<string>(prompt);
 
     const onDeleteClickHandler = () => {
         dispatch(changePromptAC(''));
     }
     const onEditClickHandler = () => {
-        setIsEdit(!isEdit);
+        setIsEdit(true);
+    }
+    const onSaveClickHandler = () => {
+        setIsEdit(false);
+        dispatch(changePromptAC(newPrompt));
     }
     const onApproveClickHandler = () => {
         toast.error("Запрос улетел на сервер...");
@@ -60,7 +65,7 @@ const BlockTwo = () => {
         <div className={s.promptDiv}>
             {
                 isEdit
-                    ? <BigText />
+                    ? <BigText value={promptArray.join(' ')} onValueChange={setNewPrompt}/>
                     : <>{ promptArray.join(' ') }</>
             }
         </div>
@@ -69,7 +74,7 @@ const BlockTwo = () => {
             <button onClick={onApproveClickHandler}>Подтвердить</button>
             {
                 isEdit
-                    ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onEditClickHandler}/>
+                    ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSaveClickHandler}/>
                     : <img alt="" src={editIcon} className={s.iconsImg} onClick={onEditClickHandler}/>
             }
             

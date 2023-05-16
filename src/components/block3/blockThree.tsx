@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import s from "./blockThree.module.css";
-import { RootState } from "../../store/store";
+import { RootState, useAppDispatch } from "../../store/store";
 
 import refreshIcon from "./../../public/icons/refresh_icon.png";
 import editIcon from "./../../public/icons/edit_icon.png";
@@ -11,19 +11,27 @@ import saveIcon from "./../../public/icons/save_icon_2.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
+import BigText from "../../common/bigText/bigText";
+import { changeRespomseAC } from "../../store/features/promptSlice";
 
 
 
 const BlockThree = () => {
+    const dispatch = useAppDispatch();
     const responseGPT: string = useSelector((state: RootState) => state.prompt.responseGPT);
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [newResp, setNewResp] = useState<string>(responseGPT)
 
     const onRefreshClickHandler = () => {
         toast.error("Запрос улетел на сервер...");
     }
     const onEditClickHandler = () => {
-        setIsEdit(!isEdit);
+        setIsEdit(true);
+    }
+    const onSaveClickHandler = () => {
+        setIsEdit(false);
+        dispatch(changeRespomseAC(newResp));
     }
     const onCopyClickHandler = () => {
         navigator.clipboard.writeText(responseGPT);
@@ -51,7 +59,7 @@ const BlockThree = () => {
             <div className={s.responseDiv}>
                 {
                     isEdit
-                        ? <> <textarea value={responseGPT}/> </>
+                        ? <BigText value={newResp} onValueChange={setNewResp}/>
                         : <>{responseGPT}</>
                 }
             </div>
@@ -60,7 +68,7 @@ const BlockThree = () => {
                 <img alt="" className={s.iconsImg} src={refreshIcon} onClick={onRefreshClickHandler}/>
                 {
                     isEdit
-                        ? <img alt="" className={s.iconsImg} src={saveIcon} onClick={onEditClickHandler}/>
+                        ? <img alt="" className={s.iconsImg} src={saveIcon} onClick={onSaveClickHandler}/>
                         : <img alt="" className={s.iconsImg} src={editIcon} onClick={onEditClickHandler}/>
                 }
                 <img alt="" className={s.iconsImg} src={copyIcon} onClick={onCopyClickHandler}/>
