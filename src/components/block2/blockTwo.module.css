@@ -1,20 +1,18 @@
 .promptWrapperDiv {
-    position: relative;
     min-height: 100%;
-    background-color: green;
+    display: flex;
+    flex-direction: column;
 }
 
 .titleDiv {
-    background-color: red;
+    min-height: 1px;
 }
 
 .promptDiv {
-    position: relative;
     overflow: hidden;
     overflow-y: scroll;
-    /* max-height: 80%; */
-    /* padding-top: 10px; */
-    background-color: yellow;
+    /* background-color: yellow; */
+    flex-grow: 1;
 }
 
 .buttonsDiv {
@@ -29,7 +27,6 @@
     align-items: center;
 
     margin-top: auto;
-    background-color: aquamarine;
 }
 
 .iconsImg {
