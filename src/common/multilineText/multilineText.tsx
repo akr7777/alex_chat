@@ -3,7 +3,10 @@ import s from './multiline.module.css';
 
 type MultilineTextPropsType = {
     value: string,
-    onValuechange: (newValue: string) => void
+    onValuechange: (newValue: string) => void,
+
+    rows?: number,
+    cols?: number
 }
 const MultilineText = (props: MultilineTextPropsType) => {
 
@@ -15,7 +18,8 @@ const MultilineText = (props: MultilineTextPropsType) => {
         value={props.value}
         onChange={(e) => onTextChangeHandler(e)}
         className={s.multiline}
-        rows={10}
+        rows={ props.rows ? props.rows : 10 }
+        cols={ props.cols ? props.cols : 5 }
     />
 }
 

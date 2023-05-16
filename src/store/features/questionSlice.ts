@@ -98,15 +98,15 @@ export const questionsSlice = createSlice({
     name: 'questionsSlice',
     initialState: initContentQuestionsSlice,
     reducers: {
-        changeEditableIdAC: (state: InitContectType, action: PayloadAction<string>) => {
-            state.editableId = action.payload;
-        },
-        removeQuestionAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
-            return {
-                ...state,
-                questions: state.questions.filter(el => el.id !== action.payload)
-            }
-        },
+        // changeEditableIdAC: (state: InitContectType, action: PayloadAction<string>) => {
+        //     state.editableId = action.payload;
+        // },
+        // removeQuestionAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
+        //     return {
+        //         ...state,
+        //         questions: state.questions.filter(el => el.id !== action.payload)
+        //     }
+        // },
         changeQuestionAC: (state: InitContectType, action: PayloadAction<QuestionType>):InitContectType => {
             return {
                 ...state, 
@@ -144,6 +144,6 @@ export const questionsSlice = createSlice({
        
     }
 })
-export const {changeEditableIdAC, removeQuestionAC, changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC} = questionsSlice.actions;
+export const {changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC} = questionsSlice.actions;
 
 export default questionsSlice.reducer;

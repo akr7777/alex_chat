@@ -5,11 +5,11 @@ import { IdIndexType, changePromptAC } from '../../store/features/promptSlice';
 import deleteIcon from "./../../public/icons/delete_icon.png";
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon_2.png";
+import okIcon from "./../../public/icons/ok_icon.png";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import BigText from '../../common/bigText/bigText';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
@@ -65,13 +65,14 @@ const BlockTwo = () => {
         <div className={s.promptDiv}>
             {
                 isEdit
-                    ? <BigText value={promptArray.join(' ')} onValueChange={setNewPrompt}/>
+                    ? <textarea/> //<BigText value={promptArray.join(' ')} onValueChange={setNewPrompt}/>
                     : <>{ promptArray.join(' ') }</>
             }
         </div>
 
         <div className={s.buttonsDiv}>
-            <button onClick={onApproveClickHandler}>Подтвердить</button>
+            {/* <button onClick={onApproveClickHandler}>Подтвердить</button> */}
+            <img alt="" src={okIcon} className={s.iconsImg} onClick={onApproveClickHandler}/>
             {
                 isEdit
                     ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSaveClickHandler}/>

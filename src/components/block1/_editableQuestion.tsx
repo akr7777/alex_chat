@@ -4,7 +4,7 @@ import removeIcon from './../../public/icons/remove_icon_1.png';
 import arrowDownIcon from "./../../public/icons/arrow_down.png";
 import arrowUpIcon from "./../../public/icons/arrow_up.png";
 import sphereIcon from "./../../public/icons/sphere_icon.png";
-import { QuestionType, addIdToChangedIdsListAC, changeEditableIdAC, changeQuestionAC, removeQuestionAC } from '../../store/features/questionSlice';
+import { QuestionType, addIdToChangedIdsListAC, changeQuestionAC } from '../../store/features/questionSlice';
 import { RootState, useAppDispatch } from '../../store/store';
 import s from './blockOne.module.css';
 import MultilineText from '../../common/multilineText/multilineText';
@@ -32,13 +32,13 @@ const EditableQuestion = (props: EditableQuestionPropsType) => {
         }
         dispatch(changeQuestionAC(newElemValue))
         dispatch(addIdToChangedIdsListAC(props.elem.id));
-        dispatch(changeEditableIdAC(''));
+        // dispatch(changeEditableIdAC(''));
     }
     const onCancelClickHandler = () => {
-        dispatch(changeEditableIdAC(''));
+        // dispatch(changeEditableIdAC(''));
     }
     const onRemoveClickHandler = () => {
-        dispatch(removeQuestionAC(props.elem.id));
+        // dispatch(removeQuestionAC(props.elem.id));
     }
 
     return <div className={s.oneQuestion}>

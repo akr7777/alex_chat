@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { QuestionType, changeEditableIdAC } from "../../store/features/questionSlice";
+import { QuestionType } from "../../store/features/questionSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import s from './blockOne.module.css';
 import sphereIcon from "./../../public/icons/sphere_icon.png";
@@ -14,7 +14,7 @@ const NonEditableQuestion = (props: NonEditableQuestionPropsType) => {
     const changedIdsList: Array<string> = useSelector((state: RootState) => state.questions.changedIdsList);
 
     const onQuestionClickHandler = () => {
-        dispatch(changeEditableIdAC(props.elem.id));
+        // dispatch(changeEditableIdAC(props.elem.id));
     }
 
     return <div className={s.oneQuestion + " " + s.oneQuestionNonEditable} onClick={onQuestionClickHandler}>

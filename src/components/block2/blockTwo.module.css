@@ -19,19 +19,24 @@
     position: sticky;
     bottom: 0;
     left: 0;
-    height: 30px;
+    height: 50px;
 
     display: flex;
     flex-direction: row-reverse;
     gap: 20px;
     align-items: center;
+    justify-content: center;
 
-    margin-top: auto;
+    margin-top: 10px;
+
+    background-color: rgba(252, 217, 151);
+    border-radius: 10px;
+    border: 1px solid black;
 }
 
 .iconsImg {
-    height: 25px;
-    width: 25px;
+    height: 45px;
+    width: 45px;
     cursor: pointer;
 }
 .iconsImg:hover {

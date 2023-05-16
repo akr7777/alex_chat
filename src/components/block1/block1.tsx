@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux';
 import s from './blockOne.module.css';
 import { RootState } from '../../store/store';
 import { QuestionType } from '../../store/features/questionSlice';
-import EditableQuestion from './editableQuestion';
-import NonEditableQuestion from './nonEditableQuestion';
+import EditableQuestion from './_editableQuestion';
+import NonEditableQuestion from './_nonEditableQuestion';
 import Preloader from '../../common/preloader/preloader';
+import OneQuestion from './oneQuestion';
 
 const BlockOne = () => {
 
@@ -22,7 +23,7 @@ const BlockOne = () => {
                 : <>{
                     questions.map( (elem:QuestionType, elemIndex: number) => {
                         return <div key={elem.id}>
-                            {
+                            {/* {
                                 editableId === elem.id
                                     ?   <EditableQuestion 
                                             index={elemIndex} 
@@ -32,7 +33,11 @@ const BlockOne = () => {
                                             index={elemIndex} 
                                             elem={elem}
                                         />
-                            }
+                            } */}
+                            <OneQuestion 
+                                index={elemIndex} 
+                                elem={elem}
+                            />
                         </div>
                     })
                 }</>
