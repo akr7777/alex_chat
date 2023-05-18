@@ -1,15 +1,27 @@
 
 .oneQuestion {
     margin: 10px 0;
-    padding: 5px;
     background-color: rgb(252, 217, 151);
     border: 1px solid black;
     border-radius: 10px;
 
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;    
+}
+.colorDiv {
+    width: 20px;
+    cursor: pointer;
+    border-right: 1px solid black;
+}
+.oneQuestionContent {
+    padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
+
 .oneQuestionNonEditable {
     cursor: pointer;
 }
@@ -48,4 +60,8 @@
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.colorChooser {
+    width: 100%;
 }

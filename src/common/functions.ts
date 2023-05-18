@@ -20,6 +20,5 @@ export const addAnswerToPrompt = (text: string, questions: Array<QuestionType>):
         }
         return word
     })
-    // console.log('addAnswerToPrompt/ g=', g.join(' '))
     return g.join(' ');
 }

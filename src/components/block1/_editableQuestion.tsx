@@ -25,13 +25,13 @@ const EditableQuestion = (props: EditableQuestionPropsType) => {
     const [newAnswerText, setNewAnswerText] = useState<string>(props.elem.answer);
 
     const onSaveClickHandler = () => {
-        const newElemValue:QuestionType = {
-            id: props.elem.id,
-            question: newQuestionText,
-            answer: newAnswerText
-        }
-        dispatch(changeQuestionAC(newElemValue))
-        dispatch(addIdToChangedIdsListAC(props.elem.id));
+        // const newElemValue:QuestionType = {
+        //     id: props.elem.id,
+        //     question: newQuestionText,
+        //     answer: newAnswerText
+        // }
+        // dispatch(changeQuestionAC(newElemValue))
+        // dispatch(addIdToChangedIdsListAC(props.elem.id));
         // dispatch(changeEditableIdAC(''));
     }
     const onCancelClickHandler = () => {

@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import s from './blockTwo.module.css';
 import { RootState, useAppDispatch } from '../../store/store';
-import { changePromptAC } from '../../store/features/promptSlice';
 import deleteIcon from "./../../public/icons/delete_icon.png";
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon_2.png";
@@ -12,10 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import MultilineText from '../../common/multilineText/multilineText';
 import { addAnswerToPrompt } from '../../common/functions';
+import { changePromptAC } from '../../store/features/questionSlice';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
-    const prompt: Array<string> = useSelector((state: RootState) => state.prompt.prompt);
+    const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
     const questions = useSelector((state: RootState) => state.questions.questions);
 
     const nonEditablePrompt: string = addAnswerToPrompt(prompt.join('\n\n').replaceAll('\n\n', '<br/><br/>'), questions);
@@ -31,11 +31,12 @@ const BlockTwo = () => {
     }
     const onSaveClickHandler = () => {
         setIsEdit(false);
-        // alert('On Save Click: ' + newPrompt)
         const newPromptArray:Array<string> = newPrompt.split('\n\n');
         dispatch(changePromptAC(newPromptArray));
     }
     const onApproveClickHandler = () => {
+        console.log(prompt);
+        
         toast.error("Запрос улетел на сервер...");
     }
     const onDisabledApproveClickHandler = () => {
@@ -64,7 +65,7 @@ const BlockTwo = () => {
         <div className={s.promptDiv}>
             {
                 isEdit
-                    ? <MultilineText value={newPrompt} onValuechange={(newText) => setNewPrompt(newText)} class={''}/> 
+                    ? <MultilineText value={newPrompt} onValuechange={(newText) => setNewPrompt(newText)} class={s.textAreaHeight} /> 
                     : <div className={s.promptTextDiv} dangerouslySetInnerHTML={{__html: nonEditablePrompt}} />
             }
         </div>

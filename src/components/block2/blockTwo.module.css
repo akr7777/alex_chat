@@ -46,3 +46,7 @@
 .iconsImg:hover {
     scale: 1.2;
 }
+
+.textAreaHeight {
+    height: 75vh;
+}

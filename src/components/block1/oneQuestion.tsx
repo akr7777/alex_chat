@@ -1,66 +1,28 @@
 import { useState } from "react";
-import { QuestionType, changeQuestionAC } from "../../store/features/questionSlice";
+import { QuestionType } from "../../store/features/questionSlice";
 import s from "./blockOne.module.css";
-import MultilineText from "../../common/multilineText/multilineText";
-import { useAppDispatch } from "../../store/store";
+import OneQuestionContent from "./oneQuestionContent";
+import ColorChooser from "./colorChooser";
 
-import saveIcon from "./../../public/icons/save_icon.png";
-import cancelIcon from "./../../public/icons/cancel_icon.png";
-
-
-type OneQuestionPropsType = {
+export type OneQuestionPropsType = {
     index: number,
     elem: QuestionType
 }
 
 const OneQuestion = (props: OneQuestionPropsType) => {
-
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [newAnswer, setNewAnswer] = useState<string>(props.elem.answer);
-    const dispatch = useAppDispatch();
-
-    const onSaveClickHandler = () => {
-        const newElem: QuestionType = {
-            ...props.elem, answer: newAnswer
-        }
-        dispatch(changeQuestionAC(newElem));
-        setIsEdit(false);
-    }
-    const onCancelClickHandler = () => {
-        setIsEdit(false);
-
-    }
-    const onDivClickHandler = () => {
-        setIsEdit(true);
-    }
+    const [editColor, setEditColor] = useState<boolean>(false);
 
     return <div className={s.oneQuestion}>
-
-        <div className={s.questionTextLabel}>
-            Вопрос №{props.index + 1}
-        </div>
-
-        <div className={s.questionTextLabel}>
-            { props.elem.question}
-        </div>
-
-        <div>
-            {
-                isEdit
-                    ?   <MultilineText value={newAnswer} onValuechange={(newValue) => setNewAnswer(newValue)}/>
-                    :   <div className={s.answerTextLabel} onClick={onDivClickHandler}>
-                                { props.elem.answer }
-                        </div>
-            }
-        </div>
-
+        <div 
+            className={s.colorDiv}
+            onClick={() => setEditColor(!editColor)} 
+            style={ { backgroundColor: props.elem.color } }
+        /> 
         {
-            isEdit && <div className={s.iconsDiv}>
-                    <img alt="" className={s.iconsImg} src={saveIcon} onClick={onSaveClickHandler} />
-                    <img alt="" className={s.iconsImg} src={cancelIcon} onClick={onCancelClickHandler} />
-                </div>
+            editColor 
+                ? <ColorChooser questionId={props.elem.id}/>
+                : <OneQuestionContent index={props.index} elem={props.elem}/>
         }
-        
     </div>
 }
 

@@ -1,12 +1,12 @@
 import {configureStore, ThunkDispatch, AnyAction} from "@reduxjs/toolkit";
 import {useDispatch} from "react-redux";
 import questionSlice from "./features/questionSlice";
-import promptSlice from "./features/promptSlice";
+// import promptSlice from "./features/promptSlice";
 
 export const store = configureStore({
     reducer: {
         questions: questionSlice,
-        prompt: promptSlice,
+        // prompt: promptSlice,
     },
 });
 

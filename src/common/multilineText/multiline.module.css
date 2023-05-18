@@ -1,6 +1,9 @@
 .multiline {
     background-color: azure;
-    width: 100%;
+    width: 98%;
+    min-height: 70px;
     height: 100%;
     white-space: pre-wrap;
+    border-radius: 10px;
+    resize: none;
 }

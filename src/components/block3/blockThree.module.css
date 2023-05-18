@@ -13,16 +13,11 @@
 }
 
 .responseDiv {
-    /* position: relative;
     overflow: hidden;
     overflow-y: scroll;
-    padding-top: 10px;
-    background-color: yellow; */
-
-    overflow: hidden;
-    overflow-y: scroll;
-    /* background-color: yellow; */
     flex-grow: 1;
+    white-space: pre-wrap;
+    text-align: justify;
 }
 
 .buttonsDiv {
@@ -37,7 +32,6 @@
     align-items: center;
 
     margin-top: auto;
-    /* background-color: aquamarine; */
 }
 
 .iconsImg {

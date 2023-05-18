@@ -20,8 +20,8 @@ const MultilineText = (props: MultilineTextPropsType) => {
         value={props.value}
         onChange={(e) => onTextChangeHandler(e)}
         className={props.class ? s.multiline + " " + props.class : s.multiline}
-        rows={ props.rows ? props.rows : 10 }
-        cols={ props.cols ? props.cols : 5 }
+        // rows={ props.rows ? props.rows : 0 }
+        // cols={ props.cols ? props.cols : 0 }
     />
 }
 
