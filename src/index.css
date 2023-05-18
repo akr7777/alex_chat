@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  --header_foorter_height: 15px;
+  --main_icons_size: 45px;
+  --menu_icons_height: 50px;
+  --menu_bg_color: rgba(252, 217, 151);
+  --main_bg_color: rgb(186, 207, 235);
+}
+
 body {
   /* background-color: rgb(29, 28, 28); */
   background-color: rgb(156, 153, 153);
