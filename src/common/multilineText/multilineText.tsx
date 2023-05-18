@@ -6,7 +6,9 @@ type MultilineTextPropsType = {
     onValuechange: (newValue: string) => void,
 
     rows?: number,
-    cols?: number
+    cols?: number,
+    
+    class?: string
 }
 const MultilineText = (props: MultilineTextPropsType) => {
 
@@ -17,7 +19,7 @@ const MultilineText = (props: MultilineTextPropsType) => {
     return <textarea 
         value={props.value}
         onChange={(e) => onTextChangeHandler(e)}
-        className={s.multiline}
+        className={props.class ? s.multiline + " " + props.class : s.multiline}
         rows={ props.rows ? props.rows : 10 }
         cols={ props.cols ? props.cols : 5 }
     />

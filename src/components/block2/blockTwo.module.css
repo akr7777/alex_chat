@@ -14,6 +14,10 @@
     /* background-color: yellow; */
     flex-grow: 1;
 }
+.promptTextDiv {
+    white-space: pre-wrap;
+    text-align: justify;
+}
 
 .buttonsDiv {
     position: sticky;
@@ -22,7 +26,7 @@
     height: 50px;
 
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     gap: 20px;
     align-items: center;
     justify-content: center;

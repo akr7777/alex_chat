@@ -4,7 +4,7 @@ export type QuestionType = {
     id: string
     question: string
     answer: string,
-    
+    color?: string
 }
 export type InitContectType = {
     questions: Array<QuestionType>,
@@ -37,12 +37,14 @@ const initContentQuestionsSlice:InitContectType = {
     {
         id: '1',
         question: 'question 1 text question 1 text question 1 text question 1 text',
-        answer: 'answer 1 text answer 1 text answer 1 text '
+        answer: 'answer 1 text answer 1 text answer 1 text ',
+        color: 'red'
     },
     {
         id: '2',
         question: 'question 2 text question 2 text question 2 text question 2 text',
-        answer: 'answer 2 text answer 2 text answer 2 text '
+        answer: 'answer 2 text answer 2 text answer 2 text ',
+        color: 'green'
     },
     {
         id: '3',

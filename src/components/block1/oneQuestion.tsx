@@ -37,7 +37,7 @@ const OneQuestion = (props: OneQuestionPropsType) => {
     return <div className={s.oneQuestion}>
 
         <div className={s.questionTextLabel}>
-            Вопрос №{props.index}
+            Вопрос №{props.index + 1}
         </div>
 
         <div className={s.questionTextLabel}>
@@ -48,9 +48,9 @@ const OneQuestion = (props: OneQuestionPropsType) => {
             {
                 isEdit
                     ?   <MultilineText value={newAnswer} onValuechange={(newValue) => setNewAnswer(newValue)}/>
-                    :   <label className={s.answerTextLabel} onClick={onDivClickHandler}>
-                            { props.elem.answer }
-                        </label>
+                    :   <div className={s.answerTextLabel} onClick={onDivClickHandler}>
+                                { props.elem.answer }
+                        </div>
             }
         </div>
 

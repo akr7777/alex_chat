@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import s from './blockTwo.module.css';
 import { RootState, useAppDispatch } from '../../store/store';
-import { IdIndexType, changePromptAC } from '../../store/features/promptSlice';
+import { changePromptAC } from '../../store/features/promptSlice';
 import deleteIcon from "./../../public/icons/delete_icon.png";
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon_2.png";
@@ -10,37 +10,36 @@ import okIcon from "./../../public/icons/ok_icon.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import MultilineText from '../../common/multilineText/multilineText';
+import { addAnswerToPrompt } from '../../common/functions';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
-    const prompt: string = useSelector((state: RootState) => state.prompt.prompt);
-    const promptArray: Array<string> = prompt.split(' ');
-    const idIndexArr: Array<IdIndexType> = useSelector((state: RootState) => state.prompt.idIndex);
+    const prompt: Array<string> = useSelector((state: RootState) => state.prompt.prompt);
     const questions = useSelector((state: RootState) => state.questions.questions);
 
-    idIndexArr.forEach( idElem => {
-        const wordToPaste: string | undefined = questions.find( qElem => qElem.id === idElem.id)?.answer;
-        if (wordToPaste) {
-            promptArray.splice(idElem.index, 0, wordToPaste)
-        }
-            
-    })
+    const nonEditablePrompt: string = addAnswerToPrompt(prompt.join('\n\n').replaceAll('\n\n', '<br/><br/>'), questions);
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [newPrompt, setNewPrompt] = useState<string>(prompt);
+    const [newPrompt, setNewPrompt] = useState<string>(prompt.join('\n\n'));
 
     const onDeleteClickHandler = () => {
-        dispatch(changePromptAC(''));
+        dispatch(changePromptAC([]));
     }
     const onEditClickHandler = () => {
         setIsEdit(true);
     }
     const onSaveClickHandler = () => {
         setIsEdit(false);
-        dispatch(changePromptAC(newPrompt));
+        // alert('On Save Click: ' + newPrompt)
+        const newPromptArray:Array<string> = newPrompt.split('\n\n');
+        dispatch(changePromptAC(newPromptArray));
     }
     const onApproveClickHandler = () => {
         toast.error("Запрос улетел на сервер...");
+    }
+    const onDisabledApproveClickHandler = () => {
+        toast.warning('Сначала надо завершить редактирование...');
     }
 
     return <div className={s.promptWrapperDiv}>
@@ -65,21 +64,26 @@ const BlockTwo = () => {
         <div className={s.promptDiv}>
             {
                 isEdit
-                    ? <textarea/> //<BigText value={promptArray.join(' ')} onValueChange={setNewPrompt}/>
-                    : <>{ promptArray.join(' ') }</>
+                    ? <MultilineText value={newPrompt} onValuechange={(newText) => setNewPrompt(newText)} class={''}/> 
+                    : <div className={s.promptTextDiv} dangerouslySetInnerHTML={{__html: nonEditablePrompt}} />
             }
         </div>
 
         <div className={s.buttonsDiv}>
-            {/* <button onClick={onApproveClickHandler}>Подтвердить</button> */}
-            <img alt="" src={okIcon} className={s.iconsImg} onClick={onApproveClickHandler}/>
+            <img alt="" src={deleteIcon} className={s.iconsImg} onClick={onDeleteClickHandler}/>
+
             {
                 isEdit
                     ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSaveClickHandler}/>
                     : <img alt="" src={editIcon} className={s.iconsImg} onClick={onEditClickHandler}/>
             }
             
-            <img alt="" src={deleteIcon} className={s.iconsImg} onClick={onDeleteClickHandler}/>
+            {  
+                isEdit 
+                    ? <img alt="" src={okIcon} className={s.iconsImg} onClick={onDisabledApproveClickHandler}/> 
+                    : <img alt="" src={okIcon} className={s.iconsImg} onClick={onApproveClickHandler}/>
+            }
+
         </div>
     </div>
 }
