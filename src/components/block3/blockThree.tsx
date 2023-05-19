@@ -9,7 +9,7 @@ import { useState } from "react";
 import HistoryResponses from "./history";
 
 const BlockThree = () => {
-    const [showHistory, setShowHistory] = useState<boolean>(true);
+    const [showHistory, setShowHistory] = useState<boolean>(false);
     const responseGPT: string = useSelector((state: RootState) => state.questions.responseGPT);
     const onCopyClickHandler = () => {
         navigator.clipboard.writeText(responseGPT);

@@ -13,6 +13,7 @@ export type InitContectType = {
         isLoading: boolean,
         newQuestionText: string,
         newAnswertext: string,
+        newPrompt: string
     },
     changedIdsList: Array<string>,
     prompt: Array<string>,
@@ -28,7 +29,8 @@ const initContentQuestionsSlice:InitContectType = {
     var: {
         isLoading: false,
         newQuestionText: '',
-        newAnswertext: ''
+        newAnswertext: '',
+        newPrompt: ''
     },
     prompt: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Integer vitae justo eget magna fermentum iaculis.", 
             "Non tellus orci ac auctor augue mauris augue. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Feugiat in ante metus dictum at tempor. Ut ornare lectus sit amet. Lorem ipsum dolor sit amet.", "Etiam non quam lacus suspendisse. Tortor aliquam nulla facilisi cras fermentum odio eu. Quisque sagittis purus sit amet. Turpis massa tincidunt dui ut. Montes nascetur ridiculus mus mauris vitae ultricies leo. In dictum non consectetur a erat nam at. Eget mauris pharetra et ultrices neque ornare aenean euismod. Senectus et netus et malesuada fames. Faucibus turpis in eu mi bibendum neque egestas congue quisque. Leo duis ut diam quam Imperdiet dui accumsan sit amet nulla.", 
@@ -38,13 +40,13 @@ const initContentQuestionsSlice:InitContectType = {
     changedIdsList: [],
     questions: [
     {
-        id: '1',
+        id: '11111',
         question: 'question 1 text question 1 text question 1 text question 1 text',
         answer: 'answer 1 text answer 1 text answer 1 text ',
         color: ''
     },
     {
-        id: '2',
+        id: '22222',
         question: 'question 2 text question 2 text question 2 text question 2 text',
         answer: 'answer 2 text answer 2 text answer 2 text ',
         color: ''
@@ -112,15 +114,15 @@ export const questionsSlice = createSlice({
     name: 'questionsSlice',
     initialState: initContentQuestionsSlice,
     reducers: {
-        // changeEditableIdAC: (state: InitContectType, action: PayloadAction<string>) => {
-        //     state.editableId = action.payload;
-        // },
-        // removeQuestionAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
-        //     return {
-        //         ...state,
-        //         questions: state.questions.filter(el => el.id !== action.payload)
-        //     }
-        // },
+        changeEditableIdAC: (state: InitContectType, action: PayloadAction<string>) => {
+            state.editableId = action.payload;
+        },
+        removeQuestionAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
+            return {
+                ...state,
+                questions: state.questions.filter(el => el.id !== action.payload)
+            }
+        },
         changeQuestionAC: (state: InitContectType, action: PayloadAction<QuestionType>):InitContectType => {
             return {
                 ...state, 
@@ -144,7 +146,7 @@ export const questionsSlice = createSlice({
         changeQuestionColorAC: (state: InitContectType, action: PayloadAction<{questionId: string, newColor: string}>):InitContectType => {
             return {
                 ...state,
-                questions: state.questions.map(currentQuestion => {
+                questions: [...state.questions].map(currentQuestion => {
                     if (currentQuestion.id === action.payload.questionId) {
                         return {...currentQuestion, color: action.payload.newColor}
                     }
@@ -152,8 +154,20 @@ export const questionsSlice = createSlice({
                 })
             }
         },
-        changePromptAC: (state: InitContectType, action: PayloadAction<Array<string>>) => {
-            state.prompt = action.payload;
+        changePromptAC: (state: InitContectType, action: PayloadAction<Array<string>>):InitContectType => {
+            return {
+                ...state, 
+                prompt: action.payload
+            }
+        },
+        changeNewPromptAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
+            return {
+                ...state, 
+                var: {
+                    ...state.var, 
+                    newPrompt: action.payload
+                }
+            }
         },
     },
 
@@ -172,7 +186,7 @@ export const questionsSlice = createSlice({
        
     }
 })
-export const {changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC, changeQuestionColorAC, 
-    changePromptAC} = questionsSlice.actions;
+export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC, changeQuestionColorAC, 
+    changePromptAC, changeNewPromptAC} = questionsSlice.actions;
 
 export default questionsSlice.reducer;

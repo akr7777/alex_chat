@@ -10,26 +10,26 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import MultilineText from '../../common/multilineText/multilineText';
-import { addAnswerToPrompt } from '../../common/functions';
-import { changePromptAC } from '../../store/features/questionSlice';
+import { AddAnswerToPrompt } from '../../common/functions';
+import { changeNewPromptAC, changePromptAC } from '../../store/features/questionSlice';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
     const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
-    const questions = useSelector((state: RootState) => state.questions.questions);
 
-    const nonEditablePrompt: string = addAnswerToPrompt(prompt.join('\n\n').replaceAll('\n\n', '<br/><br/>'), questions);
+    const nonEditablePrompt: string = AddAnswerToPrompt(prompt.join('\n\n').replaceAll('\n\n', ' <br/><br/> '));
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [newPrompt, setNewPrompt] = useState<string>(prompt.join('\n\n'));
+    const newPrompt: string = useSelector((state: RootState) => state.questions.var.newPrompt);
 
     const onDeleteClickHandler = () => {
         dispatch(changePromptAC([]));
     }
     const onEditClickHandler = () => {
+        dispatch(changeNewPromptAC(prompt.join('\n\n')))
         setIsEdit(true);
     }
-    const onSaveClickHandler = () => {
+    const onSavePromptClickHandler = () => {
         setIsEdit(false);
         const newPromptArray:Array<string> = newPrompt.split('\n\n');
         dispatch(changePromptAC(newPromptArray));
@@ -41,6 +41,9 @@ const BlockTwo = () => {
     }
     const onDisabledApproveClickHandler = () => {
         toast.warning('Сначала надо завершить редактирование...');
+    }
+    const onNewPromptTextChange = (newText: string) => {
+        dispatch(changeNewPromptAC(newText));
     }
 
     return <div className={s.promptWrapperDiv}>
@@ -65,7 +68,7 @@ const BlockTwo = () => {
         <div className={s.promptDiv}>
             {
                 isEdit
-                    ? <MultilineText value={newPrompt} onValuechange={(newText) => setNewPrompt(newText)} class={s.textAreaHeight} /> 
+                    ? <MultilineText value={newPrompt} onValuechange={(newText) => onNewPromptTextChange(newText)} class={s.textAreaHeight} /> 
                     : <div className={s.promptTextDiv} dangerouslySetInnerHTML={{__html: nonEditablePrompt}} />
             }
         </div>
@@ -75,7 +78,7 @@ const BlockTwo = () => {
 
             {
                 isEdit
-                    ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSaveClickHandler}/>
+                    ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSavePromptClickHandler}/>
                     : <img alt="" src={editIcon} className={s.iconsImg} onClick={onEditClickHandler}/>
             }
             
