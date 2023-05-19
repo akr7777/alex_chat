@@ -7,10 +7,32 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 30px;
+
+    padding-right: 30px;
+
+    font-weight: bold;
 }
 .titleDiv{
     flex-grow: 1;
 }
-.userNameDiv {
-    padding-right: 30px;
+
+.VarNameCompanyDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 100px;
+    cursor: pointer;
+}
+.varLabel {
+    cursor: pointer;
+}
+
+.iconImg {
+    width: var(--top_menu_icons_size);
+    height: var(--top_menu_icons_size);
+    cursor: pointer;
 }

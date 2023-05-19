@@ -1,26 +1,22 @@
-import { useState } from "react";
 import s from "./header.module.css";
 
+import UserName from "./userName";
+import CompanyName from "./companyName";
+
+
+const COMPANY_LC = "company";
+
 const Header = () => {
-    const userName: string = localStorage.getItem('username') || 'some user';
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-    const onSaveNewUserName = () => {
-
-    }
-
     return <div className={s.headerDiv}>
 
         <div className={s.titleDiv}>
-            <strong>TITLE</strong>
+            TITLE
         </div>
 
-        <div onClick={() => setIsEdit(!isEdit)} className={s.userNameDiv}>
-            {
-                isEdit
-                    ? <input type="text" value={userName}/>
-                    : <label>{userName}</label>
-            }
-        </div>
+        <UserName />
+
+        <CompanyName />
+        
     </div>
 }
 
