@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import s from './mainPage.module.css';
-import { useAppDispatch } from '../../store/store';
 import BlockOne from '../block1/block1';
 import BlockTwo from '../block2/block2';
 import BlockThree from '../block3/blockThree';
+import Header from './header/header';
+import Footer from './footer/footer';
 
 const MainPage = () => {
 
@@ -12,7 +13,9 @@ const MainPage = () => {
     }, [])
 
     return <div className={s.wrappedDiv}>
-        <strong>TITLE</strong>
+        
+        <Header />
+
         <div className={s.mainDiv}>
             <div className={s.blockDiv}>
                 <BlockOne />
@@ -24,6 +27,9 @@ const MainPage = () => {
                 <BlockThree />
             </div>
         </div>
+
+        <Footer />
+        
     </div>
 }
 

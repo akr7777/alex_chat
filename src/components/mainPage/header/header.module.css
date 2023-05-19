@@ -1,0 +1,16 @@
+.headerDiv {
+    height: var(--header_foorter_height);
+    background-color: var(--header_footer_bg_color);
+    color: var(--header_footer_text_color);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.titleDiv{
+    flex-grow: 1;
+}
+.userNameDiv {
+    padding-right: 30px;
+}

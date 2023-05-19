@@ -1,7 +1,10 @@
 * {
   margin: 0;
   padding: 0;
-  --header_foorter_height: 15px;
+  --header_foorter_height: 50px;
+  --header_footer_bg_color: rgb(53, 50, 50);
+  --header_footer_text_color: white;
+
   --main_icons_size: 45px;
   --menu_icons_height: 50px;
   --menu_bg_color: rgba(252, 217, 151);

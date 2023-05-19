@@ -2,6 +2,9 @@ import { useSelector } from 'react-redux';
 import s from './blockTwo.module.css';
 import { RootState, useAppDispatch } from '../../store/store';
 import deleteIcon from "./../../public/icons/delete_icon.png";
+import refreshRedIcon from "./../../public/icons/refresh_red_icon.png";
+import savePromptIcon from "./../../public/icons/save_icon_3.png";
+
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon_2.png";
 import okIcon from "./../../public/icons/ok_icon.png";
@@ -22,8 +25,17 @@ const BlockTwo = () => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const newPrompt: string = useSelector((state: RootState) => state.questions.var.newPrompt);
 
-    const onDeleteClickHandler = () => {
-        dispatch(changePromptAC([]));
+    // const onDeleteClickHandler = () => {
+    //     dispatch(changePromptAC([]));
+    // }
+    const onSavePromptToServerClickHandler = () => {
+        const userAnswer: boolean = window.confirm("Уверены, что хотите сохранить эту версию промпта как базовую?");
+        if (userAnswer) {
+            toast.info("Новая версия сохранена.")
+        }
+    }
+    const onRefreshPromptClickHandler = () => {
+        toast.info("Тут надо запросить старый промпт с сервера и обновить его в приложении")
     }
     const onEditClickHandler = () => {
         dispatch(changeNewPromptAC(prompt.join('\n\n')))
@@ -74,7 +86,10 @@ const BlockTwo = () => {
         </div>
 
         <div className={s.buttonsDiv}>
-            <img alt="" src={deleteIcon} className={s.iconsImg} onClick={onDeleteClickHandler}/>
+
+            <img alt="" src={savePromptIcon} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+
+            <img alt="" src={refreshRedIcon} className={s.iconsImg} onClick={onRefreshPromptClickHandler}/>
 
             {
                 isEdit
