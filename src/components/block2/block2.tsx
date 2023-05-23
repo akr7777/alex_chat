@@ -60,7 +60,8 @@ const BlockTwo = () => {
         // toast.error("Запрос улетел на сервер...");
         // console.log('prompt.join()=',prompt.join());
         
-        dispatch(postResponseThunk(prompt.join(NEW_LINE_SEPARATOR)));
+        // dispatch(postResponseThunk(prompt.join(NEW_LINE_SEPARATOR)));
+        dispatch(postResponseThunk(prompt));
     }
     const onDisabledApproveClickHandler = () => {
         toast.warning('Сначала надо завершить редактирование...');

@@ -56,7 +56,7 @@ export const putPromptThunk = createAsyncThunk(
 
 export const postResponseThunk = createAsyncThunk(
     'questions/postResponseThunk',
-    async (prompt: string, {rejectWithValue, dispatch}) => {
+    async (prompt: Array<string>, {rejectWithValue, dispatch}) => {
         try {
             const userName:string = localStorage.getItem(USER_NAME_LocalStorage) || '-';
             const res = await questionsAPI.postResponse(prompt, userName);

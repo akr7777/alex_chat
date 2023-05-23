@@ -1,4 +1,4 @@
-/* 
+
 .bricksHead {
     display: grid;
     grid-template-columns: var(--bricks_template_column);
@@ -41,4 +41,4 @@
 }
 .iconsImg:hover {
     scale: 1.2;
-} */
+}

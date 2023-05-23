@@ -28,7 +28,7 @@ export const questionsAPI = {
     getHistory: (): Promise<AxiosResponse> => {
         return instance.get('history');
     },
-    postResponse: (prompt: string, userName: string): Promise<AxiosResponse> => {
+    postResponse: (prompt: Array<string>, userName: string): Promise<AxiosResponse> => {
         return instance.post('response', {prompt, userName});
     },
 }
