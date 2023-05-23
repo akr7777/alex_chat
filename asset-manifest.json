@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/alex_chat/static/css/main.a1e56d64.css",
-    "main.js": "/alex_chat/static/js/main.8432c8d8.js",
+    "main.css": "/alex_chat/static/css/main.2a89eb81.css",
+    "main.js": "/alex_chat/static/js/main.a7d380fe.js",
     "static/js/787.0c6125a2.chunk.js": "/alex_chat/static/js/787.0c6125a2.chunk.js",
+    "static/media/var_no.png": "/alex_chat/static/media/var_no.383ac9cbd12871299a4c.png",
+    "static/media/book_icon.png": "/alex_chat/static/media/book_icon.b2196b803ad2d3c32cb1.png",
     "index.html": "/alex_chat/index.html",
-    "main.a1e56d64.css.map": "/alex_chat/static/css/main.a1e56d64.css.map",
-    "main.8432c8d8.js.map": "/alex_chat/static/js/main.8432c8d8.js.map",
+    "main.2a89eb81.css.map": "/alex_chat/static/css/main.2a89eb81.css.map",
+    "main.a7d380fe.js.map": "/alex_chat/static/js/main.a7d380fe.js.map",
     "787.0c6125a2.chunk.js.map": "/alex_chat/static/js/787.0c6125a2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a1e56d64.css",
-    "static/js/main.8432c8d8.js"
+    "static/css/main.2a89eb81.css",
+    "static/js/main.a7d380fe.js"
   ]
 }
