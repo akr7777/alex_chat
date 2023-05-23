@@ -1,0 +1,88 @@
+.promptHistoryLayout {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0, 0.6);
+}
+
+.promptHistoryDiv {
+    z-index: 101;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgb(168, 168, 129);
+    border: 2px solid var(--border_color);
+    border-radius: 10px;
+    padding-top: 20px;
+
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.iconImg {
+    width: var(--main_icons_size);
+    height: var(--main_icons_size);
+    cursor: pointer;
+    position: fixed;
+    top: calc(10vh - 0.5*var(--main_icons_size));
+    left: calc(50vw - 0.5*var(--main_icons_size));
+}
+.iconImg:hover { scale: 1.2; }
+
+
+.promptsBrickDisplay {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+
+/* BRICKS: */
+
+.bricksDivShort {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+
+    margin: 10px 5px;
+    border: 1px solid var(--border_color);
+    border-radius: 10px;
+
+    min-height: 30px;
+    overflow: hidden;
+
+    background-color: rgb(227, 233, 233);
+}
+.bricksDivShort:hover {
+    min-height: 35px;
+    background-color: rgb(193, 193, 193);
+
+}
+
+.oneSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    white-space: pre-wrap;
+}
+
+.iconsImg {
+    width: var(--main_icons_size);
+    height: var(--main_icons_size);
+    cursor: pointer;
+}
+.iconsImg:hover {
+    scale: 1.2;
+}
+
+.linkLabel {
+    cursor: pointer;
+    font-weight: bold;
+}
+.linkLabel:hover { scale: 1.1; }

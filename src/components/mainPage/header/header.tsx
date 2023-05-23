@@ -1,8 +1,5 @@
 import s from "./header.module.css";
-
 import UserName from "./userName";
-import CompanyName from "./companyName";
-
 
 const COMPANY_LC = "company";
 
@@ -15,7 +12,6 @@ const Header = () => {
 
         <UserName />
 
-        <CompanyName />
         
     </div>
 }

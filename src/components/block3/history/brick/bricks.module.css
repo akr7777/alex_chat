@@ -1,0 +1,44 @@
+/* 
+.bricksHead {
+    display: grid;
+    grid-template-columns: var(--bricks_template_column);
+    gap: 10px;
+    margin: 10px 5px;
+}
+.bricksDivShort {
+    display: grid;
+    grid-template-columns: var(--bricks_template_column);
+    gap: 10px;
+
+    margin: 10px 5px;
+    border: 1px solid var(--border_color);
+    border-radius: 10px;
+
+    min-height: 30px;
+    overflow: hidden;
+
+    background-color: rgb(227, 233, 233);
+}
+.bricksDivShort:hover {
+    min-height: 35px;
+    background-color: rgb(193, 193, 193);
+
+}
+
+.oneSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    white-space: pre-wrap;
+}
+
+.iconsImg {
+    width: var(--main_icons_size);
+    height: var(--main_icons_size);
+    cursor: pointer;
+}
+.iconsImg:hover {
+    scale: 1.2;
+} */

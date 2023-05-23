@@ -1,0 +1,21 @@
+.search {
+    /* background-color: green; */
+    /* display: grid;
+    grid-template-columns: var(--bricks_template_column); */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.searchMarginTop {
+    margin-top: 20px;
+}
+.searchField {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.textFieldWidth {
+    min-width: 250px;
+}

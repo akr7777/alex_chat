@@ -50,7 +50,7 @@
     scale: 1.2;
 }
 
-
+/* 
 .historyLayoutDiv {
     z-index: 100;
     width: 100vw;
@@ -87,4 +87,4 @@
     position: fixed;
     top: calc( 10vh - var(--main_icons_size)*0.5 );
     left: calc( 50vw - var(--main_icons_size)*0.5 );
-}
+} */

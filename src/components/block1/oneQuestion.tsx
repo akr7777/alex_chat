@@ -6,7 +6,8 @@ import ColorChooser from "./colorChooser";
 
 export type OneQuestionPropsType = {
     index: number,
-    elem: QuestionType
+    elem: QuestionType,
+    questionsLength: number
 }
 
 const OneQuestion = (props: OneQuestionPropsType) => {
@@ -21,7 +22,7 @@ const OneQuestion = (props: OneQuestionPropsType) => {
         {
             editColor 
                 ? <ColorChooser questionId={props.elem.id}/>
-                : <OneQuestionContent index={props.index} elem={props.elem}/>
+                : <OneQuestionContent index={props.index} elem={props.elem} questionsLength={props.questionsLength}/>
         }
     </div>
 }

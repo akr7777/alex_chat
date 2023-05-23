@@ -1,6 +1,11 @@
 * {
   margin: 0;
   padding: 0;
+
+  /* COMMON */
+  --border_color: black;
+
+  /* HEADER & FOOTER */
   --header_foorter_height: 50px;
   --header_footer_bg_color: rgb(53, 50, 50);
   --header_footer_text_color: white;
@@ -13,6 +18,13 @@
 
   /* TOP MENU */
   --top_menu_icons_size: 25px;
+
+  /* TEXT FIELD */
+  --input_bg_color: azure;
+  --input_text_color: black;
+
+  /* BRICKS */
+  --bricks_template_column: 0.5fr 1fr 1fr 1.5fr 3fr 4fr 0.5fr;
 }
 
 body {

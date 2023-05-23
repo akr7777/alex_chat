@@ -1,0 +1,93 @@
+
+.textDiv {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap:5px;
+}
+.textWidth {
+    width: 170px;
+    cursor: pointer;
+
+}
+.calendar_desctop {
+    z-index: 101;
+    transition: all 0.5s linear;
+    /* background-color: var(--calendar_bgColor); */
+    background-color: var(--menu_bg_color);
+    position: absolute;
+
+    display: grid;
+    grid-template-areas: 
+        "yy mm"
+        "dd dd";
+    gap: 10px;
+    padding: 10px;
+    border-radius: 15px;
+}
+.calendar_head_year_div {
+    display: grid;
+    grid-area: yy;
+    grid-template-columns: 26px 1fr 26px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.year_width {width: 120px;} 
+.month_width {width: 180px;} 
+.calendar_head_month_div {
+    grid-area: mm;
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    text-align: center;
+    align-items: center;
+    /* background-color: yellow; */
+}
+.calendar_head_days_div {
+    grid-area: dd;
+    width: 100%; 
+    /* background-color: blue; */
+ }
+ .calendar_days_fields_div {
+    display: grid;
+    /* grid-template-columns: 25px 25px 25px 25px 25px 25px 25px; */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+ }
+ .td_tr {
+    text-align: center;
+ }
+ .calendar_oneDayField {
+    text-align: center;
+    cursor: pointer;
+ }
+ .calendar_oneDayField_checked {
+    /* text-align: center; */
+    background-color: rgb(1, 1, 195);
+    border-radius: 50%;
+    color: yellow;
+ }
+
+ .overlay {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0, 0.6);
+}
+
+.arrows {
+    width: 25px;
+    height: 25px;
+}
+
+.clearIcon {
+    width: 20px;
+    height: 20px;
+}

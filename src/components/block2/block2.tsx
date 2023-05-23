@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import s from './blockTwo.module.css';
 import { RootState, useAppDispatch } from '../../store/store';
-import deleteIcon from "./../../public/icons/delete_icon.png";
+import promptHistoryIcon from "./../../public/icons/history_icon_1.png";
 import refreshRedIcon from "./../../public/icons/refresh_red_icon.png";
-import savePromptIcon from "./../../public/icons/save_icon_3.png";
+import favoritePromptIcon from "./../../public/icons/favorite_icon.png";
 
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon_2.png";
@@ -13,16 +13,25 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import MultilineText from '../../common/multilineText/multilineText';
-import { AddAnswerToPrompt } from '../../common/functions';
-import { changeNewPromptAC, changePromptAC } from '../../store/features/questionSlice';
+import { AddAnswerToPrompt } from '../../functions/functions';
+import { changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from '../../store/features/questionSlice';
+import PromptFavorite from './promptFavorite/promptFavorite';
+import { getPromtThunk, postResponseThunk } from '../../store/features/questionThunk';
+import { NEW_LINE_SEPARATOR } from '../../functions/consts';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
     const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
+    const showPromptHistory: boolean = useSelector((state: RootState) => state.questions.var.showPromptHistory);
 
-    const nonEditablePrompt: string = AddAnswerToPrompt(prompt.join('\n\n').replaceAll('\n\n', ' <br/><br/> '));
+    const nonEditablePrompt: string = AddAnswerToPrompt(
+        prompt
+            .join(NEW_LINE_SEPARATOR)
+            .replaceAll(NEW_LINE_SEPARATOR, ' <br/><br/> ')
+    );
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    // const [isShowPromptHistory, setIsShowPromptHistory] = useState<boolean>(false);
     const newPrompt: string = useSelector((state: RootState) => state.questions.var.newPrompt);
 
     // const onDeleteClickHandler = () => {
@@ -35,27 +44,32 @@ const BlockTwo = () => {
         }
     }
     const onRefreshPromptClickHandler = () => {
-        toast.info("Тут надо запросить старый промпт с сервера и обновить его в приложении")
+        // toast.info("Тут надо запросить старый промпт с сервера и обновить его в приложении")
+        dispatch(getPromtThunk());
     }
     const onEditClickHandler = () => {
-        dispatch(changeNewPromptAC(prompt.join('\n\n')))
+        dispatch(changeNewPromptAC(prompt.join(NEW_LINE_SEPARATOR)))
         setIsEdit(true);
     }
     const onSavePromptClickHandler = () => {
         setIsEdit(false);
-        const newPromptArray:Array<string> = newPrompt.split('\n\n');
+        const newPromptArray:Array<string> = newPrompt.split(NEW_LINE_SEPARATOR);
         dispatch(changePromptAC(newPromptArray));
     }
     const onApproveClickHandler = () => {
-        console.log(prompt);
+        // toast.error("Запрос улетел на сервер...");
+        // console.log('prompt.join()=',prompt.join());
         
-        toast.error("Запрос улетел на сервер...");
+        dispatch(postResponseThunk(prompt.join(NEW_LINE_SEPARATOR)));
     }
     const onDisabledApproveClickHandler = () => {
         toast.warning('Сначала надо завершить редактирование...');
     }
     const onNewPromptTextChange = (newText: string) => {
         dispatch(changeNewPromptAC(newText));
+    }
+    const onPromptHistoryClickHandler = () => {
+        dispatch(changeShowPromptFavoritesAC(true))
     }
 
     return <div className={s.promptWrapperDiv}>
@@ -73,6 +87,10 @@ const BlockTwo = () => {
             theme="light"
         />
 
+
+        { showPromptHistory && <PromptFavorite />}
+        
+        
         <div className={s.titleDiv}>
             <strong>Ваш промпт:</strong>
         </div>
@@ -87,7 +105,11 @@ const BlockTwo = () => {
 
         <div className={s.buttonsDiv}>
 
-            <img alt="" src={savePromptIcon} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+
+
+            <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+            
+            <img alt="" src={promptHistoryIcon} className={s.iconsImg} onClick={onPromptHistoryClickHandler} />
 
             <img alt="" src={refreshRedIcon} className={s.iconsImg} onClick={onRefreshPromptClickHandler}/>
 

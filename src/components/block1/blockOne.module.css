@@ -1,7 +1,15 @@
-
+.questionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.allQuestionsField {
+    flex-grow: 1;
+}
 .oneQuestion {
     margin: 10px 0;
-    background-color: var(--menu_bg_color);
+    background-color: rgba(248, 248, 107, 0.5);
+    /* background-color: var(--menu_bg_color); */
     border: 1px solid black;
     border-radius: 10px;
 
@@ -64,4 +72,32 @@
 
 .colorChooser {
     width: 100%;
+}
+
+.buttonsDiv {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    height: var(--menu_icons_height);
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 10px;
+
+    background-color: var(--menu_bg_color);
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.menuIconsImg {
+    width: var(--main_icons_size);
+    height: var(--main_icons_size);
+    cursor: pointer;
+}
+.menuIconsImg:hover {
+    scale: 1.2;
 }
