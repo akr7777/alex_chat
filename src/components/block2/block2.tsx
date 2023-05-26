@@ -6,7 +6,7 @@ import refreshRedIcon from "./../../public/icons/refresh_red_icon.png";
 import favoritePromptIcon from "./../../public/icons/favorite_icon.png";
 
 import editIcon from "./../../public/icons/edit_icon.png";
-import saveIcon from "./../../public/icons/save_icon_2.png";
+import saveIcon from "./../../public/icons/save_icon.png";
 import okIcon from "./../../public/icons/ok_icon.png";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -108,7 +108,9 @@ const BlockTwo = () => {
 
 
 
-            <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+            <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+            
+            <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={()=>{}} />
             
             <img alt="" src={promptHistoryIcon} className={s.iconsImg} onClick={onPromptHistoryClickHandler} />
 

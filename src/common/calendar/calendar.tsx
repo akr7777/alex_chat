@@ -12,8 +12,8 @@ import dayjs from 'dayjs';
 import { LineTextField } from "../lineTextField/labelLineText";
 // import { COMMON_DATE_FORMAT } from "../../../store/features/authSlice";
 
-export const DATE_EU = 'DD.MM.YYYY';
-export const COMMON_DATE_FORMAT = "YYYY-MM-DD";
+// export const DATE_EU = 'DD.MM.YYYY';
+export const COMMON_DATE_FORMAT = "YYYY.MM.DD";
 export const CURRENT_LANG = 'ru';
 
 export type CalendarPropsType = {
@@ -52,10 +52,16 @@ const Calendar = (props: CalendarPropsType) => {
 
     }
     const onTextInputChangeHandler = (newText: string) => {
+        console.log('changing Cal newText=',newText, newText.slice(0,4));
+        
         setNewDateText(newText)
         if (Number(newText.slice(0,4)) > 2000) {
             const dayJsObj = dayjs(newText);
-            setDate(new Date(dayJsObj.year(), dayJsObj.month(), dayJsObj.date()))
+            console.log('dayJsObj=', dayJsObj);
+            
+            const dateToChange:Date = new Date(dayJsObj.year(), dayJsObj.month(), dayJsObj.date());
+            setDate(dateToChange);
+            props.onDateChange(dayjs(dateToChange).format(COMMON_DATE_FORMAT));
         }
     }
 

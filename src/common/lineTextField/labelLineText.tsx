@@ -17,6 +17,8 @@ type LineTextFieldPropsType = {
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
     const onTextChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log('e.currentTarget.value=',e.currentTarget.value);
+        
         e.preventDefault();
         e.stopPropagation();
         const text = e.currentTarget.value;

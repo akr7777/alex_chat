@@ -20,6 +20,8 @@ const Search = () => {
     }
 
     const onDateStartChangeClickHandler = (newValue: string) => {
+        console.log('newValue=', newValue);
+        
         dispatch(changeSearchDateStartAC(newValue));
     }
     const onDateEndChangeClickHandler = (newValue: string) => {

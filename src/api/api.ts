@@ -3,7 +3,9 @@ import { QuestionType } from "../store/features/questionSlice";
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://95.217.84.190:35923/api/',
+    // baseURL: 'http://95.217.84.190:35923/api/',
+    // baseURL: 'http://95.142.46.27:8000/api/',
+    baseURL: 'http://127.0.0.1:8000/'
 });
 
 // instance.interceptors.request.use((config)=> {
