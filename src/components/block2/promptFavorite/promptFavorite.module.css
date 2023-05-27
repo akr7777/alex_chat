@@ -86,3 +86,23 @@
     font-weight: bold;
 }
 .linkLabel:hover { scale: 1.1; }
+
+.addPromptToFavoriteWindow {
+    position: fixed;
+    height: 80vh;
+    width: 60vw;
+    top: 5vh;
+    left: 20vw;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    background-color: gold;
+    border: 3px solid var(--border_color);
+    border-radius: 10px;
+    padding: 20px;
+
+    overflow: hidden;
+    overflow-y: scroll;
+}

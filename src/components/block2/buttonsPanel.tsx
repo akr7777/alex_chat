@@ -12,21 +12,28 @@ import { NEW_LINE_SEPARATOR } from "../../functions/consts";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState, useAppDispatch } from "../../store/store";
-import { getPromtThunk, postResponseThunk, putPromptThunk } from "../../store/features/questionThunk";
+import { getPromtThunk, postResponseThunk } from "../../store/features/questionThunk";
 import { changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from "../../store/features/questionSlice";
 import { useSelector } from "react-redux";
+import { PromptFavoriteType } from "../../store/features/questionTypes";
+import { useState } from "react";
+import AddPromptToFavoriteWindow from "./promptFavorite/addPromptToFavoriteWindow";
 
 type ButtonsPanelPropsType = {
     isEdit: boolean,
     setIsEdit: (newVal: boolean) => void
     prompt: Array<string>
-    newPrompt: string
+    newPrompt: string,
 }
 
 const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     const dispatch = useAppDispatch();
     const isResponseLoading: boolean = useSelector((state:RootState) => state.questions.varLoading.responseLoading);
     const company: string = useSelector((state: RootState) => state.questions.company);
+
+    const [showAdd, setShowAdd] = useState<boolean>(false);
+
+    
     // const onDeleteClickHandler = () => {
     //     dispatch(changePromptAC([]));
     // }
@@ -37,11 +44,11 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
             
     //     }
     // }
-    const onAddToFavotitesPromtClickHandler = () => {
-        alert('Block2 / ButtonsPanel / onAddToFavotitesPromtClickHandler')
-    }
+    const onAddToFavotitesPromtClickHandler = () => setShowAdd(true);
+    const onAddToFavotitesPromtClickHandlerDisabled = () => toast.warning('Сначала надо завершить редактирование...');
+
     const onRefreshPromptClickHandler = () => {
-        // toast.info("Тут надо запросить старый промпт с сервера и обновить его в приложении")
+        toast.info("Тут надо запросить старый промпт с сервера и обновить его в приложении")
         dispatch(getPromtThunk());
     }
     const onEditClickHandler = () => {
@@ -68,13 +75,20 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     
     return <>
         {
+            showAdd && <AddPromptToFavoriteWindow setShow={setShowAdd}/>
+        }
+        {
             isResponseLoading
                 ? <></>
                 : <div className={s.buttonsDiv}>
 
                     {/* <img alt="" src={saveIcon2} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} /> */}
                     
-                    <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onAddToFavotitesPromtClickHandler} />
+                    {
+                        props.isEdit
+                            ? <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onAddToFavotitesPromtClickHandlerDisabled} />
+                            : <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onAddToFavotitesPromtClickHandler} />
+                    }
                     
                     <img alt="" src={promptHistoryIcon} className={s.iconsImg} onClick={onPromptHistoryClickHandler} />
             
