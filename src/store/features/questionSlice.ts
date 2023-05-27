@@ -1,70 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { FAVORITE_PROMPTS, HISTORY, PROMPT, RESPONSE_GPT, TEMPORARY_QUESTIONS } from "./vars"
-
-export type QuestionType = { 
-    id: string
-    question: string
-    answer: string,
-    color: string
-}
-export type HistoryType = {
-    date: string,
-    company: string,
-    prompt: Array<string>,
-    answer: string
-}
-export type PromptFavoriteType = {
-    title: string,
-    prompt: Array<string>
-}
-export type InitContectType = {
-    questions: Array<QuestionType>,
-    editableId: string,
-    var: {
-        isLoading: boolean,
-        newQuestionText: string,
-        newAnswertext: string,
-        newPrompt: string,
-        searchDateStart: string,
-        searchDateEnd: string,
-        searchText: string
-        searchCompany: string,
-        companyName: string,
-        showPromptHistory: boolean,
-        showResponseHistory: boolean
-    },
-    changedIdsList: Array<string>,
-    prompt: Array<string>,
-    responseGPT: string,
-    history: Array<HistoryType>,
-    favoritesPrompts: Array<PromptFavoriteType>
-}
-
-const initContentQuestionsSlice:InitContectType = {
-    editableId: '',
-    // companyName: 'company name',
-    var: {
-        isLoading: false,
-        newQuestionText: '',
-        newAnswertext: '',
-        newPrompt: '',
-        searchDateStart: '',
-        searchDateEnd: '',
-        searchText: '',
-        searchCompany: '',
-        companyName: '',
-        showPromptHistory: false,
-        showResponseHistory: false
-    },
-    prompt: PROMPT,
-    responseGPT: RESPONSE_GPT,
-    
-    changedIdsList: [],
-    questions: TEMPORARY_QUESTIONS,
-    history: HISTORY,
-    favoritesPrompts: FAVORITE_PROMPTS
-}
-
+import { getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postFavoritePromptsThunk, postResponseThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
+import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType } from "./questionTypes"
+import { initContentQuestionsSlice } from "../../functions/consts"
+import uuid from "react-uuid"
 
 
 export const questionsSlice = createSlice({
@@ -98,14 +36,11 @@ export const questionsSlice = createSlice({
             [a[i], a[i+1]] = [a[i+1], a[i]];
             state.questions = a;
         },
-        addIdToChangedIdsListAC: (state: InitContectType, action: PayloadAction<string>):InitContectType => {
-            return {
-                ...state,
-                changedIdsList: [...state.changedIdsList, action.payload]
-            }
+        addIdToChangedIdsListAC: (state: InitContectType, action: PayloadAction<string>) => {
+            // state.var.changedIdsList = state.var.changedIdsList.push(action.payload)
         },
-        clearChangedIdsListAC: (state: InitContectType, action: PayloadAction<string>) => {
-            state.changedIdsList = []
+        clearChangedIdsListAC: (state: InitContectType) => {
+            state.var.changedIdsList = []
         },
         changeQuestionColorAC: (state: InitContectType, action: PayloadAction<{questionId: string, newColor: string}>):InitContectType => {
             return {
@@ -136,35 +71,133 @@ export const questionsSlice = createSlice({
         changeGPTResponseAC: (state: InitContectType, action: PayloadAction<string>) => {
             state.responseGPT = action.payload
         },
+        addQuestionAC: (state: InitContectType) => {
+            state.questions = [...state.questions, {id: uuid(), question: "Question", answer: "Answer", color: "black"}]
+        }, 
 
         changeSearchTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchText = action.payload },
         changeSearchCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchCompany = action.payload },
         changeSearchDateStartAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchDateStart = action.payload },
         changeSearchDateEndAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchDateEnd = action.payload },
-        changeCompanyNameAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.companyName = action.payload },
+        changeCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.company = action.payload },
         changeShowPromptFavoritesAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showPromptHistory = action.payload },
         changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload }
     },
 
 
     extraReducers: (builder) => {
-        // builder.addCase(loginThunk.pending, (state: UserType) => {
-        //     state.loadingStatus.loginRequestLoadingStatus = true;
-        // })
-        // builder.addCase(loginThunk.fulfilled, (state: UserType, action: PayloadAction<string>) => {
-        //     state.loadingStatus.loginRequestLoadingStatus = false;
-        // })
-        // builder.addCase(loginThunk.rejected, (state: UserType) => {
-        //     state.loadingStatus.loginRequestLoadingStatus = false;
-        // })
+        builder.addCase(getQuestionsThunk.pending, (state: InitContectType) => {
+            state.varLoading.questionsLoading = true;
+        })
+        builder.addCase(getQuestionsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<QuestionType>>) => {
+            state.questions = action.payload;
+            state.varLoading.questionsLoading = false;
+        })
+        builder.addCase(getQuestionsThunk.rejected, (state: InitContectType) => {
+            state.varLoading.questionsLoading = false;
+        })
 
+        builder.addCase(putQuestionsThunk.pending, (state: InitContectType) => {
+            state.varLoading.questionsLoading = true;
+        })
+        builder.addCase(putQuestionsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<QuestionType>>) => {
+            // console.log('putQuestionsThunk.fulfilled, action=', action);
+            // state.questions = action.payload;
+            state.varLoading.questionsLoading = false;
+        })
+        builder.addCase(putQuestionsThunk.rejected, (state: InitContectType) => {
+            state.varLoading.questionsLoading = false;
+        })
+
+        builder.addCase(getPromtThunk.pending, (state: InitContectType) => {
+            state.varLoading.promptLoading = true;
+        })
+        builder.addCase(getPromtThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<string>>) => {
+            state.prompt = action.payload;
+            state.varLoading.promptLoading = false;
+        })
+        builder.addCase(getPromtThunk.rejected, (state: InitContectType) => {
+            state.varLoading.promptLoading = false;
+        })
+
+        builder.addCase(putPromptThunk.pending, (state: InitContectType) => {
+            state.varLoading.promptLoading = true;
+        })
+        builder.addCase(putPromptThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<string>>) => {
+            state.prompt = action.payload;
+            state.varLoading.promptLoading = false;
+        })
+        builder.addCase(putPromptThunk.rejected, (state: InitContectType) => {
+            state.varLoading.promptLoading = false;
+        })
+
+        builder.addCase(postResponseThunk.pending, (state: InitContectType) => {
+            state.varLoading.responseLoading = true;
+            // state.varLoading.promptLoading = true;
+        })
+        builder.addCase(postResponseThunk.fulfilled, (state: InitContectType, action: PayloadAction<string>) => {
+            state.responseGPT = action.payload;
+            state.varLoading.responseLoading = false;
+            // state.varLoading.promptLoading = false;
+        })
+        builder.addCase(postResponseThunk.rejected, (state: InitContectType) => {
+            state.varLoading.responseLoading = false;
+            // state.varLoading.promptLoading = false;
+        })
+
+
+        
+        builder.addCase(getFavoritePromptsThunk.pending, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = true;
+        })
+        builder.addCase(getFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<PromptFavoriteType>>) => {
+            state.favoritesPrompts = action.payload;
+            state.varLoading.promptHistoryLoading = false;
+        })
+        builder.addCase(getFavoritePromptsThunk.rejected, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = false;
+        })
+
+        builder.addCase(postFavoritePromptsThunk.pending, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = true;
+        })
+        builder.addCase(postFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<PromptFavoriteType>>) => {
+            state.favoritesPrompts = action.payload;
+            state.varLoading.promptHistoryLoading = false;
+        })
+        builder.addCase(postFavoritePromptsThunk.rejected, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = false;
+        })
+
+
+        builder.addCase(getResponseHistoryThunk.pending, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = true;
+        })
+        builder.addCase(getResponseHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
+            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
+            let historyArray:Array<HistoryType> = action.payload.map(elem => {
+                return {
+                    datetime: elem.datetime,
+                    username: elem.request.username,
+                    company: elem.request.company,
+                    prompt: elem.request.prompt,
+                    gpt_response: elem.gpt_response
+                }
+            })
+
+            state.responseHistory = historyArray;
+            state.varLoading.responseHistoryLoading = false;
+        })
+        builder.addCase(getResponseHistoryThunk.rejected, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = false;
+        })
        
     }
 })
 export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC, changeQuestionColorAC, 
-    changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC, changeCompanyNameAC,
+    changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC, changeCompanyAC,
     changeShowPromptFavoritesAC, changeGPTResponseAC, changeShowResponseHistoryAC, changeTwoQuestionsOrderAC,
-    removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC
+    removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC
 } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

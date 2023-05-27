@@ -1,9 +1,9 @@
-import { useState } from "react";
 import s from "./blockOne.module.css";
 import { HexColorPicker } from "react-colorful";
 import { RootState, useAppDispatch } from "../../store/store";
-import { QuestionType, changeQuestionColorAC } from "../../store/features/questionSlice";
+import { changeQuestionColorAC } from "../../store/features/questionSlice";
 import { useSelector } from "react-redux";
+import { QuestionType } from "../../store/features/questionTypes";
 
 
 type ColorChooserPropsType = {

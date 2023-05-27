@@ -1,4 +1,4 @@
-import { HistoryType, PromptFavoriteType, QuestionType } from "./questionSlice"
+import { HistoryType, PromptFavoriteType, QuestionType } from "./questionTypes"
 
 
 export const PROMPT: string[] = [
@@ -81,36 +81,43 @@ export const TEMPORARY_QUESTIONS:Array<QuestionType> = [
 
     export const HISTORY:Array<HistoryType> = [
         {
-            date: '2023.05.20',
+            datetime: '2023.05.20',
+            username: "user",
+
             company: 'company 1 one',
             prompt: ['prompt answer 1 text answer 1 text answer 1 text uno begin long text prompt begin long text \n\n prompt begin long text prompt begin long text prompt begin \n\nlong text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text '],
-            answer: 'GPT rrr answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
+            gpt_response: 'GPT rrr answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
         },
         {
-            date: '2023.05.23',
+            username: "user",
+            datetime: '2023.05.23',
             company: 'company 2 two',
             prompt: ['prompt dos begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text '],
-            answer: 'GPT ttt answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
+            gpt_response: 'GPT ttt answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
         },
         {
-            date: '2023.05.25',
+            username: "user",
+            datetime: '2023.05.25',
             company: 'company 3 three',
             prompt: ['prompt tres begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text prompt begin long text '],
-            answer: 'GPT bbb answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
+            gpt_response: 'GPT bbb answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text GPT answer long text '
         }
     ];
 
     export const FAVORITE_PROMPTS:Array<PromptFavoriteType> = [
         {
+            id: '0009911',
             title: 'prompt fav 1',
             // prompt: ['sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf', 'sdff', 'sdf', 'sdf']
             prompt: ['sdff lsfhs', 'sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf sdf slfhsf', 'sdf']
         },
         {
+            id: '00023323',
             title: 'prompt fav 1',
             prompt: ['sdff', 'sdf', 'sdf']
         },
         {
+            id: '000033333',
             title: 'prompt fav 1',
             prompt: ['sdff', 'sdf', 'sdf']
         }

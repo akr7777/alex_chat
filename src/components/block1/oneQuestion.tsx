@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { QuestionType } from "../../store/features/questionSlice";
+import { QuestionType } from "../../store/features/questionTypes";
 import s from "./blockOne.module.css";
 import OneQuestionContent from "./oneQuestionContent";
 import ColorChooser from "./colorChooser";

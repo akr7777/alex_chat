@@ -1,19 +1,20 @@
 import { useSelector } from 'react-redux';
-import { HistoryType } from '../../../../store/features/questionSlice';
+import { HistoryType } from '../../../../store/features/questionTypes';
 import s from './bricks.module.css';
 // import s from "./../../../../common/brickCSS/bricks.module.css";
 import { RootState, useAppDispatch } from '../../../../store/store';
 import OneBrick from './oneBrick';
 import { useEffect } from 'react';
-import { getHistoryThunk } from '../../../../store/features/questionThunk';
+import { getResponseHistoryThunk } from '../../../../store/features/questionThunk';
+import Preloader from '../../../../common/preloader/preloader';
 
 const Bricks = () => {
 
     const dispatch = useAppDispatch();
-    let history:Array<HistoryType> = useSelector((state: RootState) => state.questions.history);
+    let history:Array<HistoryType> = useSelector((state: RootState) => state.questions.responseHistory);
 
     useEffect(() => {
-        dispatch(getHistoryThunk());
+        dispatch(getResponseHistoryThunk());
     }, [])
 
     const searchText: string = useSelector((state: RootState) => state.questions.var.searchText);
@@ -21,17 +22,19 @@ const Bricks = () => {
     const searchDateStart: string = useSelector((state: RootState) => state.questions.var.searchDateStart);
     const searchDateEnd: string = useSelector((state: RootState) => state.questions.var.searchDateEnd);
 
+    const isLoading: boolean = useSelector((state: RootState) => state.questions.varLoading.responseHistoryLoading);
+
     if (searchText.length > 0) {
-        history = history.filter(el => el.answer.includes(searchText) || el.prompt.includes(searchText));
+        history = history.filter(el => el.gpt_response.includes(searchText) || el.prompt.includes(searchText));
     }
     if (searchCompany.length > 0) {
         history = history.filter(el => el.company.includes(searchCompany));
     }
     if (searchDateStart.length > 0) {
-        history = history.filter(el => el.date >= searchDateStart.replaceAll('-', '.'));
+        history = history.filter(el => el.datetime >= searchDateStart.replaceAll('-', '.'));
     }
     if (searchDateEnd.length > 0) {
-        history = history.filter(el => el.date <= searchDateEnd.replaceAll('-', '.'));
+        history = history.filter(el => el.datetime <= searchDateEnd.replaceAll('-', '.'));
     }
 
     return <div className={s.bricks}>
@@ -41,16 +44,21 @@ const Bricks = () => {
             <label>User</label>
             <label>Дата</label>
             <label>Заказчик</label>
-            <label>Начало промпта</label>
-            <label>начало ОТВЕТА ИИ</label>
+            <label>Промпт</label>
+            <label>Ответ GPT</label>
             <label>+</label>
-            {/* N / user / Дата / Заказчик / Начало промпта / начало ОТВЕТА ИИ / Выбрать*/}
         </div>
 
         {
-            history.map( (elem, elemIndex) => {
-                return <OneBrick elem={elem} index={elemIndex} key={elemIndex}/>
-            })
+            isLoading
+                ? <Preloader />
+                : <>
+                    {
+                        history.map( (elem, elemIndex) => {
+                          return <OneBrick elem={elem} index={elemIndex} key={elemIndex}/>
+                        })
+                    }
+                </>
         }
 
     </div>

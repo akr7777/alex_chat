@@ -21,8 +21,10 @@
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.3",
+    "react-uuid": "^2.0.0",
     "redux-toolkit": "^1.1.2",
     "typescript": "^4.4.2",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

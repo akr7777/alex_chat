@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { QuestionType } from "../store/features/questionSlice";
+import { QuestionType } from "../store/features/questionTypes";
 // import { COMPANY_NAME } from "../components/mainPage/header/companyName";
 
 const OPEN_TAG = '{';
@@ -10,7 +10,7 @@ export const AddAnswerToPrompt = (text: string):string => {
     // console.log('AddAnswerToPrompt');
     
     const questions:Array<QuestionType> = useSelector((state: RootState) => state.questions.questions);
-    const companyName: string = useSelector((state: RootState) => state.questions.var.companyName);
+    const companyName: string = useSelector((state: RootState) => state.questions.company);
     
     const textArr: Array<string> = text.split(' ');
     const g = textArr.map(word => {

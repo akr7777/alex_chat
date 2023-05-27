@@ -10,10 +10,11 @@ import CalendarMonths from "./calendarMonths";
 import CalendarDays from "./calendarDays";
 import dayjs from 'dayjs';
 import { LineTextField } from "../lineTextField/labelLineText";
+import { COMMON_DATE_TIME_FORMAT } from "../../functions/consts";
 // import { COMMON_DATE_FORMAT } from "../../../store/features/authSlice";
 
 // export const DATE_EU = 'DD.MM.YYYY';
-export const COMMON_DATE_FORMAT = "YYYY.MM.DD";
+export const COMMON_DATE_FORMAT = "yyyy.MM.dd";
 export const CURRENT_LANG = 'ru';
 
 export type CalendarPropsType = {
@@ -39,10 +40,9 @@ const Calendar = (props: CalendarPropsType) => {
         setDate(newDatefromDays);
         setNewDate(newDatefromDays);
         const newTextDate:string = dayjs(newDatefromDays).format(COMMON_DATE_FORMAT);
-
         setNewDateText(newTextDate);
-        
-        props.onDateChange(dayjs(newDatefromDays).format(COMMON_DATE_FORMAT));
+        // props.onDateChange(dayjs(newDatefromDays).format(COMMON_DATE_FORMAT));
+        props.onDateChange(dayjs(newDatefromDays).format(COMMON_DATE_TIME_FORMAT));
         setShow(false);
     }
     const onDateClearClickHandler = () => {
@@ -52,13 +52,9 @@ const Calendar = (props: CalendarPropsType) => {
 
     }
     const onTextInputChangeHandler = (newText: string) => {
-        console.log('changing Cal newText=',newText, newText.slice(0,4));
-        
         setNewDateText(newText)
         if (Number(newText.slice(0,4)) > 2000) {
             const dayJsObj = dayjs(newText);
-            console.log('dayJsObj=', dayJsObj);
-            
             const dateToChange:Date = new Date(dayJsObj.year(), dayJsObj.month(), dayJsObj.date());
             setDate(dateToChange);
             props.onDateChange(dayjs(dateToChange).format(COMMON_DATE_FORMAT));

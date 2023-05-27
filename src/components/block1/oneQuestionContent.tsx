@@ -2,7 +2,7 @@ import { useState } from "react";
 import s from "./blockOne.module.css";
 import { OneQuestionPropsType } from "./oneQuestion";
 import { useAppDispatch } from "../../store/store";
-import { QuestionType, changeQuestionAC, changeTwoQuestionsOrderAC, removeQuestionAC } from "../../store/features/questionSlice";
+import { changeQuestionAC, changeTwoQuestionsOrderAC, removeQuestionAC } from "../../store/features/questionSlice";
 import MultilineText from "../../common/multilineText/multilineText";
 
 import saveIcon from "./../../public/icons/save_icon.png";
@@ -10,6 +10,7 @@ import cancelIcon from "./../../public/icons/cancel_icon.png";
 import removeIcon from "./../../public/icons/remove_icon_1.png";
 import arrowUpIcon from "./../../public/icons/arrow_up.png";
 import arrowDownIcon from "./../../public/icons/arrow_down.png";
+import { QuestionType } from "../../store/features/questionTypes";
 
 
 const OneQuestionContent = (props: OneQuestionPropsType) => {

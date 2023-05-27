@@ -3,9 +3,10 @@ import { NEW_LINE_SEPARATOR, SHORT_TEXT_LENGTH } from "../../../functions/consts
 // import s from "./../../../common/brickCSS/bricks.module.css";
 import s from "./promptFavorite.module.css";
 import { inputBracketsInText } from "../../../functions/functions";
-import { QuestionType, changePromptAC, changeShowPromptFavoritesAC } from "../../../store/features/questionSlice";
+import { changePromptAC, changeShowPromptFavoritesAC } from "../../../store/features/questionSlice";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/store";
+import { QuestionType } from "../../../store/features/questionTypes";
 
 type OneFavoriteBrickPropsType = {
     title: string,
