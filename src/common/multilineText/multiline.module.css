@@ -1,7 +1,7 @@
 .multiline {
     background-color: var(--input_bg_color);
     color: var(--input_text_color);
-    width: 98%;
+    width: 95%;
     min-height: 70px;
     height: 100%;
     white-space: pre-wrap;

@@ -48,7 +48,7 @@ export type InitContectType = {
         showPromptHistory: boolean,
         showResponseHistory: boolean
     },
-    company: string
+    // company: string
     questions: Array<QuestionType>,
     prompt: Array<string>,
     favoritesPrompts: Array<PromptFavoriteType>

@@ -16,32 +16,22 @@ import { QuestionType } from "../../store/features/questionTypes";
 const OneQuestionContent = (props: OneQuestionPropsType) => {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [newQuestion, setNewQuestion] = useState<string>(props.elem.question);
     const [newAnswer, setNewAnswer] = useState<string>(props.elem.answer);
     const dispatch = useAppDispatch();
     
     const onSaveClickHandler = () => {
         const newElem: QuestionType = {
-            ...props.elem, answer: newAnswer
+            ...props.elem, answer: newAnswer, question: newQuestion
         }
         dispatch(changeQuestionAC(newElem));
         setIsEdit(false);
     }
-    const onCancelClickHandler = () => {
-        setIsEdit(false);
-
-    }
-    const onDivClickHandler = () => {
-        setIsEdit(true);
-    }
-    const onQuestionUpClickHandler = () => {
-        dispatch(changeTwoQuestionsOrderAC(props.index - 1))
-    }
-    const onQuestionDownClickHandler = () => {
-        dispatch(changeTwoQuestionsOrderAC(props.index))
-    }
-    const onRemoveQuestionClickHandler = () => {
-        dispatch(removeQuestionAC(props.elem.id))
-    }
+    const onCancelClickHandler = () => setIsEdit(false);
+    const onDivClickHandler = () => setIsEdit(true);
+    const onQuestionUpClickHandler = () => dispatch(changeTwoQuestionsOrderAC(props.index - 1));
+    const onQuestionDownClickHandler = () => dispatch(changeTwoQuestionsOrderAC(props.index));
+    const onRemoveQuestionClickHandler = () => dispatch(removeQuestionAC(props.elem.id));
 
 
     return <div className={s.oneQuestionContent}>
@@ -63,10 +53,16 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
             {/* OF {props.questionsLength} */}
         </div>
 
-        <div className={s.questionTextLabel}>
-            { props.elem.question}
-        </div>
-
+        {
+            isEdit
+                ? <MultilineText value={newQuestion} onValuechange={(newValue) => setNewQuestion(newValue)}/>
+                : <div className={s.questionTextLabel}>
+                    { props.elem.question}
+                </div>
+        }
+       
+       <div className={s.questionTextLabel}>Ответ:</div>
+       
         <div>
             {
                 isEdit

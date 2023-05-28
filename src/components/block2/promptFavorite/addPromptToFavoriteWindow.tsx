@@ -33,7 +33,9 @@ const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) =>
     return <div className={s.promptHistoryLayout}>
         <div className={s.addPromptToFavoriteWindow}>
             <h3>Название:</h3>
-            <LineTextField type={"text"} text={title} onChangeFunction={(val) => setTitle(val)} />
+
+            <LineTextField type={"text"} text={title} onChangeFunction={(val) => setTitle(val)} className={s.textAreaHeight}/>
+
             <h3>Текст промпта:</h3>
             {prompt}
             <div>

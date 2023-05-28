@@ -3,6 +3,7 @@ import { getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseH
 import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType } from "./questionTypes"
 import { initContentQuestionsSlice } from "../../functions/consts"
 import uuid from "react-uuid"
+import { toast } from "react-toastify"
 
 
 export const questionsSlice = createSlice({
@@ -79,7 +80,7 @@ export const questionsSlice = createSlice({
         changeSearchCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchCompany = action.payload },
         changeSearchDateStartAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchDateStart = action.payload },
         changeSearchDateEndAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchDateEnd = action.payload },
-        changeCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.company = action.payload },
+        // changeCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.company = action.payload },
         changeShowPromptFavoritesAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showPromptHistory = action.payload },
         changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload }
     },
@@ -124,7 +125,11 @@ export const questionsSlice = createSlice({
             state.varLoading.promptLoading = true;
         })
         builder.addCase(putPromptThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<string>>) => {
-            state.prompt = action.payload;
+            try {
+                state.prompt = action.payload;
+            } catch {
+                toast.error('Error')
+            }
             state.varLoading.promptLoading = false;
         })
         builder.addCase(putPromptThunk.rejected, (state: InitContectType) => {
@@ -195,7 +200,7 @@ export const questionsSlice = createSlice({
     }
 })
 export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC, changeQuestionColorAC, 
-    changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC, changeCompanyAC,
+    changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC,
     changeShowPromptFavoritesAC, changeGPTResponseAC, changeShowResponseHistoryAC, changeTwoQuestionsOrderAC,
     removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC
 } = questionsSlice.actions;

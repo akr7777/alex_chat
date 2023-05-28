@@ -7,12 +7,14 @@ import saveIcon from '../../public/icons/save_icon.png';
 import refreshIcon from '../../public/icons/refresh_icon.png';
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
-import { changeCompanyAC } from "../../store/features/questionSlice";
+import { COMPANY_LC } from "../../functions/consts";
 
 const CompanyField = () => {
     const dispatch = useAppDispatch();
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const company: string = useSelector((state:RootState) => state.questions.company);
+    // const company: string = useSelector((state:RootState) => state.questions.company);
+    const company: string = localStorage.getItem(COMPANY_LC) || "SomeCompany";
+
     const [newCompany, setNewCompany] = useState<string>(company);
 
     const onRefreshCompanyClickHandler = () => setIsEdit(true);
@@ -22,7 +24,8 @@ const CompanyField = () => {
         setIsEdit(false);
     }
     const onSaveNewCompanyNameClickHandler = () => {
-        dispatch(changeCompanyAC(newCompany));
+        localStorage.setItem(COMPANY_LC, newCompany)
+        // dispatch(changeCompanyAC(newCompany));
         setIsEdit(false);
     }
 

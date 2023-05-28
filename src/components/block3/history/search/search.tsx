@@ -3,7 +3,14 @@ import { LineTextField } from "../../../../common/lineTextField/labelLineText";
 import s from "./search.module.css"
 import { RootState, useAppDispatch } from "../../../../store/store";
 import { changeSearchCompanyAC, changeSearchDateEndAC, changeSearchDateStartAC, changeSearchTextAC } from "../../../../store/features/questionSlice";
-import Calendar from "../../../../common/calendar/calendar";
+
+// import Calendar from "../../../../common/calendar/calendar";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { useState } from "react";
+import dayjs from "dayjs";
+import { COMMON_DATE_TIME_FORMAT } from "../../../../functions/consts";
 
 const Search = () => {
     const dispatch = useAppDispatch();
@@ -19,43 +26,40 @@ const Search = () => {
         dispatch(changeSearchCompanyAC(newVal));
     }
 
-    const onDateStartChangeClickHandler = (newValue: string) => {
-        console.log('newValue=', newValue);
-        
-        dispatch(changeSearchDateStartAC(newValue));
+    // const [startDate, setStartDate] = useState(new Date());
+    const startDateStr: string = useSelector((state: RootState) => state.questions.var.searchDateStart);
+    const startDateDate: Date = new Date(dayjs(startDateStr).year(), dayjs(startDateStr).month(), dayjs(startDateStr).date())
+
+    const endDateStr: string = useSelector((state: RootState) => state.questions.var.searchDateEnd);
+    const endDateDate: Date = new Date(dayjs(endDateStr).year(), dayjs(endDateStr).month(), dayjs(endDateStr).date())
+
+    const onDateStartChangeClickHandler = (newDate: Date) => {
+        const newValue: string = dayjs(newDate).format(COMMON_DATE_TIME_FORMAT);
+        dispatch(changeSearchDateStartAC(newValue)); 
     }
-    const onDateEndChangeClickHandler = (newValue: string) => {
-        dispatch(changeSearchDateEndAC(newValue));
+    const onDateEndChangeClickHandler = (newDate: Date) => { 
+        const newValue: string = dayjs(newDate).format(COMMON_DATE_TIME_FORMAT);
+        dispatch(changeSearchDateEndAC(newValue)); 
     }
 
     return <div className={s.search}>
 
         <div className={s.searchField + " " + s.searchMarginTop}>
-            {/* <label>Поиск по дате:</label>
-            <Calendar onDateChange={(newValue: string) => onDateStartChangeClickHandler(newValue)} />
-            -
-            <Calendar onDateChange={(newValue: string) => onDateEndChangeClickHandler(newValue)} /> */}
-
-            {/* <LineTextField 
-                type="text"
-                text=""
-                onChangeFunction={() => {}}
-            />
-            -
-            <LineTextField 
-                type="text"
-                text=""
-                onChangeFunction={() => {}}
-            /> */}
+            
         </div>
 
         <div className={s.searchField + " " + s.searchMarginTop}>
             <div>
                 <label>Поиск по дате:</label>
                 <div className={s.searchField}>
-                    <Calendar onDateChange={(newValue: string) => onDateStartChangeClickHandler(newValue)} />
+                    {/* <DatePicker selected={startDateDate} onChange={(date:Date) => onDateStartChangeClickHandler(date)} /> */}
                     -
-                    <Calendar onDateChange={(newValue: string) => onDateEndChangeClickHandler(newValue)} />
+                    {/* <DatePicker selected={endDateDate} onChange={(date:Date) => onDateEndChangeClickHandler(date)} /> */}
+                    {/* <DatePicker onChange={(date:Date) => setStartDate(date)} /> */}
+
+                    {/* <Calendar onDateChange={(newValue: string) => onDateStartChangeClickHandler(newValue)} />
+                    -
+                    <Calendar onDateChange={(newValue: string) => onDateEndChangeClickHandler(newValue)} /> */}
                 </div>
             </div>
             <div>

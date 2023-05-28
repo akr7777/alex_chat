@@ -12,11 +12,13 @@ import { getPromtThunk } from '../../store/features/questionThunk';
 import { NEW_LINE_SEPARATOR } from '../../functions/consts';
 import ButtonsPanel from './buttonsPanel';
 import Preloader from '../../common/preloader/preloader';
+import { QuestionType } from '../../store/features/questionTypes';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
     const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
     const isLoading: boolean = useSelector((state:RootState) => state.questions.varLoading.promptLoading);
+    const questions:Array<QuestionType> = useSelector((state: RootState) => state.questions.questions);
 
     useEffect(() => {
         dispatch(getPromtThunk());
@@ -27,7 +29,8 @@ const BlockTwo = () => {
     const nonEditablePrompt: string = AddAnswerToPrompt(
         prompt
             .join(NEW_LINE_SEPARATOR)
-            .replaceAll(NEW_LINE_SEPARATOR, ' <br/><br/> ')
+            .replaceAll(NEW_LINE_SEPARATOR, ' <br/><br/> '),
+        questions
     );
 
     const [isEdit, setIsEdit] = useState<boolean>(false);

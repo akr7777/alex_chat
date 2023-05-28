@@ -29,6 +29,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
 }
 
 .oneQuestionNonEditable {
@@ -43,6 +44,8 @@
     flex-direction: row;
     justify-content: center;
     gap: 30px;
+    min-height: 35px;
+    margin-top: 10px;
 }
 .iconsImg {
     width: 30px;
@@ -63,6 +66,7 @@
 }
 
 .questionTextLabel {
+    /* text-align: center; */
     font-size: 12px;
 }
 .answerTextLabel {

@@ -52,9 +52,14 @@ export const putPromptThunk = createAsyncThunk(
     async (data: Array<string>, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.putPrompt(data);
-            return res.data.data
+            
+            if (res.data.status === "error") {
+                toast.error(res.data.message);
+                return []
+            }
+            return res.data.data.prompt;
         } catch (err: any) {
-            toast(err.response.data.message);
+            toast.error(err.response.data.message);
         }
     }
 );

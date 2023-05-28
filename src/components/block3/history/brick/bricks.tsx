@@ -7,11 +7,23 @@ import OneBrick from './oneBrick';
 import { useEffect } from 'react';
 import { getResponseHistoryThunk } from '../../../../store/features/questionThunk';
 import Preloader from '../../../../common/preloader/preloader';
+import dayjs from 'dayjs';
 
 const Bricks = () => {
 
     const dispatch = useAppDispatch();
     let history:Array<HistoryType> = useSelector((state: RootState) => state.questions.responseHistory);
+    if (history.length > 0)
+        history = [...history].sort( (a,b) => {
+            const a1 = dayjs(a.datetime).format("YYYY-MM-DD.HH:mm");
+            const b1 = dayjs(b.datetime).format("YYYY-MM-DD.HH:mm")
+            if (a1 < b1)
+                return 1;
+            else if (a1 > b1)
+                return -1;
+            else 
+                return 0;
+        });
 
     useEffect(() => {
         dispatch(getResponseHistoryThunk());

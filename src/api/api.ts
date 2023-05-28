@@ -25,7 +25,7 @@ export const questionsAPI = {
         return instance.get('prompt');
     },
     putPrompt: (data: Array<string>): Promise<AxiosResponse> => {
-        return instance.put('prompt', data);
+        return instance.put('prompt', {prompt: data});
     },
     getPromptFavorites: (): Promise<AxiosResponse> => {
         return instance.get("favoritesPrompts");
