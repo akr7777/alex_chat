@@ -18,6 +18,7 @@ import { QuestionType } from "../../store/features/questionTypes";
 const OneQuestionContent = (props: OneQuestionPropsType) => {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [isQuestionEdit, setIsQuestionEdit] = useState<boolean>(false);
     const [newQuestion, setNewQuestion] = useState<string>(props.elem.question);
     const [newAnswer, setNewAnswer] = useState<string>(props.elem.answer);
     const dispatch = useAppDispatch();
@@ -28,8 +29,13 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
         }
         dispatch(changeQuestionAC(newElem));
         setIsEdit(false);
+        setIsQuestionEdit(false);
     }
-    const onCancelClickHandler = () => setIsEdit(false);
+    const onQuestionEditOnClickHandler = () => setIsQuestionEdit(true);
+    const onCancelClickHandler = () => {
+        setIsEdit(false);
+        setIsQuestionEdit(false);
+    }
     const onDivClickHandler = () => setIsEdit(true);
     const onQuestionUpClickHandler = () => dispatch(changeTwoQuestionsOrderAC(props.index - 1));
     const onQuestionDownClickHandler = () => dispatch(changeTwoQuestionsOrderAC(props.index));
@@ -59,14 +65,24 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
         </div>
 
         {
-            isEdit
-                ? <MultilineText value={newQuestion} onValuechange={(newValue) => setNewQuestion(newValue)}/>
+            isQuestionEdit
+                ? <div>
+                    <MultilineText value={newQuestion} onValuechange={(newValue) => setNewQuestion(newValue)}/>
+                    {/* {
+                        isQuestionEdit 
+                            ? <img alt="" className={s.iconsImg} src={refreshIcon} onClick={onQuestionEditOnClickHandler} />
+                            : <></>
+                    } */}
+                </div>
                 : <div className={s.questionTextLabel}>
-                    { props.elem.question}
+                    <div onDoubleClick={isEdit ? onQuestionEditOnClickHandler : () => {}}>
+                        { props.elem.question }
+                    </div>
+                    {/* <img alt="" className={s.iconsImg} src={refreshIcon} onClick={onQuestionEditOnClickHandler} /> */}
                 </div>
         }
        
-       <div className={s.questionTextLabel}>Ответ:</div>
+       <div className={s.questionTextLabel + " " + s.marginTop}>Ответ:</div>
        
         <div>
             {

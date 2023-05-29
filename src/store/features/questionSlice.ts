@@ -82,7 +82,8 @@ export const questionsSlice = createSlice({
         changeSearchDateEndAC: (state: InitContectType, action: PayloadAction<string>) => { state.var.searchDateEnd = action.payload },
         // changeCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.company = action.payload },
         changeShowPromptFavoritesAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showPromptHistory = action.payload },
-        changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload }
+        changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload },
+        changeFooterHelpTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.footerHelpText = action.payload; }
     },
 
 
@@ -202,7 +203,8 @@ export const questionsSlice = createSlice({
 export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, clearChangedIdsListAC, changeQuestionColorAC, 
     changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC,
     changeShowPromptFavoritesAC, changeGPTResponseAC, changeShowResponseHistoryAC, changeTwoQuestionsOrderAC,
-    removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC
+    removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC,
+    changeFooterHelpTextAC
 } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

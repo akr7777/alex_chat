@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { addQuestionAC } from '../../store/features/questionSlice';
+import { addQuestionAC, changeFooterHelpTextAC } from '../../store/features/questionSlice';
 import Preloader from '../../common/preloader/preloader';
 import OneQuestion from './oneQuestion';
 import { useEffect } from 'react';
@@ -58,9 +58,19 @@ const BlockOne = () => {
                     </div>
 
                     <div className={s.buttonsDiv}>
-                        <img alt="Сохранить вопросы на сервер" src={saveIcon} className={s.menuIconsImg} onClick={saveAllQuestionsToServerClickHandler}/>
+                        <img 
+                            alt="" src={saveIcon} className={s.menuIconsImg} 
+                            onClick={saveAllQuestionsToServerClickHandler}
+                            onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
+                            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                        />
                         {/* <img alt="Удалить все вопросы" src={removeIcon} className={s.menuIconsImg} onClick={removeAllQuestionsClickHandler}/> */}
-                        <img alt="Добавить вопрос" src={plusIcon} className={s.menuIconsImg} onClick={addQuestionClickHandler}/>
+                        <img 
+                            alt="Добавить вопрос" src={plusIcon} className={s.menuIconsImg} 
+                            onClick={addQuestionClickHandler}
+                            onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить новый вопрос"))}
+                            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                        />
                     </div>
                 </>
         }

@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState, useAppDispatch } from "../../store/store";
 import { getPromtThunk, postResponseThunk, putPromptThunk } from "../../store/features/questionThunk";
-import { changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from "../../store/features/questionSlice";
+import { changeFooterHelpTextAC, changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from "../../store/features/questionSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import AddPromptToFavoriteWindow from "./promptFavorite/addPromptToFavoriteWindow";
@@ -76,39 +76,87 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     {
                         props.isEdit
                         
-                            ? <img alt="" src={saveIcon2} className={s.iconsImg} onClick={onDisabledButtonClickHandler} />
-                            : <img alt="" src={saveIcon2} className={s.iconsImg} onClick={onSavePromptToServerClickHandler} />
+                            ? <img alt="" src={saveIcon2} className={s.iconsImg} 
+                                onClick={onDisabledButtonClickHandler} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            : <img alt="" src={saveIcon2} className={s.iconsImg} 
+                                onClick={onSavePromptToServerClickHandler} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onDisabledButtonClickHandler} />
-                            : <img alt="" src={favoritePromptIcon} className={s.iconsImg} onClick={onAddToFavotitesPromtClickHandler} />
+                            ? <img alt="" src={favoritePromptIcon} className={s.iconsImg} 
+                                onClick={onDisabledButtonClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить данную версию промпта в Избранное"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            : <img alt="" src={favoritePromptIcon} className={s.iconsImg} 
+                                onClick={onAddToFavotitesPromtClickHandler} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить данную версию промпта в Избранное"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={promptHistoryIcon} className={s.iconsImg} onClick={onDisabledButtonClickHandler} />
-                            : <img alt="" src={promptHistoryIcon} className={s.iconsImg} onClick={onPromptHistoryClickHandler} />
+                            ? <img alt="" src={promptHistoryIcon} className={s.iconsImg} 
+                                onClick={onDisabledButtonClickHandler} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть список Избранных промптов"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            : <img alt="" src={promptHistoryIcon} className={s.iconsImg} 
+                                onClick={onPromptHistoryClickHandler} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть список Избранных промптов"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={refreshRedIcon} className={s.iconsImg} onClick={onDisabledButtonClickHandler}/>
-                            : <img alt="" src={refreshRedIcon} className={s.iconsImg} onClick={onRefreshPromptClickHandler}/>
+                            ? <img alt="" src={refreshRedIcon} className={s.iconsImg} 
+                                onClick={onDisabledButtonClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить все изменения и вернуть базовый промпт"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            : <img alt="" src={refreshRedIcon} className={s.iconsImg} 
+                                onClick={onRefreshPromptClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить все изменения и вернуть базовый промпт"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
                     
             
                     {
                         props.isEdit
-                            ? <img alt="" src={saveIcon} className={s.iconsImg} onClick={onSavePromptClickHandler}/>
-                            : <img alt="" src={editIcon} className={s.iconsImg} onClick={onEditClickHandler}/>
+                            ? <img alt="" src={saveIcon} className={s.iconsImg} 
+                                onClick={onSavePromptClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать промпт"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            : <img alt="" src={editIcon} className={s.iconsImg} 
+                                onClick={onEditClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать промпт"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
                     
                     {  
                         props.isEdit 
-                            ? <img alt="" src={okIcon} className={s.iconsImg} onClick={onDisabledButtonClickHandler}/> 
-                            : <img alt="" src={okIcon} className={s.iconsImg} onClick={onApproveClickHandler}/>
+                            ? <img alt="" src={okIcon} className={s.iconsImg} 
+                                onClick={onDisabledButtonClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Отправить запрос в GPT"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            /> 
+                            : <img alt="" src={okIcon} className={s.iconsImg} 
+                                onClick={onApproveClickHandler}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Отправить запрос в GPT"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                     }
             
                 </div>

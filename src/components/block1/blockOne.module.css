@@ -68,6 +68,10 @@
 .questionTextLabel {
     /* text-align: center; */
     font-size: 12px;
+    /* margin-top: 10px;   */
+}
+.marginTop {
+    margin-top: 10px;
 }
 .answerTextLabel {
     font-size: 14px;

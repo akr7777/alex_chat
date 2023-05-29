@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import bookIcon from "./../../public/icons/book_icon.png";
 import copyIcon from "./../../public/icons/copy_icon.png";
 import HistoryResponses from "./history/historyResponse";
-import { changeShowResponseHistoryAC } from "../../store/features/questionSlice";
+import { changeFooterHelpTextAC, changeShowResponseHistoryAC } from "../../store/features/questionSlice";
 import Preloader from "../../common/preloader/preloader";
 
 const BlockThree = () => {
@@ -55,8 +55,14 @@ const BlockThree = () => {
                         </div>
 
                         <div className={s.buttonsDiv}>
-                            <img alt="" src={bookIcon} onClick={onHistoryClickHandler} className={s.iconsImg} />
-                            <img alt="" src={copyIcon} onClick={onCopyClickHandler} className={s.iconsImg}/>
+                            <img alt="" src={bookIcon} onClick={onHistoryClickHandler} className={s.iconsImg} 
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть историю запросов к GPT"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
+                            <img alt="" src={copyIcon} onClick={onCopyClickHandler} className={s.iconsImg}
+                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Скопировать текст ответа GPT в буфер обмена"))}
+                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                            />
                         </div>
                     </>
             }
