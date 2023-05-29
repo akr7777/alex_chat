@@ -47,6 +47,8 @@
     scale: 1.2;
 }
 
-.textAreaHeight {
+.textAreaProps {
     height: 75vh;
+    font-size: 18px;
+    text-align: justify;
 }

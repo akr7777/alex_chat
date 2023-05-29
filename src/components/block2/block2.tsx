@@ -71,7 +71,11 @@ const BlockTwo = () => {
                     <div className={s.promptDiv}>
                         {
                             isEdit
-                                ? <MultilineText value={newPrompt} onValuechange={(newText) => onNewPromptTextChange(newText)} class={s.textAreaHeight} /> 
+                                ? <MultilineText 
+                                    value={newPrompt} 
+                                    onValuechange={(newText) => onNewPromptTextChange(newText)} 
+                                    class={s.textAreaProps} 
+                                /> 
                                 : <div className={s.promptTextDiv} dangerouslySetInnerHTML={{__html: nonEditablePrompt}} />
                         }
                     </div>
