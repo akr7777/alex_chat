@@ -32,7 +32,7 @@ export const initContentQuestionsSlice:InitContectType = {
         showPromptHistory: false,
         showResponseHistory: false
     },
-    prompt: PROMPT,
+    prompt: [],
     responseGPT: '',
     // company: 'Some Company',
     // changedIdsList: [],
@@ -42,6 +42,8 @@ export const initContentQuestionsSlice:InitContectType = {
     questions: [],
     responseHistory: [],
     favoritesPrompts: [],
-    footerHelpText: ''
+    footerHelpText: '',
+    basePrompt: [],
+    baseQuestions: []
 }
 

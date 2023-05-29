@@ -7,16 +7,20 @@ import { useEffect } from 'react';
 import { getQuestionsThunk, putQuestionsThunk } from '../../store/features/questionThunk';
 import s from "./blockOne.module.css";
 import saveIcon from "./../../public/icons/save_icon_2.png";
+import saveDisabledIcon from "./../../public/icons/save_icon_disabled.png";
 import removeIcon from "./../../public/icons/delete_icon.png";
 import plusIcon from "./../../public/icons/plus_icon.png";
 import { QuestionType } from '../../store/features/questionTypes';
 import CompanyField from './companyField';
+import { ToastContainer, toast } from 'react-toastify';
 // import { uuid } from 'uuidv4';
 
 const BlockOne = () => {
 
     const dispatch = useAppDispatch();
     const questions: Array<QuestionType> = useSelector((state: RootState) => state.questions.questions);
+    const baseQuestions: Array<QuestionType> = useSelector((state: RootState) => state.questions.baseQuestions);
+    const isQuestionsEqual: boolean = JSON.stringify(questions) === JSON.stringify(baseQuestions);
     // const editableId: string = useSelector((state: RootState) => state.questions.editableId);
     const isLoading: boolean = useSelector((state:RootState) => state.questions.varLoading.questionsLoading);
 
@@ -32,9 +36,23 @@ const BlockOne = () => {
     //     }
     // }
     const saveAllQuestionsToServerClickHandler = () => { dispatch(putQuestionsThunk(questions)) }
+    const onDisablaedSaveIconClickHandler = () => toast.info('Текущая версия вопросов не отличается от базовой. Не нужно ничего сохранять на сервер');
     const addQuestionClickHandler = () => { dispatch(addQuestionAC()) }
     
     return <div className={s.questionsWrapper}>
+
+        <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
 
         <CompanyField />
 
@@ -58,12 +76,23 @@ const BlockOne = () => {
                     </div>
 
                     <div className={s.buttonsDiv}>
-                        <img 
-                            alt="" src={saveIcon} className={s.menuIconsImg} 
-                            onClick={saveAllQuestionsToServerClickHandler}
-                            onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
-                            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                        />
+                        {
+                            isQuestionsEqual
+                                ?   <img 
+                                        alt="" src={saveDisabledIcon} className={s.menuIconsImg} 
+                                        onClick={onDisablaedSaveIconClickHandler}
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
+                                :   <img 
+                                        alt="" src={saveIcon} className={s.menuIconsImg} 
+                                        onClick={saveAllQuestionsToServerClickHandler}
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
+
+                        }
+                        
                         {/* <img alt="Удалить все вопросы" src={removeIcon} className={s.menuIconsImg} onClick={removeAllQuestionsClickHandler}/> */}
                         <img 
                             alt="Добавить вопрос" src={plusIcon} className={s.menuIconsImg} 

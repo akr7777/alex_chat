@@ -7,6 +7,8 @@ import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon.png";
 import saveIcon2 from "./../../public/icons/save_icon_2.png";
 import okIcon from "./../../public/icons/ok_icon.png";
+import saveDisabledIcon from '../../public/icons/save_icon_disabled.png';
+
 import { COMPANY_LC, NEW_LINE_SEPARATOR } from "../../functions/consts";
 
 import { toast } from 'react-toastify';
@@ -34,7 +36,12 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     const questions:Array<QuestionType> = useSelector((state: RootState) => state.questions.questions);
     const [showAdd, setShowAdd] = useState<boolean>(false);
 
+    const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
+    const basePrompt: Array<string> = useSelector((state: RootState) => state.questions.basePrompt);
+    const isPromptsEqual: boolean = JSON.stringify(prompt) === JSON.stringify(basePrompt) 
+
     const onDisabledButtonClickHandler = () => toast.warning('Сначала надо завершить редактирование...');
+    const onDisablaedSaveIconClickHandler = () => toast.info('Текущая версия промпта не отличается от базовой. Не нужно ничего сохранять на сервер');
 
     const onSavePromptToServerClickHandler = () => {
         const userAnswer: boolean = window.confirm("Уверены, что хотите сохранить эту версию промпта как базовую?");
@@ -76,16 +83,22 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     {
                         props.isEdit
                         
-                            ? <img alt="" src={saveIcon2} className={s.iconsImg} 
+                            ? <img alt="" src={saveDisabledIcon} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler} 
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                             />
-                            : <img alt="" src={saveIcon2} className={s.iconsImg} 
-                                onClick={onSavePromptToServerClickHandler} 
-                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
-                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                            />
+                            : isPromptsEqual
+                                ?   <img alt="" src={saveDisabledIcon} className={s.iconsImg} 
+                                        onClick={onDisablaedSaveIconClickHandler} 
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
+                                :  <img alt="" src={saveIcon2} className={s.iconsImg} 
+                                        onClick={onSavePromptToServerClickHandler} 
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить эту версию промпта как базовую"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
                     }
                     
                     {

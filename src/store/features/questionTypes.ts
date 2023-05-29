@@ -54,5 +54,7 @@ export type InitContectType = {
     favoritesPrompts: Array<PromptFavoriteType>
     responseGPT: string,
     responseHistory: Array<HistoryType>,
-    footerHelpText: string
+    footerHelpText: string,
+    basePrompt: Array<string>,
+    baseQuestions: Array<QuestionType>
 }

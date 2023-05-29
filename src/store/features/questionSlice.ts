@@ -93,6 +93,7 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(getQuestionsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<QuestionType>>) => {
             state.questions = action.payload;
+            state.baseQuestions = [...action.payload];
             state.varLoading.questionsLoading = false;
         })
         builder.addCase(getQuestionsThunk.rejected, (state: InitContectType) => {
@@ -103,8 +104,8 @@ export const questionsSlice = createSlice({
             state.varLoading.questionsLoading = true;
         })
         builder.addCase(putQuestionsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<QuestionType>>) => {
-            // console.log('putQuestionsThunk.fulfilled, action=', action);
-            // state.questions = action.payload;
+            state.questions = action.payload;
+            state.baseQuestions = [...action.payload];
             state.varLoading.questionsLoading = false;
         })
         builder.addCase(putQuestionsThunk.rejected, (state: InitContectType) => {
@@ -116,6 +117,7 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(getPromtThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<string>>) => {
             state.prompt = action.payload;
+            state.basePrompt = [...action.payload]
             state.varLoading.promptLoading = false;
         })
         builder.addCase(getPromtThunk.rejected, (state: InitContectType) => {
@@ -128,6 +130,7 @@ export const questionsSlice = createSlice({
         builder.addCase(putPromptThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<string>>) => {
             try {
                 state.prompt = action.payload;
+                state.basePrompt = [...action.payload]
             } catch {
                 toast.error('Error')
             }
