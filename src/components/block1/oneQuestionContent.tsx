@@ -10,6 +10,8 @@ import cancelIcon from "./../../public/icons/cancel_icon.png";
 import removeIcon from "./../../public/icons/remove_icon_1.png";
 import arrowUpIcon from "./../../public/icons/arrow_up.png";
 import arrowDownIcon from "./../../public/icons/arrow_down.png";
+import refreshIcon from "./../../public/icons/refresh_icon.png";
+
 import { QuestionType } from "../../store/features/questionTypes";
 
 
@@ -49,7 +51,10 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
         }
 
         <div className={s.questionTextLabel}>
-            Вопрос №{props.index + 1} 
+            <div onClick={onDivClickHandler} className={s.divClick}>
+                <strong>Вопрос №{props.index + 1} </strong>
+                {/* <img alt="" className={s.iconsImg} src={saveIcon} /> */}
+            </div>
             {/* OF {props.questionsLength} */}
         </div>
 
@@ -67,12 +72,16 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
             {
                 isEdit
                     ?   <MultilineText value={newAnswer} onValuechange={(newValue) => setNewAnswer(newValue)}/>
-                    :   <div className={s.answerTextLabel} onClick={onDivClickHandler}>
+                    // :   <div className={s.answerTextLabel} onClick={onDivClickHandler}>
+                    //             { props.elem.answer }
+                    //     </div>
+                    :   <div className={s.answerTextLabel}>
                                 { props.elem.answer }
                         </div>
             }
         </div>
 
+        {/* BUTTONS panel */}
         {
             isEdit && <div className={s.iconsDiv}>
                     <img alt="" className={s.iconsImg} src={saveIcon} onClick={onSaveClickHandler} />

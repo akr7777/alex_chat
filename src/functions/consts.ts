@@ -5,6 +5,7 @@ export const NEW_LINE_SEPARATOR = '\n\n';
 export const SHORT_TEXT_LENGTH = 40;
 export const USER_NAME_LocalStorage = 'username';
 export const COMMON_DATE_TIME_FORMAT = "DD.MM.YYYY HH:mm";
+export const COMMON_DATE_FORMAT = "YYYY-MM-DD";
 export const COMPANY_LC = "company";
 export const OPEN_TAG = '{';
 export const CLOSE_TAG = '}';

@@ -45,7 +45,7 @@
 
 .bricksDivShort {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 5fr 0.5fr;
     gap: 10px;
 
     margin: 10px 5px;
@@ -109,4 +109,10 @@
 
 .textAreaHeight {
     min-height: 35px;
+}
+
+.small_icons {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }

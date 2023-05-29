@@ -10,6 +10,7 @@
     gap: 0;
 
     background-color:  var(--input_bg_color);
+    height: var(--input_height);
 }
 
 .lineTextDecoration {

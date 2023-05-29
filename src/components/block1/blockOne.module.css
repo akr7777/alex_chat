@@ -72,7 +72,7 @@
 .answerTextLabel {
     font-size: 14px;
     font-weight: bold;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .colorChooser {
@@ -113,9 +113,29 @@
     flex-direction: column;
     gap: 5px;
 }
-.companyIcons {
-    width: 20px;
-    height: 20px;
+.companyFieldDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    
+}
+.companyFieldDivCursor {
+    font-weight: 800;
     cursor: pointer;
 }
+/* .companyFieldDiv {
+    font-weight: 800;
+} */
+.companyIcons {
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    margin-top: 5px;
+}
 .companyIcons:hover { scale: 1.2; }
+
+.divClick {
+    cursor: pointer;
+}

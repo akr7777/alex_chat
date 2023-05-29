@@ -16,8 +16,9 @@ const BlockThree = () => {
     const isLoading: boolean = useSelector((state: RootState) => state.questions.varLoading.responseLoading);
 
     const onCopyClickHandler = () => {
-        navigator.clipboard.writeText(responseGPT);
-        toast.info("Текст скопирован");
+        // navigator.clipboard.writeText(responseGPT);
+        // https://www.npmjs.com/package/use-clipboard-copy
+        // toast.info("Текст скопирован");
     }
     const onHistoryClickHandler = () => {
         dispatch(changeShowResponseHistoryAC(true));

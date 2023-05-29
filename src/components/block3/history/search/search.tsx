@@ -8,9 +8,8 @@ import { changeSearchCompanyAC, changeSearchDateEndAC, changeSearchDateStartAC, 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useState } from "react";
 import dayjs from "dayjs";
-import { COMMON_DATE_TIME_FORMAT } from "../../../../functions/consts";
+import { COMMON_DATE_FORMAT } from "../../../../functions/consts";
 
 const Search = () => {
     const dispatch = useAppDispatch();
@@ -26,35 +25,72 @@ const Search = () => {
         dispatch(changeSearchCompanyAC(newVal));
     }
 
-    // const [startDate, setStartDate] = useState(new Date());
     const startDateStr: string = useSelector((state: RootState) => state.questions.var.searchDateStart);
-    const startDateDate: Date = new Date(dayjs(startDateStr).year(), dayjs(startDateStr).month(), dayjs(startDateStr).date())
-
     const endDateStr: string = useSelector((state: RootState) => state.questions.var.searchDateEnd);
-    const endDateDate: Date = new Date(dayjs(endDateStr).year(), dayjs(endDateStr).month(), dayjs(endDateStr).date())
 
-    const onDateStartChangeClickHandler = (newDate: Date) => {
-        const newValue: string = dayjs(newDate).format(COMMON_DATE_TIME_FORMAT);
-        dispatch(changeSearchDateStartAC(newValue)); 
+
+    let startDateDate: Date | null;
+    let endDateDate: Date | null;
+    try {
+        startDateDate = startDateStr.length > 0
+            ? new Date(dayjs(startDateStr).year(), dayjs(startDateStr).month(), dayjs(startDateStr).date())
+            : null;
+
+        endDateDate = endDateStr.length > 0
+            ? new Date(dayjs(endDateStr).year(), dayjs(endDateStr).month(), dayjs(endDateStr).date()) 
+            : null;
+    } catch {
+        startDateDate = null;
+        endDateDate = null;
     }
-    const onDateEndChangeClickHandler = (newDate: Date) => { 
-        const newValue: string = dayjs(newDate).format(COMMON_DATE_TIME_FORMAT);
-        dispatch(changeSearchDateEndAC(newValue)); 
+    
+
+    const onDateStartChangeClickHandler = (newDate: Date | null) => {
+        if (newDate) {
+            const newValue: string = dayjs(newDate).format(COMMON_DATE_FORMAT);
+            dispatch(changeSearchDateStartAC(newValue)); 
+        } else  {
+            dispatch(changeSearchDateStartAC(''))
+        }
+        
+    }
+    const onDateEndChangeClickHandler = (newDate: Date | null) => { 
+        if (newDate) {
+            const newValue: string = dayjs(newDate).format(COMMON_DATE_FORMAT);
+            dispatch(changeSearchDateEndAC(newValue)); 
+        } else  {
+            dispatch(changeSearchDateEndAC(''))
+        }
+        
     }
 
     return <div className={s.search}>
 
-        <div className={s.searchField + " " + s.searchMarginTop}>
+        {/* <div className={s.searchField + " " + s.searchMarginTop}>
             
-        </div>
+        </div> */}
 
         <div className={s.searchField + " " + s.searchMarginTop}>
             <div>
                 <label>Поиск по дате:</label>
                 <div className={s.searchField}>
-                    {/* <DatePicker selected={startDateDate} onChange={(date:Date) => onDateStartChangeClickHandler(date)} /> */}
+                    {/* https://reactdatepicker.com */}
+                    <DatePicker 
+                        // showIcon
+                        dateFormat="dd.MM.yyyy"
+                        selected={startDateDate} 
+                        onChange={(date:Date) => onDateStartChangeClickHandler(date)} 
+                        className={s.datePicker}
+                    />
                     -
-                    {/* <DatePicker selected={endDateDate} onChange={(date:Date) => onDateEndChangeClickHandler(date)} /> */}
+                    <DatePicker 
+                        // showIcon
+                        dateFormat="dd.MM.yyyy"
+                        selected={endDateDate} 
+                        onChange={(date:Date) => onDateEndChangeClickHandler(date)}
+                        className={s.datePicker}
+                    />
+                    {/* </DatePicker> */}
                     {/* <DatePicker onChange={(date:Date) => setStartDate(date)} /> */}
 
                     {/* <Calendar onDateChange={(newValue: string) => onDateStartChangeClickHandler(newValue)} />

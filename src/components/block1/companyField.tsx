@@ -5,12 +5,10 @@ import s from "./blockOne.module.css";
 import closeIcon from '../../public/icons/delete_icon.png';
 import saveIcon from '../../public/icons/save_icon.png';
 import refreshIcon from '../../public/icons/refresh_icon.png';
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store/store";
 import { COMPANY_LC } from "../../functions/consts";
 
 const CompanyField = () => {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const [isEdit, setIsEdit] = useState<boolean>(false);
     // const company: string = useSelector((state:RootState) => state.questions.company);
     const company: string = localStorage.getItem(COMPANY_LC) || "SomeCompany";
@@ -36,14 +34,15 @@ const CompanyField = () => {
             isEdit
                 ? <div>
                     <LineTextField type={"text"} text={newCompany} onChangeFunction={(val) => companyNameChangeHandler(val)} />
-                    <div>
+                    <div className={s.companyFieldDiv}>
                         <img alt="" src={saveIcon} className={s.companyIcons} onClick={onSaveNewCompanyNameClickHandler}/>
                         <img alt="" src={closeIcon} className={s.companyIcons} onClick={onCloseClickHandler}/>
                     </div>
                 </div>
-                : <div>
-                    <label>{company}</label>
-                    <img alt="" src={refreshIcon} className={s.companyIcons} onClick={onRefreshCompanyClickHandler}/>
+                : <div className={s.companyFieldDiv + " " + s.companyFieldDivCursor} onClick={onRefreshCompanyClickHandler}>
+                    {/* <label onClick={onRefreshCompanyClickHandler}>{company}</label> */}
+                    {company}
+                    {/* <img alt="" src={refreshIcon} className={s.companyIcons} onClick={onRefreshCompanyClickHandler}/> */}
                 </div>
         }
         

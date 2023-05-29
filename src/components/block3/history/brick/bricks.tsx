@@ -13,10 +13,11 @@ const Bricks = () => {
 
     const dispatch = useAppDispatch();
     let history:Array<HistoryType> = useSelector((state: RootState) => state.questions.responseHistory);
-    if (history.length > 0)
+    if (history.length > 0) {
         history = [...history].sort( (a,b) => {
             const a1 = dayjs(a.datetime).format("YYYY-MM-DD.HH:mm");
-            const b1 = dayjs(b.datetime).format("YYYY-MM-DD.HH:mm")
+            const b1 = dayjs(b.datetime).format("YYYY-MM-DD.HH:mm");
+            // console.log('a1,b1=', a1,b1);
             if (a1 < b1)
                 return 1;
             else if (a1 > b1)
@@ -24,6 +25,9 @@ const Bricks = () => {
             else 
                 return 0;
         });
+    }
+    // console.log('his=', history);
+    
 
     useEffect(() => {
         dispatch(getResponseHistoryThunk());
@@ -43,10 +47,10 @@ const Bricks = () => {
         history = history.filter(el => el.company.includes(searchCompany));
     }
     if (searchDateStart.length > 0) {
-        history = history.filter(el => el.datetime >= searchDateStart.replaceAll('-', '.'));
+        history = history.filter(el => el.datetime >= searchDateStart);
     }
     if (searchDateEnd.length > 0) {
-        history = history.filter(el => el.datetime <= searchDateEnd.replaceAll('-', '.'));
+        history = history.filter(el => el.datetime <= searchDateEnd);
     }
 
     return <div className={s.bricks}>

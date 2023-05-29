@@ -22,6 +22,7 @@
   /* TEXT FIELD */
   --input_bg_color: azure;
   --input_text_color: black;
+  --input_height: 35px;
 
   /* BRICKS */
   --bricks_template_column: 0.5fr 1fr 1fr 1.5fr 3fr 4fr 0.5fr;

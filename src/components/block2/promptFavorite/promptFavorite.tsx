@@ -35,7 +35,7 @@ const PromptHistory = () => {
                     : <>
                         {
                             favoritesPrompts.map((f:PromptFavoriteType, elemIndex: number) => {
-                                    return <OneFavoriteBrick title={f.title} prompt={f.prompt} key={elemIndex}/>
+                                    return <OneFavoriteBrick id={f.id} title={f.title} prompt={f.prompt} key={elemIndex}/>
                             }) 
                         }
                     </>

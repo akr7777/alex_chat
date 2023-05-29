@@ -27,7 +27,8 @@ const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) =>
             prompt: prompt
         }
         const dataToSend:Array<PromptFavoriteType> = [...favorites, objectToAdd]
-        dispatch(postFavoritePromptsThunk(dataToSend))
+        dispatch(postFavoritePromptsThunk(dataToSend));
+        props.setShow(false);
     }
     
     return <div className={s.promptHistoryLayout}>

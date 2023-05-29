@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .searchMarginTop {
     margin-top: 20px;
@@ -18,4 +20,11 @@
 }
 .textFieldWidth {
     min-width: 250px;
+}
+.datePicker {
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--input_bg_color);
+    height: var(--input_height);
+    text-align: center;
 }
