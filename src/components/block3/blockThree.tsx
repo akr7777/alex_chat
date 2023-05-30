@@ -8,6 +8,7 @@ import copyIcon from "./../../public/icons/copy_icon.png";
 import HistoryResponses from "./history/historyResponse";
 import { changeFooterHelpTextAC, changeShowResponseHistoryAC } from "../../store/features/questionSlice";
 import Preloader from "../../common/preloader/preloader";
+import WordStatistic from "../../common/wordStatistic/wordStatistic";
 
 const BlockThree = () => {
     const dispatch = useAppDispatch();
@@ -45,6 +46,8 @@ const BlockThree = () => {
             <div className={s.titleDiv}>
                 <strong>Поле финального ответа:</strong>
             </div>
+
+            <WordStatistic text={responseGPT}/>
 
             {
                 isLoading

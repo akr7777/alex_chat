@@ -13,6 +13,7 @@ import { NEW_LINE_SEPARATOR } from '../../functions/consts';
 import ButtonsPanel from './buttonsPanel';
 import Preloader from '../../common/preloader/preloader';
 import { QuestionType } from '../../store/features/questionTypes';
+import WordStatistic from '../../common/wordStatistic/wordStatistic';
 
 const BlockTwo = () => {
     const dispatch = useAppDispatch();
@@ -61,6 +62,8 @@ const BlockTwo = () => {
         <div className={s.titleDiv}>
             <strong>Ваш промпт:</strong>
         </div>
+
+        <WordStatistic text={nonEditablePrompt}/>
 
         {
             isLoading

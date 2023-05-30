@@ -1,5 +1,4 @@
 import { InitContectType } from "../store/features/questionTypes";
-import { FAVORITE_PROMPTS, HISTORY, PROMPT, RESPONSE_GPT, TEMPORARY_QUESTIONS } from "../store/features/vars";
 
 export const NEW_LINE_SEPARATOR = '\n\n';
 export const SHORT_TEXT_LENGTH = 40;

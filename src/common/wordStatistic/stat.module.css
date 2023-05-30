@@ -1,0 +1,38 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.icons {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    transition: 1s linear;
+}
+.icons:hover { scale: 1.2; }
+
+.titleDiv {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.statBody {
+    margin-bottom: 15px;
+
+    /* min-height: 300px; */
+    /* background-color: red; */
+}
+.oneBodysection {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+}

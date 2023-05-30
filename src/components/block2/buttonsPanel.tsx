@@ -19,7 +19,7 @@ import { changeFooterHelpTextAC, changeNewPromptAC, changePromptAC, changeShowPr
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import AddPromptToFavoriteWindow from "./promptFavorite/addPromptToFavoriteWindow";
-import { AddAnswerForGPT, AddAnswerToPrompt, inputBracketsInText } from "../../functions/functions";
+import { AddAnswerForGPT } from "../../functions/functions";
 import { QuestionType } from "../../store/features/questionTypes";
 
 type ButtonsPanelPropsType = {
