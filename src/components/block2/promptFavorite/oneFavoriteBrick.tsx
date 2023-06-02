@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/store";
 import { PromptFavoriteType, QuestionType } from "../../../store/features/questionTypes";
 import removeIcon from '../../../public/icons/remove_icon_1.png';
-import { postFavoritePromptsThunk } from "../../../store/features/questionThunk";
+import { deleteFavoritePromptsThunk, postFavoritePromptsThunk } from "../../../store/features/questionThunk";
 
 type OneFavoriteBrickPropsType = {
     id: string,
@@ -34,9 +34,7 @@ const OneFavoriteBrick = (props: OneFavoriteBrickPropsType) => {
     }
 
     const onRemoveClickHandler = () => {
-        dispatch(postFavoritePromptsThunk(
-            favoritesPrompts.filter(el => el.id !== props.id)
-        ));
+        dispatch(deleteFavoritePromptsThunk(props.id));
     } 
 
     return <div 

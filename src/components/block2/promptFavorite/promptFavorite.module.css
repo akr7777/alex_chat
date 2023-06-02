@@ -1,5 +1,5 @@
 .promptHistoryLayout {
-    z-index: 100;
+    z-index: 200;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@
 }
 
 .promptHistoryDiv {
-    z-index: 101;
+    z-index: 201;
     position: fixed;
     top: 10vh;
     left: 10vw;
@@ -88,6 +88,7 @@
 .linkLabel:hover { scale: 1.1; }
 
 .addPromptToFavoriteWindow {
+    z-index: 180;
     position: fixed;
     height: 80vh;
     width: 60vw;

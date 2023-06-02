@@ -35,8 +35,10 @@
 }
 
 .iconsImg {
-    width: var(--main_icons_size);
-    height: var(--main_icons_size);
+    /* width: var(--main_icons_size);
+    height: var(--main_icons_size); */
+    width: 25px;
+    height: 25px;
     cursor: pointer;
 }
 .iconsImg:hover {

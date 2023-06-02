@@ -5,6 +5,8 @@ import BlockTwo from '../block2/block2';
 import BlockThree from '../block3/blockThree';
 import Header from './header/header';
 import Footer from './footer/footer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const MainPage = () => {
 
@@ -12,11 +14,13 @@ const MainPage = () => {
         // dispatch(getAnswerThunk());
     }, [])
 
+    const isFirstShort: boolean = useSelector((state: RootState) => state.questions.var.isFirstBlockShort);
+
     return <div className={s.wrappedDiv}>
         
         <Header />
 
-        <div className={s.mainDiv}>
+        <div className={ isFirstShort ? s.mainDiv + " " + s.mainDivShort : s.mainDiv }>
             <div className={s.blockDiv}>
                 <BlockOne />
             </div>

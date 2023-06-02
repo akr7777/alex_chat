@@ -9,7 +9,7 @@
 
 
 .historyLayoutDiv {
-    z-index: 100;
+    z-index: 190;
     width: 100vw;
     height: 100vh;
     display: none;
@@ -43,5 +43,5 @@
     z-index: 101;
     position: fixed;
     top: calc( 10vh - var(--main_icons_size)*0.5 );
-    left: calc( 50vw - var(--main_icons_size)*0.5 );
+    left: calc( 90vw - var(--main_icons_size)*0.5 );
 }

@@ -28,10 +28,14 @@ export const questionsAPI = {
         return instance.put('prompt', {prompt: data});
     },
     getPromptFavorites: (): Promise<AxiosResponse> => {
-        return instance.get("favoritesPrompts");
+        return instance.get("favoritePrompts");
     },
     postPromptFavorites: (data:Array<PromptFavoriteType>): Promise<AxiosResponse> => {
         return instance.post("favoritesPrompts", data);
+    },
+    deletePromptFavorites: (id: string): Promise<AxiosResponse> => {
+        return instance.delete("favoritesPrompts?id="+id);
+        // return instance.delete("favoritesPrompts", id);
     },
     getResponseHistory: (): Promise<AxiosResponse> => {
         return instance.get('history');

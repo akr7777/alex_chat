@@ -29,7 +29,8 @@ export const initContentQuestionsSlice:InitContectType = {
         searchText: '',
         searchCompany: '',
         showPromptHistory: false,
-        showResponseHistory: false
+        showResponseHistory: false,
+        isFirstBlockShort: false
     },
     prompt: [],
     responseGPT: '',

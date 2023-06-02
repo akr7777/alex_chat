@@ -46,7 +46,8 @@ export type InitContectType = {
         searchText: string
         searchCompany: string,
         showPromptHistory: boolean,
-        showResponseHistory: boolean
+        showResponseHistory: boolean,
+        isFirstBlockShort: boolean
     },
     // company: string
     questions: Array<QuestionType>,

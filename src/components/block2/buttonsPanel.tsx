@@ -73,7 +73,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     
     return <>
         {
-            showAdd && <AddPromptToFavoriteWindow setShow={setShowAdd}/>
+            showAdd && <AddPromptToFavoriteWindow prompt={prompt} setShow={setShowAdd}/>
         }
         {
             isResponseLoading

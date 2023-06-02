@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { addQuestionAC, changeFooterHelpTextAC } from '../../store/features/questionSlice';
+import { addQuestionAC, changeFirstBlockWidthAC, changeFooterHelpTextAC } from '../../store/features/questionSlice';
 import Preloader from '../../common/preloader/preloader';
 import OneQuestion from './oneQuestion';
 import { useEffect } from 'react';
@@ -23,7 +23,7 @@ const BlockOne = () => {
     const isQuestionsEqual: boolean = JSON.stringify(questions) === JSON.stringify(baseQuestions);
     // const editableId: string = useSelector((state: RootState) => state.questions.editableId);
     const isLoading: boolean = useSelector((state:RootState) => state.questions.varLoading.questionsLoading);
-
+    const isShort: boolean = useSelector((state: RootState) => state.questions.var.isFirstBlockShort);
     useEffect( () => {
         dispatch(getQuestionsThunk());
     }, []);
@@ -54,55 +54,64 @@ const BlockOne = () => {
             theme="light"
         />
 
-        <CompanyField />
-
-        <strong>Вопросы:</strong>
         {
-            isLoading
-                ? <Preloader />
+            isShort
+                ? <label onClick={() => dispatch(changeFirstBlockWidthAC(false))}>+</label>
                 : <>
-                    <div className={s.allQuestionsField}>
-                        {
-                            questions.map( (elem:QuestionType, elemIndex: number) => {
-                                return <div key={elem.id}>
-                                    <OneQuestion 
-                                        index={elemIndex} 
-                                        elem={elem}
-                                        questionsLength={questions.length}
+                    <label onClick={() => dispatch(changeFirstBlockWidthAC(true))}>-</label>
+
+                    <CompanyField />
+
+                    <strong>Вопросы:</strong>
+                    {
+                        isLoading
+                            ? <Preloader />
+                            : <>
+                                <div className={s.allQuestionsField}>
+                                    {
+                                        questions.map( (elem:QuestionType, elemIndex: number) => {
+                                            return <div key={elem.id}>
+                                                <OneQuestion 
+                                                    index={elemIndex} 
+                                                    elem={elem}
+                                                    questionsLength={questions.length}
+                                                />
+                                            </div>
+                                        })
+                                    }
+                                </div>
+
+                                <div className={s.buttonsDiv}>
+                                    {
+                                        isQuestionsEqual
+                                            ?   <img 
+                                                    alt="" src={saveDisabledIcon} className={s.menuIconsImg} 
+                                                    onClick={onDisablaedSaveIconClickHandler}
+                                                    onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
+                                                    onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                                />
+                                            :   <img 
+                                                    alt="" src={saveIcon} className={s.menuIconsImg} 
+                                                    onClick={saveAllQuestionsToServerClickHandler}
+                                                    onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
+                                                    onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                                />
+
+                                    }
+                                    
+                                    {/* <img alt="Удалить все вопросы" src={removeIcon} className={s.menuIconsImg} onClick={removeAllQuestionsClickHandler}/> */}
+                                    <img 
+                                        alt="Добавить вопрос" src={plusIcon} className={s.menuIconsImg} 
+                                        onClick={addQuestionClickHandler}
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить новый вопрос"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                                     />
                                 </div>
-                            })
-                        }
-                    </div>
-
-                    <div className={s.buttonsDiv}>
-                        {
-                            isQuestionsEqual
-                                ?   <img 
-                                        alt="" src={saveDisabledIcon} className={s.menuIconsImg} 
-                                        onClick={onDisablaedSaveIconClickHandler}
-                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
-                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                                    />
-                                :   <img 
-                                        alt="" src={saveIcon} className={s.menuIconsImg} 
-                                        onClick={saveAllQuestionsToServerClickHandler}
-                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Сохранить все вопросы на сервер в текущем виде"))}
-                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                                    />
-
-                        }
-                        
-                        {/* <img alt="Удалить все вопросы" src={removeIcon} className={s.menuIconsImg} onClick={removeAllQuestionsClickHandler}/> */}
-                        <img 
-                            alt="Добавить вопрос" src={plusIcon} className={s.menuIconsImg} 
-                            onClick={addQuestionClickHandler}
-                            onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить новый вопрос"))}
-                            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                        />
-                    </div>
+                            </>
+                    }
                 </>
         }
+        
         
     </div>
 }

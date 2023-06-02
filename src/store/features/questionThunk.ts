@@ -90,6 +90,18 @@ export const getFavoritePromptsThunk = createAsyncThunk(
     }
 );
 
+export const deleteFavoritePromptsThunk = createAsyncThunk(
+    'questions/deleteFavoritePromptsThunk',
+    async (id: string, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.deletePromptFavorites(id);
+            return res.data.data
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
+
 export const postFavoritePromptsThunk = createAsyncThunk(
     'questions/postFavoritePromptsThunk',
     async (data: Array<PromptFavoriteType>, {rejectWithValue, dispatch}) => {
@@ -107,7 +119,7 @@ export const getResponseHistoryThunk = createAsyncThunk(
     async (_, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.getResponseHistory();
-            return res.data.data
+            return res.data.data;
         } catch (err: any) {
             toast(err.response.data.message);
         }

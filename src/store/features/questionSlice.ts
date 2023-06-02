@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postFavoritePromptsThunk, postResponseThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
+import { deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postFavoritePromptsThunk, postResponseThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
 import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType } from "./questionTypes"
 import { initContentQuestionsSlice } from "../../functions/consts"
 import uuid from "react-uuid"
@@ -83,7 +83,8 @@ export const questionsSlice = createSlice({
         // changeCompanyAC: (state: InitContectType, action: PayloadAction<string>) => { state.company = action.payload },
         changeShowPromptFavoritesAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showPromptHistory = action.payload },
         changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload },
-        changeFooterHelpTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.footerHelpText = action.payload; }
+        changeFooterHelpTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.footerHelpText = action.payload; },
+        changeFirstBlockWidthAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.isFirstBlockShort = action.payload }
     },
 
 
@@ -167,6 +168,17 @@ export const questionsSlice = createSlice({
             state.varLoading.promptHistoryLoading = false;
         })
 
+        builder.addCase(deleteFavoritePromptsThunk.pending, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = true;
+        })
+        builder.addCase(deleteFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<PromptFavoriteType>) => {
+            state.favoritesPrompts = [...state.favoritesPrompts].filter( el => el.id !== action.payload.id );
+            state.varLoading.promptHistoryLoading = false;
+        })
+        builder.addCase(deleteFavoritePromptsThunk.rejected, (state: InitContectType) => {
+            state.varLoading.promptHistoryLoading = false;
+        })
+
         builder.addCase(postFavoritePromptsThunk.pending, (state: InitContectType) => {
             state.varLoading.promptHistoryLoading = true;
         })
@@ -207,7 +219,7 @@ export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, cle
     changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC,
     changeShowPromptFavoritesAC, changeGPTResponseAC, changeShowResponseHistoryAC, changeTwoQuestionsOrderAC,
     removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC,
-    changeFooterHelpTextAC
+    changeFooterHelpTextAC, changeFirstBlockWidthAC
 } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

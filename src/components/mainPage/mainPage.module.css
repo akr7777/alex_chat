@@ -1,15 +1,11 @@
 .wrappedDiv {
     min-width: 100%;
     min-height: 100vh;
-
     text-align: center;
-    /* padding: var(--header_foorter_height) 0; */
     display: flex;
     flex-direction: column;
-    /* gap: 20px; */
 }
 .mainDiv {
-    /* background-color: lightgrey; */
     background-color: var(--main_bg_color);
     height: 90vh;
     padding: 5px;
@@ -17,7 +13,9 @@
     display: grid;
     grid-template-columns: 0.7fr 1.3fr 1fr;
     gap: 5px;
-    
+}
+.mainDivShort {
+    grid-template-columns: 30px 1.3fr 1fr;
 }
 
 .blockDiv {

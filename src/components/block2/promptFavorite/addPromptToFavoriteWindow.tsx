@@ -12,11 +12,12 @@ import uuid from "react-uuid";
 type AddPromptToFavoriteWindowPropsType = {
     // show: boolean,
     setShow: (val: boolean) => void
+    prompt: Array<string>
 }
 const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) => {
     const dispatch = useAppDispatch();
     const favorites: Array<PromptFavoriteType> = useSelector((state:RootState) => state.questions.favoritesPrompts);
-    const prompt: Array<string> = useSelector((state:RootState) => state.questions.prompt);
+    // const prompt: Array<string> = useSelector((state:RootState) => state.questions.prompt);
     const [title, setTitle] = useState<string>('');
 
     const onCancelClickHandler = () => props.setShow(false);
@@ -24,7 +25,7 @@ const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) =>
         const objectToAdd:PromptFavoriteType = {
             id: uuid(),
             title: title,
-            prompt: prompt
+            prompt: props.prompt
         }
         const dataToSend:Array<PromptFavoriteType> = [...favorites, objectToAdd]
         dispatch(postFavoritePromptsThunk(dataToSend));
@@ -38,7 +39,8 @@ const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) =>
             <LineTextField type={"text"} text={title} onChangeFunction={(val) => setTitle(val)} className={s.textAreaHeight}/>
 
             <h3>Текст промпта:</h3>
-            {prompt}
+            {props.prompt}
+            
             <div>
                 <img alt="" src={cancelIcon} onClick={onCancelClickHandler} className={s.iconsImg}/>
                 <img alt="" src={okIcon} onClick={onOKClickHandler} className={s.iconsImg}/>

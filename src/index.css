@@ -25,7 +25,7 @@
   --input_height: 35px;
 
   /* BRICKS */
-  --bricks_template_column: 0.5fr 1fr 1fr 1.5fr 3fr 4fr 0.5fr;
+  --bricks_template_column: 0.5fr 1fr 1fr 1.5fr 3fr 4fr 0.5fr 0.5fr;
 }
 
 body {
