@@ -12,9 +12,7 @@ import { inputBracketsInText } from "../../../../functions/functions";
 import { useSelector } from "react-redux";
 import { HistoryType, PromptFavoriteType, QuestionType } from "../../../../store/features/questionTypes";
 import dayjs from "dayjs";
-import { FAVORITE_HISTORY_ITEMS_LC, addToFavoriteThisHistoryItem, removeThisItemFromFavorite } from "./oneBrickFunctions";
-// import AddPromptToFavoriteWindow from "../../../block2/promptFavorite/addPromptToFavoriteWindow";
-// import { postFavoritePromptsThunk } from "../../../../store/features/questionThunk";
+import { deleteFavoriteHistoryThunk, putFavoriteHistoryThunk } from "../../../../store/features/questionThunk";
 
 type OneBrickPropsType = {
     elem: HistoryType,
@@ -25,10 +23,8 @@ const OneBrick = (props: OneBrickPropsType) => {
     const dispatch = useAppDispatch();
     const [isShort, setIsShort] = useState<boolean>(true);
     const questions:Array<QuestionType> = useSelector((state:RootState) => state.questions.questions);
-    // const favoritePrompts: Array<PromptFavoriteType> = useSelector((state: RootState) => state.questions.favoritesPrompts);
 
     const dateAndTime: string = dayjs(props.elem.datetime).format(COMMON_DATE_TIME_FORMAT);
-    // const isThisPromptFavorite: boolean = favoritePrompts.some(el => JSON.stringify(el.prompt) === JSON.stringify(props.elem.prompt) );
     
     // let favPromptId: string | undefined;
     // if (isThisPromptFavorite)
@@ -51,18 +47,13 @@ const OneBrick = (props: OneBrickPropsType) => {
             : props.elem.gpt_response.trim();
 
 
-    // const [showAddToFavorite, setShowAddToFavorite] = useState<boolean>(false);
-    const isThisPromptFavorite: boolean = localStorage.getItem(FAVORITE_HISTORY_ITEMS_LC)
-        ? localStorage.getItem(FAVORITE_HISTORY_ITEMS_LC)?.includes(props.elem.datetime) || false
-        : false
+    
     const removePromptFromFavorites = () => {
-        // const dataToSend:Array<PromptFavoriteType> = [...favoritePrompts].filter(el => el.id !== favPromptId)
-        // dispatch(postFavoritePromptsThunk(dataToSend));
-        removeThisItemFromFavorite(props.elem.datetime);
+        dispatch(deleteFavoriteHistoryThunk(props.elem.id))
     }
     const addPromptFromFavorites = () => {
-        addToFavoriteThisHistoryItem(props.elem.datetime);
-    } //setShowAddToFavorite(true)
+        dispatch(putFavoriteHistoryThunk(props.elem.id))
+    } 
 
     return <div className={s.bricksDivShort} onDoubleClick={() => setIsShort(!isShort)}>
 
@@ -96,7 +87,7 @@ const OneBrick = (props: OneBrickPropsType) => {
         </div>
         <div className={s.oneSection}>
             {
-                isThisPromptFavorite
+                props.elem.favorite
                     ? <img alt="" src={starIconFilled} className={s.iconsImg}
                         onClick={removePromptFromFavorites}
                         onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить данную версию промпта в избранное"))}

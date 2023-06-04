@@ -30,11 +30,11 @@ export const questionsAPI = {
     getPromptFavorites: (): Promise<AxiosResponse> => {
         return instance.get("favoritePrompts");
     },
-    postPromptFavorites: (data:Array<PromptFavoriteType>): Promise<AxiosResponse> => {
-        return instance.post("favoritesPrompts", data);
+    putPromptFavorites: (data:Omit<PromptFavoriteType, "date_added">): Promise<AxiosResponse> => {
+        return instance.put("favoritePrompts", data);
     },
     deletePromptFavorites: (id: string): Promise<AxiosResponse> => {
-        return instance.delete("favoritesPrompts?id="+id);
+        return instance.delete("favoritePrompts?id="+id);
         // return instance.delete("favoritesPrompts", id);
     },
     getResponseHistory: (): Promise<AxiosResponse> => {
@@ -43,7 +43,10 @@ export const questionsAPI = {
     postResponse: (prompt: Array<string>, username: string, company: string): Promise<AxiosResponse> => {
         return instance.post('response', {prompt: prompt, username: username, company: company});
     },
-    // postResponse: (prompt: Array<string>): Promise<AxiosResponse> => {
-    //     return instance.post('response', prompt);
-    // },
+    putFavoriteHistory: (id: string): Promise<AxiosResponse> => {
+        return instance.put("favoriteHistory?id="+id);
+    },
+    deleteFavoriteHistory: (id: string): Promise<AxiosResponse> => {
+        return instance.delete("favoriteHistory?id="+id);
+    },
 }

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postFavoritePromptsThunk, postResponseThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
+import { deleteFavoriteHistoryThunk, deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postResponseThunk, putFavoriteHistoryThunk, putFavoritePromptsThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
 import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType } from "./questionTypes"
 import { initContentQuestionsSlice } from "../../functions/consts"
 import uuid from "react-uuid"
@@ -171,22 +171,23 @@ export const questionsSlice = createSlice({
         builder.addCase(deleteFavoritePromptsThunk.pending, (state: InitContectType) => {
             state.varLoading.promptHistoryLoading = true;
         })
-        builder.addCase(deleteFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<PromptFavoriteType>) => {
-            state.favoritesPrompts = [...state.favoritesPrompts].filter( el => el.id !== action.payload.id );
+        builder.addCase(deleteFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<PromptFavoriteType>>) => {
+            // state.favoritesPrompts = [...state.favoritesPrompts].filter( el => el.id !== action.payload.id );
+            state.favoritesPrompts = action.payload;
             state.varLoading.promptHistoryLoading = false;
         })
         builder.addCase(deleteFavoritePromptsThunk.rejected, (state: InitContectType) => {
             state.varLoading.promptHistoryLoading = false;
         })
 
-        builder.addCase(postFavoritePromptsThunk.pending, (state: InitContectType) => {
+        builder.addCase(putFavoritePromptsThunk.pending, (state: InitContectType) => {
             state.varLoading.promptHistoryLoading = true;
         })
-        builder.addCase(postFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<PromptFavoriteType>>) => {
-            state.favoritesPrompts = action.payload;
+        builder.addCase(putFavoritePromptsThunk.fulfilled, (state: InitContectType, action: PayloadAction<PromptFavoriteType>) => {
+            state.favoritesPrompts = [...state.favoritesPrompts, action.payload];
             state.varLoading.promptHistoryLoading = false;
         })
-        builder.addCase(postFavoritePromptsThunk.rejected, (state: InitContectType) => {
+        builder.addCase(putFavoritePromptsThunk.rejected, (state: InitContectType) => {
             state.varLoading.promptHistoryLoading = false;
         })
 
@@ -198,11 +199,13 @@ export const questionsSlice = createSlice({
             // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
             let historyArray:Array<HistoryType> = action.payload.map(elem => {
                 return {
+                    id: elem.id,
                     datetime: elem.datetime,
                     username: elem.request.username,
                     company: elem.request.company,
                     prompt: elem.request.prompt,
-                    gpt_response: elem.gpt_response
+                    gpt_response: elem.gpt_response,
+                    favorite: elem.favorite
                 }
             })
 
@@ -210,6 +213,55 @@ export const questionsSlice = createSlice({
             state.varLoading.responseHistoryLoading = false;
         })
         builder.addCase(getResponseHistoryThunk.rejected, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = false;
+        })
+
+
+        builder.addCase(putFavoriteHistoryThunk.pending, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = true;
+        })
+        builder.addCase(putFavoriteHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
+            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
+            let historyArray:Array<HistoryType> = action.payload.map(elem => {
+                return {
+                    id: elem.id,
+                    datetime: elem.datetime,
+                    username: elem.request.username,
+                    company: elem.request.company,
+                    prompt: elem.request.prompt,
+                    gpt_response: elem.gpt_response,
+                    favorite: elem.favorite
+                }
+            })
+
+            state.responseHistory = historyArray;
+            state.varLoading.responseHistoryLoading = false;
+        })
+        builder.addCase(putFavoriteHistoryThunk.rejected, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = false;
+        })
+
+        builder.addCase(deleteFavoriteHistoryThunk.pending, (state: InitContectType) => {
+            state.varLoading.responseHistoryLoading = true;
+        })
+        builder.addCase(deleteFavoriteHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
+            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
+            let historyArray:Array<HistoryType> = action.payload.map(elem => {
+                return {
+                    id: elem.id,
+                    datetime: elem.datetime,
+                    username: elem.request.username,
+                    company: elem.request.company,
+                    prompt: elem.request.prompt,
+                    gpt_response: elem.gpt_response,
+                    favorite: elem.favorite
+                }
+            })
+
+            state.responseHistory = historyArray;
+            state.varLoading.responseHistoryLoading = false;
+        })
+        builder.addCase(deleteFavoriteHistoryThunk.rejected, (state: InitContectType) => {
             state.varLoading.responseHistoryLoading = false;
         })
        

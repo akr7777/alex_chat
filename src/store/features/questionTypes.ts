@@ -5,13 +5,16 @@ export type QuestionType = {
     color: string
 }
 export type HistoryType = {
+    id: string,
     datetime: string,
     username: string,
     company: string,
     prompt: Array<string>,
     gpt_response: string
+    favorite: boolean
 }
 export type HistoryResponseType = {
+    id: string
     datetime: string,
     gpt_response: string,
     request: {
@@ -19,11 +22,13 @@ export type HistoryResponseType = {
         username: string
         prompt: Array<string>
     }
+    favorite: boolean
 }
 export type PromptFavoriteType = {
     id: string
     title: string,
     prompt: Array<string>
+    date_added: string
 }
 
 

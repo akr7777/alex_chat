@@ -6,7 +6,7 @@ import okIcon from "./../../../public/icons/ok_icon.png";
 import cancelIcon from "./../../../public/icons/cancel_icon.png";
 import { useState } from "react";
 import {LineTextField} from './../../../common/lineTextField/labelLineText';
-import { postFavoritePromptsThunk } from "../../../store/features/questionThunk";
+import { putFavoritePromptsThunk } from "../../../store/features/questionThunk";
 import uuid from "react-uuid";
 
 type AddPromptToFavoriteWindowPropsType = {
@@ -22,13 +22,13 @@ const AddPromptToFavoriteWindow = (props: AddPromptToFavoriteWindowPropsType) =>
 
     const onCancelClickHandler = () => props.setShow(false);
     const onOKClickHandler = () => {
-        const objectToAdd:PromptFavoriteType = {
+        const objectToAdd:Omit<PromptFavoriteType, "date_added"> = {
             id: uuid(),
             title: title,
             prompt: props.prompt
         }
-        const dataToSend:Array<PromptFavoriteType> = [...favorites, objectToAdd]
-        dispatch(postFavoritePromptsThunk(dataToSend));
+        // const dataToSend:Array<Omit<PromptFavoriteType, "date_added">> = [...favorites, objectToAdd]
+        dispatch(putFavoritePromptsThunk(objectToAdd));
         props.setShow(false);
     }
     

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NEW_LINE_SEPARATOR, SHORT_TEXT_LENGTH } from "../../../functions/consts";
+import { COMMON_DATE_TIME_FORMAT, NEW_LINE_SEPARATOR, SHORT_TEXT_LENGTH } from "../../../functions/consts";
 // import s from "./../../../common/brickCSS/bricks.module.css";
 import s from "./promptFavorite.module.css";
 import { inputBracketsInText } from "../../../functions/functions";
@@ -8,14 +8,15 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/store";
 import { PromptFavoriteType, QuestionType } from "../../../store/features/questionTypes";
 import removeIcon from '../../../public/icons/remove_icon_1.png';
-import { deleteFavoritePromptsThunk, postFavoritePromptsThunk } from "../../../store/features/questionThunk";
+import { deleteFavoritePromptsThunk } from "../../../store/features/questionThunk";
+import dayjs from "dayjs";
 
-type OneFavoriteBrickPropsType = {
-    id: string,
-    title: string,
-    prompt: Array<string>
-}
-const OneFavoriteBrick = (props: OneFavoriteBrickPropsType) => {
+// type OneFavoriteBrickPropsType = {
+//     id: string,
+//     title: string,
+//     prompt: Array<string>
+// }
+const OneFavoriteBrick = (props: PromptFavoriteType) => {
 
     const [isShort, setIsShort] = useState<boolean>(true);
     const dispatch = useAppDispatch();
@@ -43,6 +44,9 @@ const OneFavoriteBrick = (props: OneFavoriteBrickPropsType) => {
             >
         <div className={s.oneSection + " " + s.linkLabel} onClick={onPromptClickHandler}>
             {props.title}
+        </div>
+        <div className={s.oneSection}>
+            {dayjs(props.date_added).format(COMMON_DATE_TIME_FORMAT)}
         </div>
         <div className={s.oneSection}>
             {promptText}

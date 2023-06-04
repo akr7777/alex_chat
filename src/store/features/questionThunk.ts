@@ -102,11 +102,11 @@ export const deleteFavoritePromptsThunk = createAsyncThunk(
     }
 );
 
-export const postFavoritePromptsThunk = createAsyncThunk(
+export const putFavoritePromptsThunk = createAsyncThunk(
     'questions/postFavoritePromptsThunk',
-    async (data: Array<PromptFavoriteType>, {rejectWithValue, dispatch}) => {
+    async (data: Omit<PromptFavoriteType, "date_added">, {rejectWithValue, dispatch}) => {
         try {
-            const res = await questionsAPI.postPromptFavorites(data);
+            const res = await questionsAPI.putPromptFavorites(data);
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
@@ -126,3 +126,26 @@ export const getResponseHistoryThunk = createAsyncThunk(
     }
 );
 
+export const putFavoriteHistoryThunk = createAsyncThunk(
+    'questions/putFavoriteHistoryThunk',
+    async (id: string, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.putFavoriteHistory(id);
+            return res.data.data;
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
+
+export const deleteFavoriteHistoryThunk = createAsyncThunk(
+    'questions/deleteFavoriteHistoryThunk',
+    async (id: string, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.deleteFavoriteHistory(id);
+            return res.data.data;
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
