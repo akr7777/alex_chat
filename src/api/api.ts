@@ -40,8 +40,8 @@ export const questionsAPI = {
     getResponseHistory: (): Promise<AxiosResponse> => {
         return instance.get('history');
     },
-    postResponse: (prompt: Array<string>, username: string, company: string): Promise<AxiosResponse> => {
-        return instance.post('response', {prompt: prompt, username: username, company: company});
+    putResponse: (prompt: Array<string>, username: string, company: string): Promise<AxiosResponse> => {
+        return instance.put('response', {prompt: prompt, username: username, company: company});
     },
     putFavoriteHistory: (id: string): Promise<AxiosResponse> => {
         return instance.put("favoriteHistory?id="+id);

@@ -70,7 +70,7 @@ export const postResponseThunk = createAsyncThunk(
         try {
             const username:string = localStorage.getItem(USER_NAME_LocalStorage) || '-';
             // const res = await questionsAPI.postResponse(prompt, userName);
-            const res = await questionsAPI.postResponse(data.prompt, username, data.company);
+            const res = await questionsAPI.putResponse(data.prompt, username, data.company);
             return res.data.data.gpt_response;
         } catch (err: any) {
             toast.error(err.response.data.message);
