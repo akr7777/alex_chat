@@ -67,12 +67,14 @@ const BlockOne = () => {
                     />
                 : <>
                     {/* <label onClick={() => dispatch(changeFirstBlockWidthAC(true))}>-</label> */}
-                    <img alt="" src={hideIcon} 
-                        onClick={ () => dispatch(changeFirstBlockWidthAC(true)) } 
-                        className={s.hideShowIcon}
-                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Скрыть вопросы"))}
-                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                    />
+                    <div className={s.hideIconDiv}>
+                        <img alt="" src={hideIcon} 
+                            onClick={ () => dispatch(changeFirstBlockWidthAC(true)) } 
+                            className={s.hideShowIcon}
+                            onMouseOver={() => dispatch(changeFooterHelpTextAC("Скрыть вопросы"))}
+                            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                        />
+                    </div>
                     <CompanyField />
 
                     <strong>Вопросы:</strong>

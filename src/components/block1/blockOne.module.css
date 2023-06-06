@@ -143,9 +143,15 @@
 .divClick {
     cursor: pointer;
 }
-
+.hideIconDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .hideShowIcon {
     height: 25px;
     width: 25px;
     cursor: pointer;
+    align-self: center;
 }

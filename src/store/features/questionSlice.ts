@@ -84,10 +84,7 @@ export const questionsSlice = createSlice({
         changeShowPromptFavoritesAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showPromptHistory = action.payload },
         changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload },
         changeFooterHelpTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.footerHelpText = action.payload; },
-        changeFirstBlockWidthAC: (state: InitContectType, action: PayloadAction<boolean>) => { 
-            console.log(action.payload);
-            state.var.isFirstBlockShort = action.payload 
-        }
+        changeFirstBlockWidthAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.isFirstBlockShort = action.payload }
     },
 
 
