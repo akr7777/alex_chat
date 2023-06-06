@@ -143,3 +143,9 @@
 .divClick {
     cursor: pointer;
 }
+
+.hideShowIcon {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}

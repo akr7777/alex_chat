@@ -39,18 +39,22 @@ const WordStatistic = (props: WordStatisticPropsType) => {
             show && <div className={s.statBody}>
                 <div className={s.oneBodysection}>
                     Количество знаков (с пробелами):   
+                    &nbsp;
                     {lettersCountWithSpaces(props.text)}
                 </div>
                 <div className={s.oneBodysection}>
                     Количество знаков (без пробелов):
+                    &nbsp;
                     {lettersCountWithoutSpaces(props.text)}
                 </div>
                 <div className={s.oneBodysection}>
                     Количество слов:
+                    &nbsp;
                     {wordsCountWithoutSpaces(props.text)}
                 </div>
                 <div className={s.oneBodysection}>
                     Количество абзацев:
+                    &nbsp;
                     {paragraphsCount(props.text)}
                 </div>
             </div>

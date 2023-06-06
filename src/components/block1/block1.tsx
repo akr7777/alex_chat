@@ -9,6 +9,8 @@ import s from "./blockOne.module.css";
 import saveIcon from "./../../public/icons/save_icon_2.png";
 import saveDisabledIcon from "./../../public/icons/save_icon_disabled.png";
 import removeIcon from "./../../public/icons/delete_icon.png";
+import hideIcon from "../../public/icons/hide_show_icon_1.png";
+import showIcon from "../../public/icons/hide_show_icon_2.png";
 import plusIcon from "./../../public/icons/plus_icon.png";
 import { QuestionType } from '../../store/features/questionTypes';
 import CompanyField from './companyField';
@@ -56,10 +58,21 @@ const BlockOne = () => {
 
         {
             isShort
-                ? <label onClick={() => dispatch(changeFirstBlockWidthAC(false))}>+</label>
+                // ? <label onClick={() => dispatch(changeFirstBlockWidthAC(false))}>+</label>
+                ?   <img alt="" src={showIcon} 
+                        onClick={ () => dispatch(changeFirstBlockWidthAC(false)) }
+                        className={s.hideShowIcon}
+                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Показать вопросы"))}
+                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                    />
                 : <>
-                    <label onClick={() => dispatch(changeFirstBlockWidthAC(true))}>-</label>
-
+                    {/* <label onClick={() => dispatch(changeFirstBlockWidthAC(true))}>-</label> */}
+                    <img alt="" src={hideIcon} 
+                        onClick={ () => dispatch(changeFirstBlockWidthAC(true)) } 
+                        className={s.hideShowIcon}
+                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Скрыть вопросы"))}
+                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                    />
                     <CompanyField />
 
                     <strong>Вопросы:</strong>

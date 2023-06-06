@@ -1,12 +1,15 @@
 import s from "./blockTwo.module.css";
-import promptHistoryIcon from "./../../public/icons/history_icon_1.png";
+import promptHistoryIcon from "./../../public/icons/book_icon.png";
+import promptHistoryIconDisabled from "./../../public/icons/book_icon_disabled.png";
 import refreshRedIcon from "./../../public/icons/refresh_red_icon.png";
+import refreshRedIconDisabled from "./../../public/icons/refresh_red_icon_disabled.png";
 import favoritePromptIcon from "./../../public/icons/favorite_icon.png";
-
+import favoritePromptIconDisabled from "./../../public/icons/star_icon_empty_disabled.png";
 import editIcon from "./../../public/icons/edit_icon.png";
 import saveIcon from "./../../public/icons/save_icon.png";
 import saveIcon2 from "./../../public/icons/save_icon_2.png";
 import okIcon from "./../../public/icons/ok_icon.png";
+import okIconDisabled from "./../../public/icons/ok_icon_disabled.png";
 import saveDisabledIcon from '../../public/icons/save_icon_disabled.png';
 
 import { COMPANY_LC, NEW_LINE_SEPARATOR } from "../../functions/consts";
@@ -103,7 +106,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={favoritePromptIcon} className={s.iconsImg} 
+                            ? <img alt="" src={favoritePromptIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить данную версию промпта в Избранное"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
@@ -117,7 +120,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={promptHistoryIcon} className={s.iconsImg} 
+                            ? <img alt="" src={promptHistoryIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler} 
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть список Избранных промптов"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
@@ -131,7 +134,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     
                     {
                         props.isEdit
-                            ? <img alt="" src={refreshRedIcon} className={s.iconsImg} 
+                            ? <img alt="" src={refreshRedIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить все изменения и вернуть базовый промпт"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
@@ -160,7 +163,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     
                     {  
                         props.isEdit 
-                            ? <img alt="" src={okIcon} className={s.iconsImg} 
+                            ? <img alt="" src={okIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Отправить запрос в GPT"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}

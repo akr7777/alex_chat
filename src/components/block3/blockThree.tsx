@@ -3,7 +3,8 @@ import s from "./blockThree.module.css";
 import { RootState, useAppDispatch } from "../../store/store";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import bookIcon from "./../../public/icons/book_icon.png";
+// import bookIcon from "./../../public/icons/book_icon.png";
+import historyIcon from "./../../public/icons/history_icon_2.png";
 import copyIcon from "./../../public/icons/copy_icon.png";
 import HistoryResponses from "./history/historyResponse";
 import { changeFooterHelpTextAC, changeShowResponseHistoryAC } from "../../store/features/questionSlice";
@@ -58,7 +59,7 @@ const BlockThree = () => {
                         </div>
 
                         <div className={s.buttonsDiv}>
-                            <img alt="" src={bookIcon} onClick={onHistoryClickHandler} className={s.iconsImg} 
+                            <img alt="" src={historyIcon} onClick={onHistoryClickHandler} className={s.iconsImg} 
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть историю запросов к GPT"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                             />
