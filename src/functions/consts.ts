@@ -44,6 +44,7 @@ export const initContentQuestionsSlice:InitContectType = {
     favoritesPrompts: [],
     footerHelpText: '',
     basePrompt: [],
-    baseQuestions: []
+    baseQuestions: [],
+    title: 'TiTle'
 }
 

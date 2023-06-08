@@ -85,3 +85,7 @@ export const AddAnswerForGPT = (prompt: Array<string>, questions:Array<QuestionT
     // return g.join(' ');
     // return g;
 }
+
+
+
+export const exportToFile = () => {}

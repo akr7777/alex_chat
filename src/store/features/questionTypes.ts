@@ -62,5 +62,6 @@ export type InitContectType = {
     responseHistory: Array<HistoryType>,
     footerHelpText: string,
     basePrompt: Array<string>,
-    baseQuestions: Array<QuestionType>
+    baseQuestions: Array<QuestionType>,
+    title: string
 }
