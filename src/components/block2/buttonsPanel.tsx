@@ -18,7 +18,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState, useAppDispatch } from "../../store/store";
 import { getPromtThunk, postResponseThunk, putPromptThunk } from "../../store/features/questionThunk";
-import { changeFooterHelpTextAC, changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from "../../store/features/questionSlice";
+import { changeFooterHelpTextAC, changeIsPromptEditAC, changeNewPromptAC, changePromptAC, changeShowPromptFavoritesAC } from "../../store/features/questionSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import AddPromptToFavoriteWindow from "./promptFavorite/addPromptToFavoriteWindow";
@@ -26,8 +26,8 @@ import { AddAnswerForGPT } from "../../functions/functions";
 import { QuestionType } from "../../store/features/questionTypes";
 
 type ButtonsPanelPropsType = {
-    isEdit: boolean,
-    setIsEdit: (newVal: boolean) => void
+    // isEdit: boolean,
+    // setIsEdit: (newVal: boolean) => void
     prompt: Array<string>
     newPrompt: string,
 }
@@ -42,6 +42,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     const prompt: Array<string> = useSelector((state: RootState) => state.questions.prompt);
     const basePrompt: Array<string> = useSelector((state: RootState) => state.questions.basePrompt);
     const isPromptsEqual: boolean = JSON.stringify(prompt) === JSON.stringify(basePrompt) 
+    const isPromptEdit: boolean = useSelector((state: RootState) => state.questions.var.isPromptEdit);
 
     const onDisabledButtonClickHandler = () => toast.warning('Сначала надо завершить редактирование...');
     const onDisablaedSaveIconClickHandler = () => toast.info('Текущая версия промпта не отличается от базовой. Не нужно ничего сохранять на сервер');
@@ -56,11 +57,13 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
 
     const onRefreshPromptClickHandler = () => { dispatch(getPromtThunk()); }
     const onEditClickHandler = () => {
-        dispatch(changeNewPromptAC(props.prompt.join(NEW_LINE_SEPARATOR)))
-        props.setIsEdit(true);
+        dispatch(changeNewPromptAC(props.prompt.join(NEW_LINE_SEPARATOR)));
+        dispatch(changeIsPromptEditAC(true));
+        // props.setIsEdit(true);
     }
     const onSavePromptClickHandler = () => {
-        props.setIsEdit(false);
+        dispatch(changeIsPromptEditAC(false));
+        // props.setIsEdit(false);
         const newPromptArray:Array<string> = props.newPrompt.split(NEW_LINE_SEPARATOR);
         dispatch(changePromptAC(newPromptArray));
     }
@@ -84,7 +87,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                 : <div className={s.buttonsDiv}>
 
                     {
-                        props.isEdit
+                        isPromptEdit
                         
                             ? <img alt="" src={saveDisabledIcon} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler} 
@@ -105,7 +108,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     }
                     
                     {
-                        props.isEdit
+                        isPromptEdit
                             ? <img alt="" src={favoritePromptIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Добавить данную версию промпта в Избранное"))}
@@ -119,7 +122,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     }
                     
                     {
-                        props.isEdit
+                        isPromptEdit
                             ? <img alt="" src={promptHistoryIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler} 
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Открыть список Избранных промптов"))}
@@ -133,7 +136,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     }
                     
                     {
-                        props.isEdit
+                        isPromptEdit
                             ? <img alt="" src={refreshRedIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить все изменения и вернуть базовый промпт"))}
@@ -148,7 +151,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     
             
                     {
-                        props.isEdit
+                        isPromptEdit
                             ? <img alt="" src={saveIcon} className={s.iconsImg} 
                                 onClick={onSavePromptClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать промпт"))}
@@ -162,7 +165,7 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
                     }
                     
                     {  
-                        props.isEdit 
+                        isPromptEdit
                             ? <img alt="" src={okIconDisabled} className={s.iconsImg} 
                                 onClick={onDisabledButtonClickHandler}
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Отправить запрос в GPT"))}

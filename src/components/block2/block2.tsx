@@ -34,7 +34,8 @@ const BlockTwo = () => {
         questions
     );
 
-    const [isEdit, setIsEdit] = useState<boolean>(false);
+    // const [isEdit, setIsEdit] = useState<boolean>(false);
+    const isPromptEdit: boolean = useSelector((state: RootState) => state.questions.var.isPromptEdit);
     // const [isShowPromptHistory, setIsShowPromptHistory] = useState<boolean>(false);
     const newPrompt: string = useSelector((state: RootState) => state.questions.var.newPrompt);
 
@@ -73,7 +74,7 @@ const BlockTwo = () => {
 
                     <div className={s.promptDiv}>
                         {
-                            isEdit
+                            isPromptEdit
                                 ? <MultilineText 
                                     value={newPrompt} 
                                     onValuechange={(newText) => onNewPromptTextChange(newText)} 
@@ -83,7 +84,7 @@ const BlockTwo = () => {
                         }
                     </div>
 
-                    <ButtonsPanel isEdit={isEdit} setIsEdit={setIsEdit} prompt={prompt} newPrompt={newPrompt} />
+                    <ButtonsPanel prompt={prompt} newPrompt={newPrompt} />
                 </>
         }
         

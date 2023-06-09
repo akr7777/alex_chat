@@ -85,7 +85,8 @@ export const questionsSlice = createSlice({
         changeShowResponseHistoryAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.showResponseHistory = action.payload },
         changeFooterHelpTextAC: (state: InitContectType, action: PayloadAction<string>) => { state.footerHelpText = action.payload; },
         changeFirstBlockWidthAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.isFirstBlockShort = action.payload },
-        changeTitleAC: (state: InitContectType, action: PayloadAction<string>) => { state.title = action.payload }
+        changeTitleAC: (state: InitContectType, action: PayloadAction<string>) => { state.title = action.payload },
+        changeIsPromptEditAC: (state: InitContectType, action: PayloadAction<boolean>) => { state.var.isPromptEdit = action.payload }
     },
 
 
@@ -272,7 +273,7 @@ export const {changeEditableIdAC, changeQuestionAC, addIdToChangedIdsListAC, cle
     changePromptAC, changeNewPromptAC, changeSearchTextAC, changeSearchCompanyAC,
     changeShowPromptFavoritesAC, changeGPTResponseAC, changeShowResponseHistoryAC, changeTwoQuestionsOrderAC,
     removeQuestionAC, changeAllQustionsListAC, changeSearchDateStartAC, changeSearchDateEndAC, addQuestionAC,
-    changeFooterHelpTextAC, changeFirstBlockWidthAC, changeTitleAC
+    changeFooterHelpTextAC, changeFirstBlockWidthAC, changeTitleAC, changeIsPromptEditAC
 } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

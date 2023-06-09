@@ -30,7 +30,8 @@ export const initContentQuestionsSlice:InitContectType = {
         searchCompany: '',
         showPromptHistory: false,
         showResponseHistory: false,
-        isFirstBlockShort: false
+        isFirstBlockShort: false,
+        isPromptEdit: false,
     },
     prompt: [],
     responseGPT: '',

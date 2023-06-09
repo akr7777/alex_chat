@@ -52,7 +52,8 @@ export type InitContectType = {
         searchCompany: string,
         showPromptHistory: boolean,
         showResponseHistory: boolean,
-        isFirstBlockShort: boolean
+        isFirstBlockShort: boolean,
+        isPromptEdit: boolean
     },
     // company: string
     questions: Array<QuestionType>,

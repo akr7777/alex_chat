@@ -36,3 +36,13 @@
     height: var(--top_menu_icons_size);
     cursor: pointer;
 }
+
+.importExportDiv {
+    /* background-color: red; */
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
