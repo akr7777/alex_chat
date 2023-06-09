@@ -75,11 +75,6 @@ const ExportAndImport = () => {
                     text={"Импорт из файла"} 
                     isDisabled={isPromptEdit} 
                 />
-                {/* <ButtonOne 
-                    text="Импорт из файла"
-                    onClickFunction={() => setShow(false)}
-                    helpText="Импорт из файла" 
-                /> */}
             </>
         }
         { 

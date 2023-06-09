@@ -3,14 +3,15 @@
     background-color: var(--header_footer_bg_color);
     color: var(--header_footer_text_color);
 
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 30px; */
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
 
     padding-right: 30px;
-
     font-weight: bold;
 }
 .titleDiv{

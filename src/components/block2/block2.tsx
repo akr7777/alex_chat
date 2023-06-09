@@ -3,7 +3,7 @@ import s from './blockTwo.module.css';
 import { RootState, useAppDispatch } from '../../store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import MultilineText from '../../common/multilineText/multilineText';
 import { AddAnswerToPrompt } from '../../functions/functions';
 import { changeNewPromptAC } from '../../store/features/questionSlice';
@@ -30,16 +30,12 @@ const BlockTwo = () => {
     const nonEditablePrompt: string = AddAnswerToPrompt(
         prompt
             .join(NEW_LINE_SEPARATOR)
-            .replaceAll(NEW_LINE_SEPARATOR, ' <br/><br/> '),
+            .replaceAll(NEW_LINE_SEPARATOR, '<br/><br/>'),
         questions
     );
 
-    // const [isEdit, setIsEdit] = useState<boolean>(false);
     const isPromptEdit: boolean = useSelector((state: RootState) => state.questions.var.isPromptEdit);
-    // const [isShowPromptHistory, setIsShowPromptHistory] = useState<boolean>(false);
     const newPrompt: string = useSelector((state: RootState) => state.questions.var.newPrompt);
-
-    
 
     const onNewPromptTextChange = (newText: string) => {
         dispatch(changeNewPromptAC(newText));

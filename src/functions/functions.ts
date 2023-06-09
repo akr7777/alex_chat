@@ -8,8 +8,9 @@ export const AddAnswerToPrompt = (text: string, questions:Array<QuestionType>):s
     const companyName: string = localStorage.getItem(COMPANY_LC) || "SomeCompany"
     
     const textArr: Array<string> = text.split(' ');
-    const g = textArr.map(word => {
-        if (word.includes(OPEN_TAG) && word.includes(CLOSE_TAG)) {
+    const g = textArr.map(word1 => {
+        let word = word1
+        while (word.includes(OPEN_TAG) && word.includes(CLOSE_TAG)) {
             try {
                 const openTagIndex: number = word.indexOf(OPEN_TAG);
                 const closeTagIndex: number = word.indexOf(CLOSE_TAG);
@@ -31,7 +32,7 @@ export const AddAnswerToPrompt = (text: string, questions:Array<QuestionType>):s
                     '</b>' +
                     word.slice(closeTagIndex+1, word.length)
                     
-                return resultWord.trim();
+                word = resultWord.trim();
             } catch {
                 return '<b>!!!! ОШИБКА В ВВОДЕ ' + word + ' !!!</b>'
             }
