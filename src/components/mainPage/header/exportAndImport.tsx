@@ -51,8 +51,8 @@ const ExportAndImport = () => {
           };
         
         reader.onerror = function() {
-            toast.error("Ошибка!");
-            console.log("ERROR:", reader.error);
+            // toast.error("Ошибка!");
+            alert("ERROR: " + reader.error);
         };
     }
 

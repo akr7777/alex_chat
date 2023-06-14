@@ -198,7 +198,6 @@ export const questionsSlice = createSlice({
             state.varLoading.responseHistoryLoading = true;
         })
         builder.addCase(getResponseHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
-            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
             let historyArray:Array<HistoryType> = action.payload.map(elem => {
                 return {
                     id: elem.id,
@@ -223,7 +222,6 @@ export const questionsSlice = createSlice({
             state.varLoading.responseHistoryLoading = true;
         })
         builder.addCase(putFavoriteHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
-            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
             let historyArray:Array<HistoryType> = action.payload.map(elem => {
                 return {
                     id: elem.id,
@@ -247,7 +245,6 @@ export const questionsSlice = createSlice({
             state.varLoading.responseHistoryLoading = true;
         })
         builder.addCase(deleteFavoriteHistoryThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<HistoryResponseType>>) => {
-            // console.log('getResponseHistoryThunk.fulfilled=', action.payload);
             let historyArray:Array<HistoryType> = action.payload.map(elem => {
                 return {
                     id: elem.id,

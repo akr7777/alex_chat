@@ -45,7 +45,7 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
     return <div className={s.oneQuestionContent}>
 
         {
-            isEdit && <div>
+            isEdit && <div className={s.upperButtons}>
                 { props.index < props.questionsLength - 1 && 
                     <img alt="" className={s.iconsImg} src={arrowDownIcon} onClick={onQuestionDownClickHandler} /> }
                 
@@ -57,7 +57,7 @@ const OneQuestionContent = (props: OneQuestionPropsType) => {
         }
 
         <div className={s.questionTextLabel}>
-            <div onClick={onDivClickHandler} className={s.divClick}>
+            <div onClick={onDivClickHandler} onDoubleClick={onDivClickHandler} className={s.divClick}>
                 <strong>Вопрос №{props.index + 1} </strong>
                 {/* <img alt="" className={s.iconsImg} src={saveIcon} /> */}
             </div>

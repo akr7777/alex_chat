@@ -15,7 +15,12 @@
     font-weight: bold;
 }
 .titleDiv{
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .VarNameCompanyDiv {

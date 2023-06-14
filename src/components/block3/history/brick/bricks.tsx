@@ -17,7 +17,6 @@ const Bricks = () => {
         history = [...history].sort( (a,b) => {
             const a1 = dayjs(a.datetime).format("YYYY-MM-DD.HH:mm");
             const b1 = dayjs(b.datetime).format("YYYY-MM-DD.HH:mm");
-            // console.log('a1,b1=', a1,b1);
             if (a1 < b1)
                 return 1;
             else if (a1 > b1)
@@ -26,8 +25,6 @@ const Bricks = () => {
                 return 0;
         });
     }
-    // console.log('his=', history);
-    
 
     useEffect(() => {
         dispatch(getResponseHistoryThunk());

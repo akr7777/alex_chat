@@ -26,13 +26,6 @@ export const wordsCountWithoutSpaces = (text: string): number => {
 }
 
 export const paragraphsCount = (text: string): number => {
-    console.log('text=', text, 'res=', 
-        text
-            .replaceAll("\n\n","\n")
-            .replaceAll("<br/><br/>", "<br/>")
-            .replaceAll('\n', '<br/>')
-            .split('<br/>')
-        )
     if (text.length === 0) return 0;
     else return text
         .replaceAll("\n\n","\n")

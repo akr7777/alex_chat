@@ -59,18 +59,15 @@ const ButtonsPanel = (props: ButtonsPanelPropsType) => {
     const onEditClickHandler = () => {
         dispatch(changeNewPromptAC(props.prompt.join(NEW_LINE_SEPARATOR)));
         dispatch(changeIsPromptEditAC(true));
-        // props.setIsEdit(true);
     }
     const onSavePromptClickHandler = () => {
         dispatch(changeIsPromptEditAC(false));
-        // props.setIsEdit(false);
         const newPromptArray:Array<string> = props.newPrompt.split(NEW_LINE_SEPARATOR);
         dispatch(changePromptAC(newPromptArray));
     }
     const onApproveClickHandler = () => {
         const promptForGPT: Array<string> = AddAnswerForGPT(props.prompt, questions)
         const dataToSend = {prompt: promptForGPT, company: company}
-        // console.log('onApproveClickHandler / dataToSend=', dataToSend);
         dispatch(postResponseThunk(dataToSend));
         toast.info("Запрос улетел на сервер. Ожидание ответа может занять некоторое время...");
     }
