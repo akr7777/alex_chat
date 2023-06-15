@@ -10,6 +10,8 @@ import HistoryResponses from "./history/historyResponse";
 import { changeFooterHelpTextAC, changeShowResponseHistoryAC } from "../../store/features/questionSlice";
 import Preloader from "../../common/preloader/preloader";
 import WordStatistic from "../../common/wordStatistic/wordStatistic";
+// import { useClipboard } from 'use-clipboard-copy';
+import copy from 'copy-to-clipboard';
 
 const BlockThree = () => {
     const dispatch = useAppDispatch();
@@ -18,8 +20,19 @@ const BlockThree = () => {
     const isLoading: boolean = useSelector((state: RootState) => state.questions.varLoading.responseLoading);
 
     const onCopyClickHandler = () => {
-        navigator.clipboard.writeText(responseGPT);
-        // https://www.npmjs.com/package/use-clipboard-copy
+        // navigator.clipboard.writeText(responseGPT);
+        // // https://www.npmjs.com/package/use-clipboard-copy
+        // toast.info("Текст скопирован");
+
+        // const clipboard = useClipboard({
+        //     onSuccess() {
+        //       console.log('Text was copied successfully!')
+        //     },
+        //     onError() {
+        //       console.log('Failed to copy text!')
+        //     }
+        //   });
+        copy(responseGPT);
         toast.info("Текст скопирован");
     }
     const onHistoryClickHandler = () => {
