@@ -30,6 +30,11 @@ export type PromptFavoriteType = {
     prompt: Array<string>
     date_added: string
 }
+export type Workspace = {
+    id: string,
+    title: string,
+    initial: boolean
+}
 
 
 export type InitContectType = {
@@ -40,6 +45,7 @@ export type InitContectType = {
         responseLoading: boolean
         promptHistoryLoading: boolean
         responseHistoryLoading: boolean
+        workspaceLoading: boolean
     }
     var: {
         changedIdsList: Array<string>,
@@ -64,5 +70,8 @@ export type InitContectType = {
     footerHelpText: string,
     basePrompt: Array<string>,
     baseQuestions: Array<QuestionType>,
-    title: string
+    title: string,
+
+    workspaceList: Array<Workspace>
+    currentWorkspaceId: string
 }

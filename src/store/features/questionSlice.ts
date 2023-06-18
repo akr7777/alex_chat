@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { deleteFavoriteHistoryThunk, deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, getQuestionsThunk, getResponseHistoryThunk, postResponseThunk, putFavoriteHistoryThunk, putFavoritePromptsThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
-import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType } from "./questionTypes"
+import { deleteFavoriteHistoryThunk, deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, 
+    getQuestionsThunk, getResponseHistoryThunk, getWorkspaceThunk, postResponseThunk, putFavoriteHistoryThunk, 
+    putFavoritePromptsThunk, putPromptThunk, putQuestionsThunk } from "./questionThunk"
+import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType, Workspace } from "./questionTypes"
 import { initContentQuestionsSlice } from "../../functions/consts"
 import uuid from "react-uuid"
 import { toast } from "react-toastify"
@@ -262,6 +264,18 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(deleteFavoriteHistoryThunk.rejected, (state: InitContectType) => {
             state.varLoading.responseHistoryLoading = false;
+        })
+
+
+        builder.addCase(getWorkspaceThunk.pending, (state: InitContectType) => {
+            state.varLoading.workspaceLoading = true;
+        })
+        builder.addCase(getWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
+            state.workspaceList = action.payload;
+            state.varLoading.workspaceLoading = false;
+        })
+        builder.addCase(getWorkspaceThunk.rejected, (state: InitContectType) => {
+            state.varLoading.workspaceLoading = false;
         })
        
     }

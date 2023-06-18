@@ -15,6 +15,9 @@ const instance = axios.create({
 // });
 
 export const questionsAPI = {
+    getWorkspace: (): Promise<AxiosResponse> => {
+        return instance.get('workspace');
+    },
     getQuestions: (): Promise<AxiosResponse> => {
         return instance.get('questions');
     },

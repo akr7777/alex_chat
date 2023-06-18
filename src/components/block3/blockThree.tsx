@@ -3,14 +3,12 @@ import s from "./blockThree.module.css";
 import { RootState, useAppDispatch } from "../../store/store";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import bookIcon from "./../../public/icons/book_icon.png";
 import historyIcon from "./../../public/icons/history_icon_2.png";
 import copyIcon from "./../../public/icons/copy_icon.png";
 import HistoryResponses from "./history/historyResponse";
 import { changeFooterHelpTextAC, changeShowResponseHistoryAC } from "../../store/features/questionSlice";
 import Preloader from "../../common/preloader/preloader";
 import WordStatistic from "../../common/wordStatistic/wordStatistic";
-// import { useClipboard } from 'use-clipboard-copy';
 import copy from 'copy-to-clipboard';
 
 const BlockThree = () => {
@@ -20,18 +18,6 @@ const BlockThree = () => {
     const isLoading: boolean = useSelector((state: RootState) => state.questions.varLoading.responseLoading);
 
     const onCopyClickHandler = () => {
-        // navigator.clipboard.writeText(responseGPT);
-        // // https://www.npmjs.com/package/use-clipboard-copy
-        // toast.info("Текст скопирован");
-
-        // const clipboard = useClipboard({
-        //     onSuccess() {
-        //       console.log('Text was copied successfully!')
-        //     },
-        //     onError() {
-        //       console.log('Failed to copy text!')
-        //     }
-        //   });
         copy(responseGPT);
         toast.info("Текст скопирован");
     }

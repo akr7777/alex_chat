@@ -4,6 +4,17 @@ import { questionsAPI } from "../../api/api";
 import { PromptFavoriteType, QuestionType } from "./questionTypes";
 import { USER_NAME_LocalStorage } from "../../functions/consts";
 
+export const getWorkspaceThunk = createAsyncThunk(
+    'questions/getWorkspace',
+    async (_, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.getWorkspace();
+            return res.data.data
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
 
 export const getQuestionsThunk = createAsyncThunk(
     'questions/getQuestionsThunk',

@@ -6,9 +6,10 @@ import { LineTextField } from "../../../common/lineTextField/labelLineText";
 import { useState } from "react";
 import { changeFooterHelpTextAC, changeTitleAC } from "../../../store/features/questionSlice";
 import ExportAndImport from "./exportAndImport";
-
 import crossIcon from '../../../public/icons/cross_icon.png';
 import okIcon from '../../../public/icons/ok_icon.png';
+import FieldsSwitcher from "./fieldsSwitcher";
+
 
 const Header = () => {
     const title: string = useSelector((state:RootState) => state.questions.title);
@@ -23,7 +24,12 @@ const Header = () => {
 
     return <div className={s.headerDiv}>
 
-        <ExportAndImport/>
+        <div className={s.importExportDiv}>
+            <ExportAndImport/>
+            <FieldsSwitcher />
+        </div>
+        
+        
 
         <div className={s.titleDiv}>
             {
@@ -31,10 +37,7 @@ const Header = () => {
                     ? <>
                         <LineTextField type={"text"} text={newTitle} onChangeFunction={(text: string) => setNewTitle(text)} />
                         
-                        {/* <button onClick={() => {
-                                dispatch(changeTitleAC(newTitle))
-                                setEditTitle(false)
-                            }}>OK</button> */}
+                     
                         <img alt="" src={okIcon} 
                             onClick={onChangeTitleOKClickHandler} 
                             className={s.iconImg}

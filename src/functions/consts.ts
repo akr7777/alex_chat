@@ -17,7 +17,8 @@ export const initContentQuestionsSlice:InitContectType = {
         promptLoading: false,
         responseLoading: false,
         promptHistoryLoading: false,
-        responseHistoryLoading: false
+        responseHistoryLoading: false,
+        workspaceLoading: false,
     },
     var: {
         changedIdsList: [],
@@ -46,6 +47,8 @@ export const initContentQuestionsSlice:InitContectType = {
     footerHelpText: '',
     basePrompt: [],
     baseQuestions: [],
-    title: 'TiTle'
+    title: 'TiTle',
+    workspaceList: [],
+    currentWorkspaceId: ''
 }
 
