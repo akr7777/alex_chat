@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { PromptFavoriteType, QuestionType } from "../store/features/questionTypes";
+import { PostWorkspaceThunkPropsType } from "../store/features/questionThunk";
 
 const instance = axios.create({
     // withCredentials: true,
@@ -17,6 +18,15 @@ const instance = axios.create({
 export const questionsAPI = {
     getWorkspace: (): Promise<AxiosResponse> => {
         return instance.get('workspace');
+    },
+    putWorkspace: (id: string): Promise<AxiosResponse> => {
+        return instance.put('workspace?id='+id);
+    },
+    postWorkspace: (data: PostWorkspaceThunkPropsType): Promise<AxiosResponse> => {
+        return instance.post('workspace', data);
+    },
+    deleteWorkspace: (id: string): Promise<AxiosResponse> => {
+        return instance.delete('workspace?id='+id);
     },
     getQuestions: (): Promise<AxiosResponse> => {
         return instance.get('questions');

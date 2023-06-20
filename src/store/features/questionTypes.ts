@@ -73,5 +73,6 @@ export type InitContectType = {
     title: string,
 
     workspaceList: Array<Workspace>
-    currentWorkspaceId: string
+    // currentWorkspaceId: string
+    // currentWorkspaceName: string
 }

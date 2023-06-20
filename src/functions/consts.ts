@@ -49,6 +49,7 @@ export const initContentQuestionsSlice:InitContectType = {
     baseQuestions: [],
     title: 'TiTle',
     workspaceList: [],
-    currentWorkspaceId: ''
+    // currentWorkspaceId: '',
+    // currentWorkspaceName: ''
 }
 

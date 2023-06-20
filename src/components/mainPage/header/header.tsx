@@ -8,7 +8,7 @@ import { changeFooterHelpTextAC, changeTitleAC } from "../../../store/features/q
 import ExportAndImport from "./exportAndImport";
 import crossIcon from '../../../public/icons/cross_icon.png';
 import okIcon from '../../../public/icons/ok_icon.png';
-import FieldsSwitcher from "./fieldsSwitcher";
+import FieldsSwitcher from "./fieldSwitcher/fieldsSwitcher";
 
 
 const Header = () => {

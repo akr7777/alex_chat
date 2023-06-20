@@ -15,6 +15,42 @@ export const getWorkspaceThunk = createAsyncThunk(
         }
     }
 );
+export const putWorkspaceThunk = createAsyncThunk(
+    'questions/putWorkspaceThunk',
+    async (id: string, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.putWorkspace(id);
+            // dispatch(getPromtThunk);
+            // dispatch(getQuestionsThunk);
+            return res.data.data
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
+export type PostWorkspaceThunkPropsType = {id: string, title: string}
+export const postWorkspaceThunk = createAsyncThunk(
+    'questions/postWorkspaceThunk',
+    async (data: PostWorkspaceThunkPropsType, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.postWorkspace(data);
+            return res.data.data
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
+export const deleteWorkspaceThunk = createAsyncThunk(
+    'questions/deleteWorkspaceThunk',
+    async (id: string, {rejectWithValue, dispatch}) => {
+        try {
+            const res = await questionsAPI.deleteWorkspace(id);
+            return res.data.data
+        } catch (err: any) {
+            toast(err.response.data.message);
+        }
+    }
+);
 
 export const getQuestionsThunk = createAsyncThunk(
     'questions/getQuestionsThunk',
