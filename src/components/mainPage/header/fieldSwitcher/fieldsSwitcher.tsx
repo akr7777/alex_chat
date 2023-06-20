@@ -14,7 +14,7 @@ import { changeFooterHelpTextAC } from '../../../../store/features/questionSlice
 import { LineTextField } from '../../../../common/lineTextField/labelLineText';
 import { useEffect, useState } from 'react';
 import { Workspace } from '../../../../store/features/questionTypes';
-import { PostWorkspaceThunkPropsType, deleteWorkspaceThunk, getPromtThunk, getQuestionsThunk, getWorkspaceThunk, postWorkspaceThunk, putWorkspaceThunk } from '../../../../store/features/questionThunk';
+import { PostWorkspaceThunkPropsType, getWorkspaceThunk, postWorkspaceThunk, putWorkspaceThunk } from '../../../../store/features/questionThunk';
 import { v4 } from 'uuid';
 import { toast } from 'react-toastify';
 import Preloader from '../../../../common/preloader/preloader';
@@ -79,7 +79,7 @@ const FieldsSwitcher = () => {
         if (wsIdToDelete && wsIdToDelete.length>0) {
             const answer: boolean = window.confirm('Уверены, что хотите удалить выбранную область?');
             if (answer) {
-                dispatch(deleteWorkspaceThunk(wsIdToDelete));
+                // dispatch(deleteWorkspaceThunk(wsIdToDelete));
             }
         }
     }
@@ -163,7 +163,7 @@ const FieldsSwitcher = () => {
                         </div>
 
                         {/* Удаление workspace */}
-                        <div className={s.oneButtonDiv}>
+                        {/* <div className={s.oneButtonDiv}>
                             <OptionSwitcher 
                                 options={listToDelete.map(el => {
                                 return { value: el.id, text: el.title }
@@ -177,7 +177,7 @@ const FieldsSwitcher = () => {
                                 onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить область"))}
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

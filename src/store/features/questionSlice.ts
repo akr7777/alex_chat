@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { deleteFavoriteHistoryThunk, deleteFavoritePromptsThunk, deleteWorkspaceThunk, getFavoritePromptsThunk, getPromtThunk, 
+import { deleteFavoriteHistoryThunk, deleteFavoritePromptsThunk, getFavoritePromptsThunk, getPromtThunk, 
     getQuestionsThunk, getResponseHistoryThunk, getWorkspaceThunk, postResponseThunk, postWorkspaceThunk, putFavoriteHistoryThunk, 
     putFavoritePromptsThunk, putPromptThunk, putQuestionsThunk, putWorkspaceThunk } from "./questionThunk"
 import { HistoryResponseType, HistoryType, InitContectType, PromptFavoriteType, QuestionType, Workspace } from "./questionTypes"
@@ -272,8 +272,6 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(getWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
             state.workspaceList = action.payload;
-            // state.currentWorkspaceId = action.payload.find(el => el.initial === true)?.id || "";
-            // state.currentWorkspaceName = action.payload.find(el => el.initial === true)?.title || "";
             state.varLoading.workspaceLoading = false;
         })
         builder.addCase(getWorkspaceThunk.rejected, (state: InitContectType) => {
@@ -285,8 +283,6 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(putWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
             state.workspaceList = action.payload;
-            // state.currentWorkspaceId = action.payload.find(el => el.initial === true)?.id || "";
-            // state.currentWorkspaceName = action.payload.find(el => el.initial === true)?.title || "";
             state.varLoading.workspaceLoading = false;
         })
         builder.addCase(putWorkspaceThunk.rejected, (state: InitContectType) => {
@@ -298,26 +294,22 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(postWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
             state.workspaceList = action.payload;
-            // state.currentWorkspaceId = action.payload.find(el => el.initial === true)?.id || "";
-            // state.currentWorkspaceName = action.payload.find(el => el.initial === true)?.title || "";
             state.varLoading.workspaceLoading = false;
         })
         builder.addCase(postWorkspaceThunk.rejected, (state: InitContectType) => {
             state.varLoading.workspaceLoading = false;
         })
 
-        builder.addCase(deleteWorkspaceThunk.pending, (state: InitContectType) => {
-            state.varLoading.workspaceLoading = true;
-        })
-        builder.addCase(deleteWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
-            state.workspaceList = action.payload;
-            // state.currentWorkspaceId = action.payload.find(el => el.initial === true)?.id || "";
-            // state.currentWorkspaceName = action.payload.find(el => el.initial === true)?.title || "";
-            state.varLoading.workspaceLoading = false;
-        })
-        builder.addCase(deleteWorkspaceThunk.rejected, (state: InitContectType) => {
-            state.varLoading.workspaceLoading = false;
-        })
+        // builder.addCase(deleteWorkspaceThunk.pending, (state: InitContectType) => {
+        //     state.varLoading.workspaceLoading = true;
+        // })
+        // builder.addCase(deleteWorkspaceThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<Workspace>>) => {
+        //     state.workspaceList = action.payload;
+        //     state.varLoading.workspaceLoading = false;
+        // })
+        // builder.addCase(deleteWorkspaceThunk.rejected, (state: InitContectType) => {
+        //     state.varLoading.workspaceLoading = false;
+        // })
        
     }
 })

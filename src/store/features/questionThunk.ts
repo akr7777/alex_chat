@@ -40,17 +40,17 @@ export const postWorkspaceThunk = createAsyncThunk(
         }
     }
 );
-export const deleteWorkspaceThunk = createAsyncThunk(
-    'questions/deleteWorkspaceThunk',
-    async (id: string, {rejectWithValue, dispatch}) => {
-        try {
-            const res = await questionsAPI.deleteWorkspace(id);
-            return res.data.data
-        } catch (err: any) {
-            toast(err.response.data.message);
-        }
-    }
-);
+// export const deleteWorkspaceThunk = createAsyncThunk(
+//     'questions/deleteWorkspaceThunk',
+//     async (id: string, {rejectWithValue, dispatch}) => {
+//         try {
+//             const res = await questionsAPI.deleteWorkspace(id);
+//             return res.data.data
+//         } catch (err: any) {
+//             toast(err.response.data.message);
+//         }
+//     }
+// );
 
 export const getQuestionsThunk = createAsyncThunk(
     'questions/getQuestionsThunk',
