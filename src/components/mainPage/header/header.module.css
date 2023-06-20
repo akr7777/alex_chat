@@ -36,11 +36,14 @@
     height: var(--top_menu_icons_size);
     cursor: pointer;
 }
+.iconImg:hover { scale: 1.2; }
 .iconImg2 {
     width: var(--main_icons_size);
     height: var(--main_icons_size);
     cursor: pointer;
 }
+.iconImg2:hover { scale: 1.2; }
+
 
 .importExportDiv {
     margin: 0 20px;
@@ -79,9 +82,13 @@
 }
 .crossImgIcon {
     position: fixed;
-    top: var(--header_foorter_height);
+    top: calc(var(--header_foorter_height) - 0.5*var(--main_icons_size));
     left: calc(50vw - 400px);
+    width: var(--main_icons_size);
+    height: var(--main_icons_size);
+    cursor: pointer;
 }
+.crossImgIcon:hover { scale: 1.2; }
 .editFieldButtonsDiv {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 5fr;

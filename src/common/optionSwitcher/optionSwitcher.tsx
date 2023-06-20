@@ -7,7 +7,7 @@ type OneOptionType = {
 }
 type OptionSwitcherPropsType = {
     options: Array<OneOptionType>
-    checkedOption: string
+    checkedOption?: string
     onChangeFunction: (newValue: string) => void
 }
 const OptionSwitcher = (props: OptionSwitcherPropsType) => {

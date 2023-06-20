@@ -20,8 +20,8 @@ export const putWorkspaceThunk = createAsyncThunk(
     async (id: string, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.putWorkspace(id);
-            // dispatch(getPromtThunk);
-            // dispatch(getQuestionsThunk);
+            dispatch(getPromtThunk());
+            dispatch(getQuestionsThunk());
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);

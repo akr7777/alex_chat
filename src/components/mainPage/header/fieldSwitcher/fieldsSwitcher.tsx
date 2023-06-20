@@ -16,43 +16,34 @@ import { useEffect, useState } from 'react';
 import { Workspace } from '../../../../store/features/questionTypes';
 import { PostWorkspaceThunkPropsType, deleteWorkspaceThunk, getPromtThunk, getQuestionsThunk, getWorkspaceThunk, postWorkspaceThunk, putWorkspaceThunk } from '../../../../store/features/questionThunk';
 import { v4 } from 'uuid';
+import { toast } from 'react-toastify';
+import Preloader from '../../../../common/preloader/preloader';
 
 const FieldsSwitcher = () => {
     const dispatch = useAppDispatch();
     const workspaceList: Array<Workspace> = useSelector((state:RootState) => state.questions.workspaceList);
-    // const currentWorkspaceId: string = useSelector((state:RootState) => state.questions.currentWorkspaceId);
-    // const currentWorkspaceName: string = useSelector((state:RootState) => state.questions.currentWorkspaceName);
+    
     const currentWorkspaceId: string = workspaceList.find(el => el.initial === true)?.id || "";
-    const currentWorkspaceName: string = workspaceList.find(el => el.initial === true)?.title || "";
-    
+    const currentWorkspaceName: string = workspaceList.find(el => el.initial === true)?.title || "noData";
+    const [newFieldName, setNewFiledName] = useState<string>('');
+
     const [editField, setEditField] = useState<boolean>(false);
-    // console.log('currentWorkspaceName=', currentWorkspaceName);
-    const [newFieldName, setNewFiledName] = useState<string>(currentWorkspaceName);
-    
-    // console.log('newFieldName=', newFieldName);
     const listToDelete:Array<Workspace> = workspaceList.filter(el => el.initial === false);
     const [wsIdToDelete, setWsIdToDelete] = useState<string>('');
-    // setNewFiledName(currentWorkspaceName);
-    useEffect(() => {
-        setTimeout(() => {
-            //waiting for const currentWorkspaceName: string = workspaceList.find
-            setNewFiledName(currentWorkspaceName);
-            if (listToDelete.length > 0)
-                setWsIdToDelete(listToDelete[0].id)
-        }, 500)
-    }, [])
-    
+    const isLoading: boolean = useSelector((state: RootState) => state.questions.varLoading.workspaceLoading);
 
-    // console.log('wsIdToDelete=', wsIdToDelete);
-    
     useEffect(() => {
         dispatch(getWorkspaceThunk());
     }, [])
+    useEffect(() => {
+        setNewFiledName(currentWorkspaceName);
+    }, [currentWorkspaceName, currentWorkspaceId]);
+    useEffect(() => {
+        setWsIdToDelete(listToDelete[0]?.id || "");
+    }, [listToDelete])
 
     const onChangeWorkSpaceClickHandler = (newValue: string) => {
         dispatch(putWorkspaceThunk(newValue));
-        dispatch(getPromtThunk);
-        dispatch(getQuestionsThunk);
     }
     const onOkClickHandler = () => {
         if (newFieldName && newFieldName.length > 0) {
@@ -65,8 +56,12 @@ const FieldsSwitcher = () => {
         }
     }
     const onCancelButtonClickHandler = () => {
-        setNewFiledName(currentWorkspaceName);
+        // setNewFiledName(currentWorkspaceName);
+        setNewFiledName('');
         setEditField(false);
+    }
+    const onDisabledOkClickHandler = () => {
+        toast.error('Введите название новой области!');
     }
     const onAddNewWorkSpaceClickHandler = () => {
         const newName: string | null = prompt('Введите название нового WorkSpace:');
@@ -77,13 +72,12 @@ const FieldsSwitcher = () => {
             }
             dispatch(postWorkspaceThunk(data));
             setEditField(false);
-            alert('Область '+ newName + 'добавлена!')
+            alert('Область '+ newName + ' добавлена!')
         }
     }
     const onDeleteClickHandler = () => {
-        // const wsTitle: string = listToDelete.find(el => el.id===id)?.title || "";
         if (wsIdToDelete && wsIdToDelete.length>0) {
-            const answer: boolean = window.confirm('Уверены, что хотите удалить область?');
+            const answer: boolean = window.confirm('Уверены, что хотите удалить выбранную область?');
             if (answer) {
                 dispatch(deleteWorkspaceThunk(wsIdToDelete));
             }
@@ -91,43 +85,64 @@ const FieldsSwitcher = () => {
     }
     return <>
 
-        {/* <img alt="" src={crossIcon} 
-            onClick={ () => setEditField(true) } 
-            className={s.crossImgIcon}
-            onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать область"))}
-            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-        /> */}
-        <OptionSwitcher 
-            options={workspaceList.map(el => {
-               return { value: el.id, text: el.title }
-            })}
-            checkedOption={currentWorkspaceId} 
-            onChangeFunction={(newValue: string) => onChangeWorkSpaceClickHandler(newValue)}        
-        />
-        <img alt="" src={editIcon} 
-            onClick={ () => setEditField(true) } 
-            className={s.iconImg}
-            onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать область"))}
-            onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-        />
-
+        {
+            isLoading
+                ? <Preloader/>
+                : <>
+                    <OptionSwitcher 
+                        options={workspaceList.map(el => {
+                        return { value: el.id, text: el.title }
+                        })}
+                        checkedOption={currentWorkspaceId} 
+                        onChangeFunction={(newValue: string) => onChangeWorkSpaceClickHandler(newValue)}        
+                    />
+                    <img alt="" src={editIcon} 
+                        onClick={ () => setEditField(true) } 
+                        className={s.iconImg}
+                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Редактировать область"))}
+                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                    />    
+                </>
+        }
+        
         {
             editField && <div className={s.darkLayout}>
                 <div className={s.editFieldDiv}>
-                    <label>Название:</label>
-                    <LineTextField 
-                        type={'text'} 
-                        text={newFieldName} 
-                        onChangeFunction={(newVal: string) => setNewFiledName(newVal)} 
+
+                    <img alt="" src={crossIcon} 
+                        onClick={onCancelButtonClickHandler} 
+                        className={s.crossImgIcon}
+                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Отклонить изменения область"))}
+                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                     />
+
+                    <label>Редактирование текущей области</label>
+                    <div>
+                        <label>Новое название:</label>
+                        <LineTextField 
+                            type={'text'} 
+                            text={newFieldName} 
+                            onChangeFunction={(newVal: string) => setNewFiledName(newVal)} 
+                        />
+                    </div>
+                    
                     <div className={s.editFieldButtonsDiv}>
                         <div className={s.oneButtonDiv}>
-                            <img alt="" src={okIcon} 
-                                onClick={onOkClickHandler} 
-                                className={s.iconImg2}
-                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Применить изменения область"))}
-                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                            />
+                            {
+                                newFieldName.length > 0
+                                    ? <img alt="" src={okIcon} 
+                                        onClick={onOkClickHandler} 
+                                        className={s.iconImg2}
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Применить изменения область"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
+                                    : <img alt="" src={okIconDisabled} 
+                                        onClick={onDisabledOkClickHandler} 
+                                        className={s.iconImg2}
+                                        onMouseOver={() => dispatch(changeFooterHelpTextAC("Применить изменения область"))}
+                                        onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
+                                    />
+                            }
                         </div>
                         <div className={s.oneButtonDiv}>
                             <img alt="" src={cancelIcon} 
@@ -147,16 +162,14 @@ const FieldsSwitcher = () => {
                             />
                         </div>
 
-
+                        {/* Удаление workspace */}
                         <div className={s.oneButtonDiv}>
                             <OptionSwitcher 
                                 options={listToDelete.map(el => {
                                 return { value: el.id, text: el.title }
                                 })}
-                                checkedOption={wsIdToDelete} 
+                                // checkedOption={wsIdToDelete} 
                                 onChangeFunction={(newVal: string) => setWsIdToDelete(newVal)}
-                                // onChangeFunction={(newValue: string) => onDeleteClickHandler(newValue)}
-                                // onChangeFunction={(newValue: string) => onChangeWorkSpaceClickHandler(newValue)}        
                             />
                             <img alt="" src={removeIcon} 
                                 onClick={onDeleteClickHandler} 
@@ -165,28 +178,7 @@ const FieldsSwitcher = () => {
                                 onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                             />
                         </div>
-                        
-                        
                     </div>
-                    
-
-                    {/* <div>
-                        <div className={s.oneButtonDiv}>
-                            <OptionSwitcher 
-                                options={workspaceList.map(el => {
-                                return { value: el.id, text: el.title }
-                                })}
-                                checkedOption={currentWorkspaceId} 
-                                onChangeFunction={(newValue: string) => onChangeWorkSpaceClickHandler(newValue)}        
-                            />
-                            <img alt="" src={removeIcon} 
-                                onClick={onDeleteClickHandler} 
-                                className={s.iconImg2}
-                                onMouseOver={() => dispatch(changeFooterHelpTextAC("Удалить область"))}
-                                onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
-                            />
-                        </div>
-                    </div> */}
                 </div>
             </div>
         }
