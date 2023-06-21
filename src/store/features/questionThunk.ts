@@ -12,6 +12,7 @@ export const getWorkspaceThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -25,6 +26,7 @@ export const putWorkspaceThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -37,6 +39,7 @@ export const postWorkspaceThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -60,6 +63,7 @@ export const getQuestionsThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -69,14 +73,14 @@ export const putQuestionsThunk = createAsyncThunk(
     async (data: Array<QuestionType>, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.putQuestions(data);
-            if (res.data.data) {
+            if (res.data.status === 200) {
                 return res.data.data
             } else {
                 toast.error(res.data.msg);
             }
-
         } catch (err: any) {
             toast.error(err.response.data.message);
+            return []
         }
     }
 );
@@ -90,6 +94,7 @@ export const getPromtThunk = createAsyncThunk(
             return res.data.data.prompt
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -99,7 +104,6 @@ export const putPromptThunk = createAsyncThunk(
     async (data: Array<string>, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.putPrompt(data);
-            
             if (res.data.status === "error") {
                 toast.error(res.data.message);
                 return []
@@ -107,6 +111,7 @@ export const putPromptThunk = createAsyncThunk(
             return res.data.data.prompt;
         } catch (err: any) {
             toast.error(err.response.data.message);
+            return []
         }
     }
 );
@@ -121,6 +126,7 @@ export const postResponseThunk = createAsyncThunk(
             return res.data.data.gpt_response;
         } catch (err: any) {
             toast.error(err.response.data.message);
+            return ''        
         }
     }
 );
@@ -133,6 +139,7 @@ export const getFavoritePromptsThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -145,6 +152,7 @@ export const deleteFavoritePromptsThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -157,6 +165,7 @@ export const putFavoritePromptsThunk = createAsyncThunk(
             return res.data.data
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -169,6 +178,7 @@ export const getResponseHistoryThunk = createAsyncThunk(
             return res.data.data;
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -181,6 +191,7 @@ export const putFavoriteHistoryThunk = createAsyncThunk(
             return res.data.data;
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );
@@ -193,6 +204,7 @@ export const deleteFavoriteHistoryThunk = createAsyncThunk(
             return res.data.data;
         } catch (err: any) {
             toast(err.response.data.message);
+            return []
         }
     }
 );

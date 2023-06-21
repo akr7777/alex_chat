@@ -110,7 +110,7 @@ export const questionsSlice = createSlice({
         })
         builder.addCase(putQuestionsThunk.fulfilled, (state: InitContectType, action: PayloadAction<Array<QuestionType>>) => {
             state.questions = action.payload;
-            state.baseQuestions = [...action.payload];
+            state.baseQuestions = action.payload;
             state.varLoading.questionsLoading = false;
         })
         builder.addCase(putQuestionsThunk.rejected, (state: InitContectType) => {
