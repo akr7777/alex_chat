@@ -73,11 +73,7 @@ export const putQuestionsThunk = createAsyncThunk(
     async (data: Array<QuestionType>, {rejectWithValue, dispatch}) => {
         try {
             const res = await questionsAPI.putQuestions(data);
-            if (res.data.status === 200) {
-                return res.data.data
-            } else {
-                toast.error(res.data.msg);
-            }
+            return res.data.data;
         } catch (err: any) {
             toast.error(err.response.data.message);
             return []

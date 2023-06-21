@@ -15,6 +15,7 @@ import plusIcon from "./../../public/icons/plus_icon.png";
 import { QuestionType } from '../../store/features/questionTypes';
 import CompanyField from './companyField';
 import { ToastContainer, toast } from 'react-toastify';
+import { v4 } from 'uuid';
 // import { uuid } from 'uuidv4';
 
 const BlockOne = () => {
@@ -37,7 +38,12 @@ const BlockOne = () => {
     //         dispatch(changeAllQustionsListAC([]));
     //     }
     // }
-    const saveAllQuestionsToServerClickHandler = () => { dispatch(putQuestionsThunk(questions)) }
+    const saveAllQuestionsToServerClickHandler = () => { 
+        const newQuestions:Array<QuestionType> = questions.map(q => {
+            return {...q, id: v4()}
+        })
+        dispatch(putQuestionsThunk(newQuestions)) 
+    }
     const onDisablaedSaveIconClickHandler = () => toast.info('Текущая версия вопросов не отличается от базовой. Не нужно ничего сохранять на сервер');
     const addQuestionClickHandler = () => { dispatch(addQuestionAC()) }
     
