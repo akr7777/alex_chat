@@ -31,7 +31,7 @@ const Header = () => {
         
         
 
-        <div className={s.titleDiv}>
+        {/* <div className={s.titleDiv}>
             {
                 editTitle
                     ? <>
@@ -51,13 +51,12 @@ const Header = () => {
                             onMouseOver={() => dispatch(changeFooterHelpTextAC("Отменить изменение заголовка"))}
                             onMouseLeave={() => dispatch(changeFooterHelpTextAC(""))}
                         />
-                        {/* <button onClick={() => setEditTitle(false)}>Cancel</button> */}
                     </>
                     : <div className={s.titleDiv}>
                         <h3 onClick={() => setEditTitle(true)}>{title}</h3>
                     </div>
             }
-        </div>
+        </div> */}
 
         <UserName />
 

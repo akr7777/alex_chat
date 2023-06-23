@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  /* width: 100vw; */
 
   /* COMMON */
   --border_color: black;
@@ -29,6 +30,7 @@
 }
 
 body {
+  width: 100vw;
   /* background-color: rgb(29, 28, 28); */
   background-color: rgb(156, 153, 153);
   margin: 0;

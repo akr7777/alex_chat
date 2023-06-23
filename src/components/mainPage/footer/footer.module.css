@@ -1,10 +1,18 @@
-.footerDiv {
-    height: var(--header_foorter_height);
-    background-color: var(--header_footer_bg_color);
-    color: var(--header_footer_text_color);
+@media screen and (min-width: 550px) {
+    .footerDiv {
+        height: var(--header_foorter_height);
+        background-color: var(--header_footer_bg_color);
+        color: var(--header_footer_text_color);
+    
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+@media screen and (max-width: 550px) {
+    .footerDiv {
+        display: none;
+    }
 }
